@@ -1,0 +1,40 @@
+<svg width="900" height="620" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="900" height="620" fill="#ffffff"/>
+
+  <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">
+    AI ⊃ ML ⊃ DL — with NLP as a cross-cutting domain
+  </text>
+
+  <!-- AI outer circle -->
+  <circle cx="400" cy="370" r="250" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5"/>
+  <!-- ML circle -->
+  <circle cx="460" cy="320" r="170" fill="#93c5fd" stroke="#1d4ed8" stroke-width="2.5"/>
+  <!-- DL circle -->
+  <circle cx="520" cy="280" r="90" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2.5"/>
+  <!-- NLP ellipse: a domain cutting across ML/DL, not a subset -->
+  <ellipse cx="640" cy="230" rx="150" ry="85" fill="#fb923c" fill-opacity="0.55" stroke="#c2410c" stroke-width="2.5" transform="rotate(-18 640 230)"/>
+
+  <!-- AI-only label + example -->
+  <text x="160" y="540" font-size="26" font-weight="700" fill="#1e3a8a">AI</text>
+  <text x="130" y="565" font-size="14" fill="#1e3a8a">e.g. Deep Blue (1997)</text>
+  <text x="130" y="583" font-size="14" fill="#1e3a8a">hand-coded rules, no learning</text>
+
+  <!-- ML-only label + example -->
+  <text x="270" y="420" font-size="24" font-weight="700" fill="#1e3a8a">ML</text>
+  <text x="230" y="443" font-size="13" fill="#1e3a8a">e.g. spam filter</text>
+  <text x="230" y="460" font-size="13" fill="#1e3a8a">learns from labeled data</text>
+
+  <!-- DL label + example -->
+  <text x="480" y="270" font-size="22" font-weight="700" fill="#ffffff">DL</text>
+  <text x="450" y="330" font-size="13" fill="#ffffff">e.g. CNN reading</text>
+  <text x="450" y="346" font-size="13" fill="#ffffff">X-ray images</text>
+
+  <!-- NLP label + example -->
+  <text x="700" y="150" font-size="22" font-weight="700" fill="#7c2d12">NLP</text>
+  <text x="660" y="330" font-size="13" fill="#7c2d12">e.g. Google Translate:</text>
+  <text x="660" y="347" font-size="13" fill="#7c2d12">rules (2006) → transformers (today)</text>
+
+  <text x="450" y="600" text-anchor="middle" font-size="13" fill="#475569">
+    NLP is not a subset of AI/ML/DL — it's a domain they all get applied to.
+  </text>
+</svg>

@@ -17,10 +17,7 @@ do next* across multiple steps, instead of waiting for a human to prompt every s
 These are not four separate fields sitting side by side — three of them are nested inside each other, and
 the fourth is a domain they all get applied to.
 
-```
-AI  ⊃  ML  ⊃  DL
-        NLP = a domain/application area, cuts across AI/ML/DL
-```
+![AI contains ML contains DL, with NLP as a cross-cutting domain](assets/ai-ml-dl-nlp.svg)
 
 | Term | What it means | How it works | Real example |
 |---|---|---|---|
