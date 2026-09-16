@@ -10,8 +10,9 @@ together.
 
 ## How this is organized
 
-- [`days/`](days) — one folder per day (`day-01` ... `day-30`), each with a `README.md` log
-  (objectives → resources → key learnings → notes/code).
+- [`days/`](days) — one folder per day (`day-01` ... `day-30`). Each has a `README.md` log
+  (objectives → resources → key learnings → links) and a `notes.md` with the actual write-up for
+  that day's objectives — the part meant to be read by other learners.
 - [`projects/`](projects) — one folder per real-time project, built across the days that reference it.
 - Source code for a given day/project lives inside that day's or project's own folder.
 
