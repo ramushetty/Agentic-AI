@@ -78,6 +78,19 @@ still handle it, because it can break it into pieces it *has* seen — like "fli
 **Rule of thumb for interviews:** 1 token ≈ 4 characters in English, or roughly ¾ of a word — so 100
 tokens ≈ 75 words. OpenAI's own tokenizer for GPT models is called `tiktoken`.
 
+**Is the vocabulary preset, or does the model learn it while training?** Preset — every model has a
+fixed vocabulary decided *before* training even starts:
+```
+Huge text corpus  →  run BPE/WordPiece/SentencePiece ONCE  →  fixed vocabulary (e.g. 100K entries)
+                                                                        ↓
+                                             THEN the model's actual weight-training begins
+```
+That vocabulary is then frozen for the model's whole lifetime — every model family builds its own from
+its own data, so sizes differ (GPT-4o ≈ 200K tokens, LLaMA ≈ 32K, BERT ≈ 30K). Because subword
+tokenizers can always fall back to smaller and smaller pieces (down to individual characters/bytes),
+nothing is ever truly "out of vocabulary" — unlike old word-level tokenizers, which would get stuck on
+any word missing from their fixed list.
+
 ## 2. Context Windows
 
 The **context window** is the maximum number of tokens — input plus output, combined — that a model
@@ -290,6 +303,12 @@ A token is a chunk of text — sometimes a whole word, often a piece of one. LLM
 instead of whole words because human language has effectively unlimited possible words (names, typos,
 slang); subword tokenization lets the model handle a word it has never seen by assembling it from
 familiar pieces, instead of getting stuck.
+
+**Q1a. Is a model's vocabulary preset, or learned during training?**
+Preset. The vocabulary is built once, before the model's actual weight-training even starts, by
+running BPE/WordPiece/SentencePiece over a large text corpus. It's then frozen for the model's
+lifetime. Every model family builds its own vocabulary from its own data (GPT-4o ≈ 200K tokens, LLaMA
+≈ 32K, BERT ≈ 30K), so vocabularies differ across models but are fixed within a given model.
 
 **Q2. Name the common tokenization algorithms and one model that uses each.**
 BPE (Byte Pair Encoding) — used by GPT models. WordPiece — used by BERT. SentencePiece — used by T5,
