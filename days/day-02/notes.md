@@ -88,6 +88,11 @@ has no memory of anything that isn't explicitly included in the current context.
 erased to fit new writing — older parts of a long conversation get dropped or summarized once you go
 past the limit.
 
+```
+Turn 1:   [System 80] + [History 120] + [Msg 40] + [free space] + [Reserved reply 80]  → mostly free
+Turn 20:  [System 80] + [History 520] + [Msg 40] + [little free] + [Reserved reply 80] → nearly full
+```
+
 > **Why / How / Where / When**
 > - **Why:** a model has a fixed amount of compute/memory it can spend per request — it cannot look at
 >   an unlimited amount of text at once, no matter how powerful it is.
@@ -123,6 +128,34 @@ An **embedding** is a way of turning a piece of text (a word, a sentence, a whol
 list of numbers — a **vector** — that captures its *meaning*, not just its spelling. Texts with
 similar meaning end up with vectors that are close together in this number-space, even if they don't
 share a single letter.
+
+**How does a vector actually get formed? Is there a vocabulary lookup involved?** Yes — there are two
+layers to this, and they connect directly to tokenization (Section 1):
+
+**1. Inside the model, every token starts from a lookup table.** After tokenization gives you a token
+ID (a single integer), the model has a giant table called the **embedding matrix** — one row per
+vocabulary entry (e.g. ~50,000 rows for GPT), and each row is a vector of numbers (e.g. 768 or 4096 of
+them, called the "embedding dimension"). Getting a token's starting vector is just a lookup, nothing
+fancier:
+```
+"cat"  →  token ID 5023  →  look up row 5023 in the embedding table  →  [0.12, -0.87, ..., 0.05]
+```
+This table isn't hand-built — it starts as random numbers and gets adjusted during training (Section
+5), the same way every other weight does, until similar tokens naturally end up with similar rows.
+
+**2. That starting vector then gets reshaped by context as it flows through the model** (this is what
+attention in Section 4 actually does) — so the word "bank" starts from the same lookup-table row in
+"river bank" and "bank account," but ends up with two *different* final vectors once attention has
+mixed in the surrounding words.
+
+**3. For whole sentences/documents (what RAG and search actually use), a separate embedding model does
+this end-to-end in one step** — not a simple lookup, but a full neural network trained specifically so
+that similar *meaning* ends up as nearby vectors:
+```
+"The cat sat on the mat"  →  embedding model (e.g. text-embedding-3)  →  [0.44, -0.12, ..., 0.91]
+```
+One dense vector for the entire sentence — this is the kind of embedding used for semantic search and
+RAG (Section 3's "why this matters" below), not the per-token lookup-table vector from step 1.
 
 **Example:** the vectors for "dog" and "puppy" will land close together, while "dog" and "airplane"
 will land far apart.
@@ -172,6 +205,10 @@ what "it" refers to, the model needs to connect "it" strongly to "animal," not "
 is exactly the mechanism that lets it make that connection directly, no matter how many words sit in
 between.
 
+```
+"it"  →  attention scores against every other word  →  animal: 0.72, tired: 0.12, was: 0.08, street: ~0.01
+```
+
 > **Why / How / Where / When**
 > - **Why:** the older RNN approach (Day 01) reads one token at a time and forgets far-back context, and
 >   it can't be parallelized well, which makes training slow. Language needed an architecture that
@@ -216,6 +253,11 @@ times a day across every user.
 **Analogy:** training is like years of medical school — expensive, slow, and mostly a one-time thing.
 Inference is like a doctor seeing a patient — fast, drawing on everything already learned, with no
 re-studying required for each visit.
+
+```
+Training:   Data → Predict → Compare to correct answer (Loss) → Adjust weights → repeat billions of times
+Inference:  Your input → Frozen model (same weights) → Output          → one pass, no weight changes
+```
 
 > **Why / How / Where / When**
 > - **Why:** a model has to *learn* a language and a huge amount of world knowledge before it's useful
@@ -268,6 +310,15 @@ An embedding is a numerical vector representation of text that captures meaning 
 wording — similar meanings produce nearby vectors. Similarity is typically measured with cosine
 similarity, which compares the angle between two vectors: close to 1 means very similar, close to 0
 means unrelated.
+
+**Q5a. How does a token actually become a vector — is there a vocabulary lookup involved?**
+Yes. After tokenization assigns a token an ID (an integer), the model has an embedding matrix — one
+row per vocabulary entry, each row a vector of numbers. Getting a token's starting vector is a lookup:
+ID 5023 → row 5023 of the table → e.g. `[0.12, -0.87, ..., 0.05]`. That table starts random and is
+learned during training. As the vector then flows through the Transformer's attention layers, it gets
+reshaped by context — so the same starting row for "bank" ends up as two different final vectors in
+"river bank" vs. "bank account." Whole-sentence embeddings (used in RAG) work differently — a separate
+embedding model maps the entire sentence to one vector directly, not via a per-token lookup.
 
 **Q6. What's the famous word2vec example that shows embeddings capture meaning, not just words?**
 `vector("king") - vector("man") + vector("woman") ≈ vector("queen")`. The model learned concepts like
