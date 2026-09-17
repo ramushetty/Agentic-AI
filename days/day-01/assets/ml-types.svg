@@ -1,8 +1,8 @@
-<svg width="960" height="370" viewBox="0 0 960 370" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
-  <rect width="960" height="370" fill="#ffffff"/>
+<svg width="960" height="410" viewBox="0 0 960 410" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="410" fill="#ffffff"/>
 
   <text x="480" y="24" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
-    Types of Machine Learning — how a computer can learn
+    Types of Machine Learning — with the actual algorithms interviewers ask about
   </text>
 
   <!-- Top box -->
@@ -34,39 +34,61 @@
   <text x="840" y="189" text-anchor="middle" font-size="11" font-style="italic" fill="#ffedd5">(how LLMs pre-train)</text>
 
   <!-- connector lines from L2 to L3 -->
-  <line x1="65" y1="193" x2="65" y2="238" stroke="#94a3b8" stroke-width="2"/>
-  <line x1="175" y1="193" x2="175" y2="238" stroke="#94a3b8" stroke-width="2"/>
-  <line x1="360" y1="193" x2="360" y2="238" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="62" y1="193" x2="62" y2="238" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="178" y1="193" x2="178" y2="238" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="302" y1="193" x2="302" y2="238" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="418" y1="193" x2="418" y2="238" stroke="#94a3b8" stroke-width="2"/>
   <line x1="600" y1="193" x2="600" y2="238" stroke="#94a3b8" stroke-width="2"/>
   <line x1="840" y1="193" x2="840" y2="238" stroke="#94a3b8" stroke-width="2"/>
 
-  <!-- Level 3 boxes -->
-  <rect x="10" y="238" width="110" height="85" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="65" y="263" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Classification</text>
-  <text x="65" y="281" text-anchor="middle" font-size="11" fill="#1e3a8a">sort into categories</text>
-  <text x="65" y="296" text-anchor="middle" font-size="11" fill="#1e3a8a">e.g. spam or not spam</text>
+  <!-- Level 3 boxes: Supervised -> Classification / Regression -->
+  <rect x="10" y="238" width="105" height="100" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="62" y="258" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Classification</text>
+  <text x="62" y="274" text-anchor="middle" font-size="10" fill="#1e3a8a">sort → categories</text>
+  <text x="62" y="289" text-anchor="middle" font-size="10" fill="#1e3a8a">e.g. spam filter</text>
+  <text x="62" y="308" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1e40af">LogReg · Decision</text>
+  <text x="62" y="320" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1e40af">Tree · RF · SVM · KNN</text>
 
-  <rect x="130" y="238" width="110" height="85" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-  <text x="185" y="263" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Regression</text>
-  <text x="185" y="281" text-anchor="middle" font-size="11" fill="#1e3a8a">predict a number</text>
-  <text x="185" y="296" text-anchor="middle" font-size="11" fill="#1e3a8a">e.g. house price</text>
+  <rect x="125" y="238" width="105" height="100" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="177" y="258" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Regression</text>
+  <text x="177" y="274" text-anchor="middle" font-size="10" fill="#1e3a8a">predict → number</text>
+  <text x="177" y="289" text-anchor="middle" font-size="10" fill="#1e3a8a">e.g. house price</text>
+  <text x="177" y="308" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1e40af">Linear · Ridge /</text>
+  <text x="177" y="320" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1e40af">Lasso · SVR</text>
 
-  <rect x="250" y="238" width="220" height="85" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
-  <text x="360" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Clustering</text>
-  <text x="360" y="286" text-anchor="middle" font-size="11" fill="#14532d">finds hidden groups on its own</text>
-  <text x="360" y="303" text-anchor="middle" font-size="11" fill="#14532d">e.g. customer segments</text>
+  <!-- Level 3 boxes: Unsupervised -> Clustering / Dimensionality Reduction -->
+  <rect x="250" y="238" width="105" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="302" y="255" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14532d">Clustering</text>
+  <text x="302" y="271" text-anchor="middle" font-size="9.5" fill="#14532d">finds hidden groups</text>
+  <text x="302" y="286" text-anchor="middle" font-size="9.5" fill="#14532d">e.g. customer segments</text>
+  <text x="302" y="305" text-anchor="middle" font-size="9.5" font-weight="700" fill="#166534">K-Means · DBSCAN</text>
+  <text x="302" y="317" text-anchor="middle" font-size="9.5" font-weight="700" fill="#166534">Hierarchical · GMM</text>
 
-  <rect x="490" y="238" width="220" height="85" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-  <text x="600" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Trial &amp; error</text>
-  <text x="600" y="286" text-anchor="middle" font-size="11" fill="#4c1d95">try, get reward/penalty, adjust</text>
-  <text x="600" y="303" text-anchor="middle" font-size="11" fill="#4c1d95">e.g. training a dog with treats</text>
+  <rect x="365" y="238" width="105" height="100" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="417" y="255" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Dim. Reduction</text>
+  <text x="417" y="271" text-anchor="middle" font-size="9.5" fill="#14532d">fewer features, same info</text>
+  <text x="417" y="286" text-anchor="middle" font-size="9.5" fill="#14532d">e.g. compress 100 cols</text>
+  <text x="417" y="305" text-anchor="middle" font-size="9.5" font-weight="700" fill="#166534">PCA · t-SNE</text>
+  <text x="417" y="317" text-anchor="middle" font-size="9.5" font-weight="700" fill="#166534">UMAP</text>
 
-  <rect x="730" y="238" width="220" height="85" rx="8" fill="#ffedd5" stroke="#c2410c" stroke-width="2"/>
-  <text x="840" y="266" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Predict next word</text>
-  <text x="840" y="286" text-anchor="middle" font-size="11" fill="#7c2d12">on huge unlabeled text</text>
-  <text x="840" y="303" text-anchor="middle" font-size="11" fill="#7c2d12">e.g. how GPT/Claude are pre-trained</text>
+  <!-- Level 3 box: Reinforcement -->
+  <rect x="490" y="238" width="220" height="100" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="600" y="260" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Trial &amp; error</text>
+  <text x="600" y="278" text-anchor="middle" font-size="11" fill="#4c1d95">try, get reward/penalty, adjust</text>
+  <text x="600" y="294" text-anchor="middle" font-size="11" fill="#4c1d95">e.g. AlphaGo, self-driving cars</text>
+  <text x="600" y="317" text-anchor="middle" font-size="11" font-weight="700" fill="#5b21b6">Q-Learning · DQN · PPO</text>
 
-  <text x="480" y="350" text-anchor="middle" font-size="12" fill="#475569">
-    Same idea, four different ways of learning — pick based on whether you have labels, and how much of them.
+  <!-- Level 3 box: Semi-/Self-supervised -->
+  <rect x="730" y="238" width="220" height="100" rx="8" fill="#ffedd5" stroke="#c2410c" stroke-width="2"/>
+  <text x="840" y="260" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">Predict next word</text>
+  <text x="840" y="278" text-anchor="middle" font-size="11" fill="#7c2d12">on huge unlabeled text</text>
+  <text x="840" y="294" text-anchor="middle" font-size="11" fill="#7c2d12">e.g. pretrains GPT/Claude</text>
+  <text x="840" y="317" text-anchor="middle" font-size="11" font-weight="700" fill="#9a3412">Pretraining objective, not 1 algorithm</text>
+
+  <text x="480" y="360" text-anchor="middle" font-size="12" fill="#475569">
+    Same idea, four ways of learning — pick based on whether you have labels, how many, and what you need out.
+  </text>
+  <text x="480" y="378" text-anchor="middle" font-size="12" fill="#475569">
+    Bold names in each box = the specific algorithms interviewers expect you to name.
   </text>
 </svg>

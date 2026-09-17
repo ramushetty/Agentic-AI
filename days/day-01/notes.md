@@ -56,7 +56,7 @@ mostly academic/statistics topic for decades, until computers got fast enough an
 
 **Types of ML (how a computer can learn — this is the classification you asked about):**
 
-![Types of Machine Learning: supervised, unsupervised, reinforcement, semi/self-supervised](assets/ml-types.svg)
+![Types of Machine Learning: supervised (classification/regression), unsupervised (clustering/dimensionality reduction), reinforcement, semi/self-supervised — with the named algorithms for each](assets/ml-types.svg)
 
 There are **four** common ways a computer can learn from data:
 
@@ -66,18 +66,29 @@ checking homework.
 - **Classification** = sorting things into categories.
   Example: Is this email spam or not spam? Is this photo a cat or a dog? Is this loan application
   risky or safe?
+  **Common algorithms:** Logistic Regression, Decision Tree, Random Forest, SVM (Support Vector
+  Machine), Naive Bayes, K-Nearest Neighbors (KNN), Gradient Boosting (XGBoost/LightGBM).
 - **Regression** = predicting a number.
   Example: What will this house sell for? How many customers will show up tomorrow?
+  **Common algorithms:** Linear Regression, Ridge/Lasso Regression, Decision Tree/Random Forest
+  Regression, SVR (Support Vector Regression).
 
 You train the model on examples where you already know the right answer, so it learns the pattern.
 Then you show it something new, and it makes its own guess.
 
 **2. Unsupervised Learning** — you give the computer examples but **no** correct answers. It has to
-find patterns or groups on its own.
+find patterns or groups on its own. There are two common jobs here too:
 
-Example: You give an online store all its customers' purchase histories, with no labels at all. The
-computer groups customers into clusters by itself — like "people who mostly buy baby products" and
-"people who mostly buy gym gear" — without anyone telling it those groups exist ahead of time.
+- **Clustering** = grouping similar things together.
+  Example: an online store groups customers into clusters by purchase history — like "people who
+  mostly buy baby products" and "people who mostly buy gym gear" — without anyone telling it those
+  groups exist ahead of time.
+  **Common algorithms:** K-Means, Hierarchical Clustering, DBSCAN, Gaussian Mixture Model (GMM).
+- **Dimensionality Reduction** = squeezing a large number of features down to a smaller number, while
+  keeping most of the useful information.
+  Example: a dataset with 100 columns about a customer gets compressed to 10 columns that still
+  capture almost everything important — makes the data faster to work with and easier to visualize.
+  **Common algorithms:** PCA (Principal Component Analysis), t-SNE, UMAP.
 
 **3. Reinforcement Learning** — the computer learns by trial and error, getting a reward or a penalty,
 similar to training a dog with treats. It tries an action, sees if the result was good or bad, and
@@ -86,6 +97,9 @@ adjusts.
 *Example: AlphaGo, the AI that beat the world champion at the game Go in 2016, learned by playing
 millions of games against itself — winning was the reward, losing was the penalty. Self-driving cars
 also use this to learn things like smooth braking.*
+
+**Common algorithms:** Q-Learning, Deep Q-Network (DQN), Policy Gradient methods, PPO (Proximal Policy
+Optimization).
 
 This becomes important later when we build agents that improve from feedback.
 
@@ -275,6 +289,29 @@ has to find structure or groupings on its own (e.g. clustering).
 **Q4. What's the difference between classification and regression?**
 Classification predicts a category or class (spam vs. not spam). Regression predicts a continuous
 number (a house price).
+
+**Q4a. Name a few common classification algorithms, and when would you pick Logistic Regression over
+Random Forest?**
+Logistic Regression, Decision Tree, Random Forest, SVM, Naive Bayes, KNN, and Gradient Boosting
+(XGBoost/LightGBM) are the common ones. Pick Logistic Regression when you want something fast,
+interpretable, and the relationship between features and the outcome is roughly linear — e.g. you need
+to explain *why* a loan was rejected. Pick Random Forest (or Gradient Boosting) when the relationships
+are more complex/non-linear and you care more about accuracy than explainability.
+
+**Q4b. What's the difference between K-Means and Hierarchical Clustering?**
+K-Means picks a fixed number of cluster centers ("k") upfront, assigns each point to its nearest
+center, and repeats until the centers stop moving — fast, but you have to choose k in advance.
+Hierarchical Clustering builds a tree of clusters by repeatedly merging (or splitting) groups, so you
+don't have to pick the number of clusters ahead of time, but it's slower on large datasets. DBSCAN is
+a common third option — it groups densely packed points and automatically finds outliers, with no
+need to specify k at all.
+
+**Q4c. What is PCA used for, and when would you use it?**
+PCA (Principal Component Analysis) compresses a large number of features into a smaller number of
+"components" that still capture most of the original information. It's used to speed up training,
+reduce noise, fight overfitting, and to visualize high-dimensional data in 2D/3D. t-SNE and UMAP are
+used more specifically for visualization rather than as a general preprocessing step, since they're
+better at preserving local clusters visually but distort global distances more.
 
 **Q5. What is self-supervised learning, and why does it matter for LLMs?**
 Self-supervised learning generates its own labels from the raw data itself — for example, predicting
