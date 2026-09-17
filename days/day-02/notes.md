@@ -226,6 +226,33 @@ that similar *meaning* ends up as nearby vectors:
 One dense vector for the entire sentence — this is the kind of embedding used for semantic search and
 RAG (Section 3's "why this matters" below), not the per-token lookup-table vector from step 1.
 
+**Does a word's vector ever change? Is the model creating meaning fresh from your query, or is it
+already baked in from training?** Both, but in different parts:
+
+- **The starting vector is always identical, every time, within one trained model** — row 1917 always
+  holds the same numbers. Across *different* models it's different, since each model trains its own
+  table independently.
+- **The final (contextual) vector changes per sentence**, because attention (step 2 above) reshapes it
+  using that sentence's specific surrounding words.
+- **Nothing is being learned or created live when you send a query.** The vectors and the attention
+  mechanism for combining them are both 100% fixed from training (Section 5: inference uses frozen
+  weights). Think of a calculator: its arithmetic rules are fixed at manufacture time, and typing
+  "2+3" doesn't relearn addition — it applies already-fixed rules to *your specific numbers*. Same
+  here: the model applies its already-learned vectors and attention rules to *your specific sentence*,
+  producing a fresh **result** (a contextual understanding of your input), not fresh **learning**.
+
+**How does training make a vector "know" meaning in the first place?** By repeatedly predicting
+something (like the next word), getting corrected when wrong, and nudging the vector's numbers
+slightly — across billions of sentences. Words that tend to appear in *similar surrounding company*
+get pulled toward similar vectors, purely from co-occurrence statistics:
+```
+"cat" often appears near: pet, vet, feed, cute, purr
+"dog" often appears near: pet, vet, feed, cute, bark
+→ similar surrounding words → training nudges their vectors toward each other
+```
+Nobody labels "cat" and "dog" as "both animals" — the model works that out purely from how those words
+get used around similar company, over and over, across huge amounts of text.
+
 **Example:** the vectors for "dog" and "puppy" will land close together, while "dog" and "airplane"
 will land far apart.
 
