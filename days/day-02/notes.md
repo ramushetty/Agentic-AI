@@ -33,6 +33,16 @@ slang, brand names, other languages. You can't build a fixed list containing eve
 breaking words into common sub-pieces, the model can handle a word it has *never seen before* by
 assembling it from familiar pieces, the same way you could sound out an unfamiliar word from its parts.
 
+> **Why / How / Where / When**
+> - **Why:** a model can't have a vocabulary entry for every possible word — human language is
+>   effectively infinite (names, typos, slang, new brands).
+> - **How:** subword algorithms (BPE, WordPiece, SentencePiece) break text into a fixed set of common
+>   chunks, so any word — even one never seen before — can be assembled from familiar pieces.
+> - **Where:** the very first step of every LLM pipeline. Nothing reaches the model as raw text — it's
+>   always tokens first. Also drives API pricing, since most providers bill per token.
+> - **When:** every single time text goes in or comes out of a model — during training AND inference,
+>   with no exceptions.
+
 **Types of tokenization:**
 
 - **Word-level** — one token per word. Simple, but the vocabulary list becomes huge, and the model is
@@ -63,6 +73,16 @@ has no memory of anything that isn't explicitly included in the current context.
 **Analogy:** think of it as the size of a whiteboard. Once the whiteboard is full, something has to be
 erased to fit new writing — older parts of a long conversation get dropped or summarized once you go
 past the limit.
+
+> **Why / How / Where / When**
+> - **Why:** a model has a fixed amount of compute/memory it can spend per request — it cannot look at
+>   an unlimited amount of text at once, no matter how powerful it is.
+> - **How:** measured in tokens, and input + output share the *same* budget — a bigger reply leaves
+>   less room for input, and vice versa.
+> - **Where:** shows up directly in chat app design (how much history to keep), RAG (how many
+>   retrieved documents you can stuff in), and long-document summarization.
+> - **When:** it bites you the moment a conversation runs long or you try to paste in a large document
+>   — that's when truncation, summarization, or "lost in the middle" problems start to appear.
 
 **Real numbers (as of this course):**
 
@@ -101,6 +121,15 @@ purely from reading text — nobody ever told it what a king or a queen is.
 vectors, not their length. A cosine similarity near **1** means very similar meaning, near **0** means
 unrelated, and near **-1** means opposite.
 
+> **Why / How / Where / When**
+> - **Why:** computers can't compare "meaning" directly — they need numbers to do math on. Exact
+>   keyword matching also fails whenever the wording differs even though the meaning is the same.
+> - **How:** a neural network is trained so that texts with similar meaning end up as nearby vectors;
+>   you then compare vectors with cosine similarity.
+> - **Where:** semantic search, RAG retrieval (Modules 4 &amp; 6), recommendation systems, clustering.
+> - **When:** computed once per document when you build a knowledge base (offline, in bulk), and again
+>   for every new user query (online, one at a time) so you can find the closest matches.
+
 ![2D map of word embeddings clustering by meaning, plus the king - man + woman ≈ queen vector arithmetic](assets/embeddings-explained.svg)
 
 **Why this matters for this course:** embeddings are the backbone of **semantic search** and **RAG**
@@ -128,6 +157,18 @@ every other token showing how much it matters.
 what "it" refers to, the model needs to connect "it" strongly to "animal," not "street." Self-attention
 is exactly the mechanism that lets it make that connection directly, no matter how many words sit in
 between.
+
+> **Why / How / Where / When**
+> - **Why:** the older RNN approach (Day 01) reads one token at a time and forgets far-back context, and
+>   it can't be parallelized well, which makes training slow. Language needed an architecture that
+>   connects distant words directly and trains fast on modern GPUs.
+> - **How:** self-attention scores how relevant every token is to every other token; multi-head
+>   attention runs several of these scoring passes in parallel; the result is stacked into many layers
+>   (e.g. 96 in GPT-3) for deeper understanding.
+> - **Where:** the base architecture of literally every modern LLM — GPT, Claude, Gemini, LLaMA, BERT.
+>   If it's a large language model released after 2018, it's almost certainly Transformer-based.
+> - **When:** introduced in 2017 ("Attention Is All You Need"). Used both during training (to learn the
+>   attention weights) and during inference (to process your prompt, using those learned weights).
 
 **The building blocks:**
 
@@ -161,6 +202,18 @@ times a day across every user.
 **Analogy:** training is like years of medical school — expensive, slow, and mostly a one-time thing.
 Inference is like a doctor seeing a patient — fast, drawing on everything already learned, with no
 re-studying required for each visit.
+
+> **Why / How / Where / When**
+> - **Why:** a model has to *learn* a language and a huge amount of world knowledge before it's useful
+>   (training), and then needs a fast, cheap way to actually be used by millions of people afterward
+>   (inference) — these are two very different jobs with very different cost profiles.
+> - **How:** training repeats forward pass → loss → backpropagation → weight update, billions of times.
+>   Inference is one forward pass through the already-trained, frozen weights — no learning happens.
+> - **Where:** training happens inside the model creator's own data centers (OpenAI, Anthropic, Google,
+>   etc.). Inference happens wherever the model is deployed — an API call, a chat app, an agent's tool
+>   call — anywhere a request reaches the model.
+> - **When:** training happens rarely — once for pre-training, occasionally again for fine-tuning.
+>   Inference happens constantly — every single message you send is one inference call.
 
 ![Training loop (data -> prediction -> loss -> backpropagation -> updated weights, repeated billions of times) vs. inference (frozen model, one input, one output, no weight changes)](assets/training-vs-inference-explained.svg)
 
