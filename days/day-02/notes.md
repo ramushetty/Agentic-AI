@@ -167,233 +167,166 @@ Turn 20:  [System 80] + [History 520] + [Msg 40] + [little free] + [Reserved rep
 
 ## 3. Embeddings and Vector Representations
 
-**Embedding vector, in one line: a list of many numbers that describes a word's *meaning* — the same
-way you'd describe a person using a list of measurable traits (height, weight, age) instead of just
-their name.** Two people with similar traits (twins) get similar number-lists; two words with similar
-meaning ("cat" and "kitten") get similar number-lists too, even sharing zero letters.
+**Embedding vector, in one line: a list of numbers that describes a word's meaning** — the same way
+you'd describe a person with height, weight, and age instead of just their name. Similar meaning →
+similar number-list, even with zero shared letters ("cat" and "kitten").
 
-This is the key contrast with Section 1: a **token ID** (like 1917) is a locker *number* — arbitrary,
-tells you nothing by itself. An **embedding vector** (`[0.12, -0.87, ..., 0.05]`) is what's *inside*
-that locker — the actual meaning, built up during training, not assigned in advance.
+**Quick contrast with Section 1:** a **token ID** (like 1917) is just a locker *number* — random, means
+nothing by itself. An **embedding vector** (`[0.12, -0.87, ..., 0.05]`) is what's *inside* that locker
+— the real meaning, built up during training.
 
-An **embedding** is a way of turning a piece of text (a word, a sentence, a whole document) into a
-list of numbers — a **vector** — that captures its *meaning*, not just its spelling. Texts with
-similar meaning end up with vectors that are close together in this number-space, even if they don't
-share a single letter.
-
-**How does a vector actually get formed? Is there a vocabulary lookup involved?** Yes — there are two
-layers to this, and they connect directly to tokenization (Section 1):
-
-**1. Inside the model, every token starts from a lookup table.** After tokenization gives you a token
-ID (a single integer), the model has a giant table called the **embedding matrix** — one row per
-vocabulary entry (e.g. ~50,000 rows for GPT), and each row is a vector of numbers (e.g. 768 or 4096 of
-them, called the "embedding dimension"). Getting a token's starting vector is just a lookup, nothing
-fancier:
+**How does a word get its number-list? Two simple steps:**
+1. Tokenization gives the word an ID (Section 1) — just a position in a list, no meaning yet.
+2. The model looks up that ID's row in a big table (its "meaning table"). That row is the word's
+   starting vector.
 ```
-"cat"  →  token ID 5023  →  look up row 5023 in the embedding table  →  [0.12, -0.87, ..., 0.05]
+"cat"  →  token ID 5023  →  row 5023 in the meaning table  →  [0.12, -0.87, ..., 0.05]
 ```
-This table isn't hand-built — it starts as random numbers and gets adjusted during training (Section
-5), the same way every other weight does, until similar tokens naturally end up with similar rows.
+That table starts as random numbers. During training, the model keeps guessing things (like the next
+word), gets corrected when it's wrong, and slowly adjusts these numbers — across billions of examples
+— until words used in similar situations end up with similar rows. Nobody tells the model "cat and dog
+are both animals"; it works that out just from how those words tend to appear near similar company
+(pet, vet, feed, cute).
 
-**What does "4096 dimensions" actually mean, and why do we need a vector instead of just using the ID
-number directly?**
+**Why a vector, and not just the ID number?** Because the ID is random — "cat" = 5023 tells you
+nothing. A vector is *trained* so that simple math on it (checking how close two vectors are) actually
+tells you whether two words mean something similar. The ID can't do that; the vector can.
 
-"4096 dimensions" just means the vector is a list of exactly 4096 numbers — think of it like a
-spreadsheet: 100,000 rows (one per vocabulary word) × 4096 columns, every row fully filled with
-decimals. You can't visualize 4096 dimensions directly (humans max out at 3), so use this mental
-model instead: it's like describing a person with 4096 measurable traits instead of 3 (height, weight,
-age) — many more traits, so much finer ability to capture subtle differences in meaning.
+**A word's vector isn't always exactly the same everywhere:**
+- The starting vector (the table lookup) is identical every time, in the same model.
+- As a sentence passes through attention (Section 4), the vector gets adjusted by context — so "bank"
+  ends up slightly different in "river bank" vs. "bank account."
+- Nothing is learned live when you send a message — the model only *uses* what it already learned.
 
-As for why the vector and not just the ID: because the ID is **arbitrary** (Section 1) — "un" = 1917
-tells you nothing about meaning, the same way two students sitting next to each other on a roster
-doesn't mean they're friends. A neural network works entirely by doing math on its inputs
-(multiplication, addition), so for that math to produce something meaningful, the input itself has to
-*encode* meaning. That's the vector's whole job — it's trained specifically so that doing math on it
-(distance, angle, addition) gives meaningful results, like `king - man + woman ≈ queen`. The ID can't
-do that; the vector is built to.
+**What does "4096 dimensions" mean?** Just the count of numbers in the list — 4096 numbers per word,
+instead of 3 (height/weight/age). More numbers = more detail the model can capture about meaning. You
+can't picture 4096 numbers at once (humans max out at 3), so just think "way more traits than usual."
 
-**2. That starting vector then gets reshaped by context as it flows through the model** (this is what
-attention in Section 4 actually does) — so the word "bank" starts from the same lookup-table row in
-"river bank" and "bank account," but ends up with two *different* final vectors once attention has
-mixed in the surrounding words.
-
-**3. For whole sentences/documents (what RAG and search actually use), a separate embedding model does
-this end-to-end in one step** — not a simple lookup, but a full neural network trained specifically so
-that similar *meaning* ends up as nearby vectors:
+**What about a whole sentence, not just one word?** That's what RAG actually uses — a separate
+**embedding model** turns an entire sentence into ONE vector in a single step:
 ```
 "The cat sat on the mat"  →  embedding model (e.g. text-embedding-3)  →  [0.44, -0.12, ..., 0.91]
 ```
-One dense vector for the entire sentence — this is the kind of embedding used for semantic search and
-RAG (Section 3's "why this matters" below), not the per-token lookup-table vector from step 1.
 
-**Does a word's vector ever change? Is the model creating meaning fresh from your query, or is it
-already baked in from training?** Both, but in different parts:
+**How do you check if two vectors are similar?** With **cosine similarity** — it compares the *angle*
+between two vectors, not their length. Close to **1** = very similar meaning. Close to **0** =
+unrelated.
 
-- **The starting vector is always identical, every time, within one trained model** — row 1917 always
-  holds the same numbers. Across *different* models it's different, since each model trains its own
-  table independently.
-- **The final (contextual) vector changes per sentence**, because attention (step 2 above) reshapes it
-  using that sentence's specific surrounding words.
-- **Nothing is being learned or created live when you send a query.** The vectors and the attention
-  mechanism for combining them are both 100% fixed from training (Section 5: inference uses frozen
-  weights). Think of a calculator: its arithmetic rules are fixed at manufacture time, and typing
-  "2+3" doesn't relearn addition — it applies already-fixed rules to *your specific numbers*. Same
-  here: the model applies its already-learned vectors and attention rules to *your specific sentence*,
-  producing a fresh **result** (a contextual understanding of your input), not fresh **learning**.
-
-**How does training make a vector "know" meaning in the first place?** By repeatedly predicting
-something (like the next word), getting corrected when wrong, and nudging the vector's numbers
-slightly — across billions of sentences. Words that tend to appear in *similar surrounding company*
-get pulled toward similar vectors, purely from co-occurrence statistics:
-```
-"cat" often appears near: pet, vet, feed, cute, purr
-"dog" often appears near: pet, vet, feed, cute, bark
-→ similar surrounding words → training nudges their vectors toward each other
-```
-Nobody labels "cat" and "dog" as "both animals" — the model works that out purely from how those words
-get used around similar company, over and over, across huge amounts of text.
-
-**Example:** the vectors for "dog" and "puppy" will land close together, while "dog" and "airplane"
-will land far apart.
-
-**Classic example (word2vec, 2013):** `vector("king") - vector("man") + vector("woman") ≈
-vector("queen")`. The model learned "royalty" and "gender" as *directions* in this number-space,
-purely from reading text — nobody ever told it what a king or a queen is.
-
-**How do you compare two embeddings?** With **cosine similarity** — it measures the angle between two
-vectors, not their length. A cosine similarity near **1** means very similar meaning, near **0** means
-unrelated, and near **-1** means opposite.
+**Famous example (2013):** `vector("king") − vector("man") + vector("woman") ≈ vector("queen")`. The
+model learned ideas like "royalty" and "gender" as directions in this number-space, purely from reading
+text — nobody told it what a king or queen actually is.
 
 > **Why / How / Where / When**
-> - **Why:** computers can't compare "meaning" directly — they need numbers to do math on. Exact
->   keyword matching also fails whenever the wording differs even though the meaning is the same.
-> - **How:** a neural network is trained so that texts with similar meaning end up as nearby vectors;
->   you then compare vectors with cosine similarity.
-> - **Where:** semantic search, RAG retrieval (Modules 4 &amp; 6), recommendation systems, clustering.
-> - **When:** computed once per document when you build a knowledge base (offline, in bulk), and again
->   for every new user query (online, one at a time) so you can find the closest matches.
+> - **Why:** computers can't compare "meaning" directly — they need numbers to do math on.
+> - **How:** train a model so similar-meaning text lands as similar vectors, then compare with cosine
+>   similarity.
+> - **Where:** semantic search, RAG (Modules 4 &amp; 6), recommendations, clustering.
+> - **When:** computed once for every document you store, and again for every new question someone
+>   asks.
 
 ![2D map of word embeddings clustering by meaning, plus the king - man + woman ≈ queen vector arithmetic](assets/embeddings-explained.svg)
 
-**Why this matters for this course:** embeddings are the backbone of **semantic search** and **RAG**
-(Modules 4 and 6). Instead of matching exact keywords, you convert both the user's question and every
-document into embeddings, and retrieve the documents whose vectors are *closest* to the question's
-vector — so a search for "how do I get my money back" can still find a document titled "refund
-policy," even though they share no words.
+**Why this matters here:** instead of matching exact words, you turn both the question and every
+document into vectors, then find the documents whose vectors sit closest to the question's vector — so
+"how do I get my money back" can still find a document titled "refund policy," with zero shared words.
 
-**Common embedding models:** OpenAI's `text-embedding-3`, Google's Gecko, Cohere Embed, and popular
-open-source options like `sentence-transformers` (e.g. `all-MiniLM`) — plus the older, word-level
-models that started it all: Word2Vec and GloVe.
+**Common embedding models:** OpenAI's `text-embedding-3`, Cohere Embed, open-source
+`sentence-transformers` — plus the older ones that started it all, Word2Vec and GloVe.
 
-**Is an "embedding model" the same thing as a Transformer?** Related, not identical: "Transformer" is
-an *architecture* (Section 4), "embedding model" is a *job* (turn a whole sentence into one
-meaning-vector). Most modern embedding models above (`text-embedding-3`, `sentence-transformers`,
-Cohere Embed) **are** Transformers internally — just trained for a different job than a generative LLM:
+**Is an "embedding model" the same as a Transformer?** Not quite — a Transformer is a *design*
+(Section 4), an embedding model is a *job* (turn a sentence into one vector). Most modern embedding
+models are built using the Transformer design, just trained for a different job than a chatbot:
 ```
-Generative LLM (GPT, Claude):        predicts the NEXT token  → generates text, one token at a time
-Embedding model (text-embedding-3):  maps a WHOLE sentence to ONE vector → generates nothing, just compares
+Chatbot (GPT, Claude):               predicts the next word  →  writes text, one word at a time
+Embedding model (text-embedding-3):  maps a WHOLE sentence to ONE vector  →  writes nothing, just compares
 ```
-Not every embedding model is a Transformer, though — Word2Vec and GloVe predate Transformers entirely
-(2013 vs. 2017) and use much simpler methods.
+Word2Vec and GloVe are older and don't use Transformers at all.
 
 ## 4. Transformer Architecture and Attention
 
-Every modern LLM (GPT, Claude, Gemini, LLaMA) is built on the **Transformer** architecture, introduced
-in the 2017 paper *"Attention Is All You Need."* Transformers replaced the older RNN/LSTM approach
-(Day 01) because they process a whole sequence **at once** instead of one token at a time, using a
-mechanism called **attention**.
+**What is a Transformer, in simple words?** It's the design used to build almost every AI chatbot
+today — GPT, Claude, Gemini. Its one big idea: look at the **whole sentence at once**, instead of
+reading it word by word like older systems (RNNs, Day 01) did.
 
-**Self-attention, in plain words:** for every token, the model asks *"which other tokens in this
-sentence should I pay attention to, to understand THIS token correctly?"* — and assigns a weight to
-every other token showing how much it matters.
+**What is "attention"?** Attention is how the model decides which words matter most for understanding
+one specific word.
 
-**Classic example:** *"The animal didn't cross the street because it was too tired."* To figure out
-what "it" refers to, the model needs to connect "it" strongly to "animal," not "street." Self-attention
-is exactly the mechanism that lets it make that connection directly, no matter how many words sit in
-between.
+**Simple example:** *"The animal didn't cross the street because it was too tired."*
+The word "it" is confusing on its own — what does it point to? Attention lets the model ask: *"which
+word does 'it' really mean?"* — and it correctly lands on "animal," not "street."
 
 ```
-"it"  →  attention scores against every other word  →  animal: 0.72, tired: 0.12, was: 0.08, street: ~0.01
+"it" gives every other word a score, showing how much that word helps explain "it":
+animal → 0.72 (very important)
+tired  → 0.12
+was    → 0.08
+street → 0.01 (barely matters)
 ```
+Bigger score = more important for understanding that word.
 
 > **Why / How / Where / When**
-> - **Why:** the older RNN approach (Day 01) reads one token at a time and forgets far-back context, and
->   it can't be parallelized well, which makes training slow. Language needed an architecture that
->   connects distant words directly and trains fast on modern GPUs.
-> - **How:** self-attention scores how relevant every token is to every other token; multi-head
->   attention runs several of these scoring passes in parallel; the result is stacked into many layers
->   (e.g. 96 in GPT-3) for deeper understanding.
-> - **Where:** the base architecture of literally every modern LLM — GPT, Claude, Gemini, LLaMA, BERT.
->   If it's a large language model released after 2018, it's almost certainly Transformer-based.
-> - **When:** introduced in 2017 ("Attention Is All You Need"). Used both during training (to learn the
->   attention weights) and during inference (to process your prompt, using those learned weights).
+> - **Why:** older systems (RNNs) read one word at a time and often forgot earlier words. Attention
+>   lets the model connect any two words directly, however far apart they are, and process a whole
+>   sentence at once instead of word by word — which also makes it much faster to train.
+> - **How:** every word scores every other word. This scoring happens many times side by side, and the
+>   whole thing repeats through many layers (sometimes almost 100), getting a little sharper each time.
+> - **Where:** inside every major AI language model today — GPT, Claude, Gemini, LLaMA, BERT.
+> - **When:** invented in 2017. Used both while the model is learning (training) and while it's
+>   answering you (inference).
 
-**The building blocks:**
+**The main parts inside a Transformer, one at a time:**
 
-- **Token + positional embeddings** — every token is converted to a vector (Section 3), and
-  information about its *position* in the sentence gets added in, since attention on its own has no
-  sense of word order.
-- **Multi-head attention** — the model doesn't compute attention just once; it computes it several
-  times in parallel ("heads"). Each head can specialize — one might track grammar, another might track
-  "who is doing what to whom."
-- **Feed-forward layers** — after attention, each token's representation passes through a small neural
-  network for further processing.
-- These blocks are **stacked** many times (GPT-3, for example, stacks 96 layers) to build up deeper
-  and deeper understanding.
+- **Turn words into numbers.** Each word becomes a token, then a number-list (Sections 1 &amp; 3). A
+  small tag also gets added showing *where* the word sits in the sentence (1st, 2nd, 3rd...), since
+  attention alone has no sense of order.
+- **Attention.** Explained above — every word looks at every other word and decides what matters.
+- **A small extra thinking step.** After attention, each word's number-list passes through one more
+  tiny processing step to refine it further.
+- **Repeat, many times.** This whole cycle (attention + thinking step) runs over and over — up to
+  around 96 times in GPT-3 — understanding the sentence a little better each round.
 
 ![A simplified Transformer block, plus an attention-weight example showing "it" attending strongly to "animal"](assets/transformer-attention-explained.svg)
 
-**Full worked example — tracing one sentence through every stage:**
+**A full example, step by step:** `"The cat sat because it was tired."`
+*(Numbers below are made up to teach the idea, not real model output.)*
 
-*(Numbers below are illustrative, not real model output, but the mechanism is exactly right.)*
+1. Break the sentence into pieces and give each piece a number (Section 1):
+   `The, cat, sat, because, it, was, tired, .` → `[464, 3797, 7731, 780, 340, 373, 10032, 13]`
+2. Look up each number's starting number-list from the model's table (Section 3):
+   `cat (3797) → [0.55, 0.12, -0.40, 0.08, 0.71, -0.09]`
+3. Add a small tag for word order (1st word, 2nd word, ...).
+4. Let every word look at every other word (attention): `"it" → cat: 0.68, tired: 0.15, was: 0.09, ...`
+   — "it"'s number-list now leans heavily toward "cat."
+5. Tidy up the numbers a bit, so they stay in a stable range.
+6. Run each word's numbers through the small extra thinking step.
+7. Tidy up again.
+8. Repeat steps 4–7 many times — each round understands the sentence a bit more deeply.
+9. Use the final numbers to guess the next word. Feed in `"The cat sat because it was"` and "tired"
+   comes out as the best guess — it gets written, then fed back in to guess the *next* word after that.
+   This is why a chatbot writes one word at a time.
 
-`"The cat sat because it was tired."`
+**Is what I just described an "encoder" or a "decoder"?** Good question — it's a decoder. The original
+2017 design actually had two halves:
 
-1. **Tokenize** (Section 1): `The, cat, sat, because, it, was, tired, .` → IDs `[464, 3797, 7731, 780, 340, 373, 10032, 13]`
-2. **Embedding lookup** (Section 3): each ID → its row in the embedding table → a context-free starting
-   vector, e.g. `cat (3797) → [0.55, 0.12, -0.40, 0.08, 0.71, -0.09]`.
-3. **Add positional encoding**: a position-based pattern gets added to each vector, marking "you are
-   word #1 / #2 / #3..." — attention alone has no sense of order.
-4. **Self-attention**: every token scores how relevant every other token is to it:
-   `"it" → cat: 0.68, tired: 0.15, was: 0.09, sat: 0.03, the: 0.02, because: 0.02, .: 0.01`
-   "it"'s vector becomes a weighted mix dominated by "cat" — this is the actual mechanism that resolves
-   the reference. Multi-head = this scoring runs several times in parallel, each head free to specialize.
-5. **Add & Normalize**: the original vector is added back in, then rescaled to a stable range.
-6. **Feed-forward network**: each token's updated vector passes through a small neural net (same net,
-   applied to every token independently) — a further refinement step.
-7. **Add & Normalize** again.
-8. **Repeat steps 4–7, stacked N times** (96 for GPT-3) — early layers tend to pick up grammar/local
-   structure, later layers build deeper relationships. Every layer refines every token's vector further.
-9. **Predict the next token**: the final layer's last-position vector becomes a probability score over
-   every vocabulary word. Feed in `"The cat sat because it was"` (unfinished) and "tired" scores
-   highest — it gets generated, then fed back in as input for predicting the *next* token. This is why
-   generation happens one token at a time, even though understanding each token happens in parallel.
-
-**Wait — is that an encoder or a decoder? Modern LLMs are decoder-only.** The original 2017 Transformer
-paper actually had two halves:
-
-- **Encoder** — reads the *entire* input at once. Every token can see every other token, including
-  ones *after* it (**bidirectional** attention). Good for *understanding* a complete input.
-- **Decoder** — *generates* output one token at a time. Each token can only attend to itself and
-  tokens *before* it, never ones that don't exist yet (**causal**/masked attention). Good for
-  *generating* text.
+- **Encoder** — reads the *whole* sentence at once, and every word can see every other word,
+  including ones that come later. Good at *understanding* a full piece of text.
+- **Decoder** — *writes* the answer one word at a time, and can only look at words already written —
+  never ones that don't exist yet. Good at *generating* text.
 
 ```
-Encoder attention on "it":  can see  The, cat, sat, because, it, was, tired   (ALL tokens, past + future)
-Decoder attention on "it":  can see  The, cat, sat, because, it               (only itself + past)
+Encoder looking at "it":  can see every word in the sentence (before AND after "it")
+Decoder looking at "it":  can only see words that came before "it" — nothing after
 ```
 
-Three architectures get built from these two pieces:
+In plain terms:
+- **BERT** = encoder only → great at understanding text, but doesn't write new text.
+- **GPT, Claude, LLaMA** = decoder only → write text one word at a time. Almost every chatbot you use
+  is this type.
+- **The original 2017 Transformer** = both halves together → used for translation (read one language,
+  write another).
 
-| Architecture | Best at | Example models |
-|---|---|---|
-| Encoder-only | Understanding/classifying a complete input | BERT, and most embedding models (Section 3) |
-| Decoder-only | Generating text, one token at a time | GPT, Claude, LLaMA — basically every modern chat LLM |
-| Encoder-Decoder | Input → output tasks (translation, summarization) | The original 2017 Transformer, T5 |
-
-**The worked example above is specifically decoder-only** — that's exactly why generation happens one
-token at a time and each generated token gets fed back in: causal attention literally cannot see
-tokens that don't exist yet. That's the actual architectural reason, not a simplification.
+The 9-step example above is the decoder type — that's exactly why it writes one word, looks at what it
+just wrote, then writes the next word, and keeps going.
 
 ## 5. Training vs. Inference
 
