@@ -1,0 +1,97 @@
+<svg width="1280" height="400" viewBox="0 0 1280 400" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1280" height="400" fill="#ffffff"/>
+
+  <text x="640" y="26" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Three ways to structure an agentic system
+  </text>
+
+  <!-- ============ Panel 1: Router ============ -->
+  <rect x="30" y="55" width="380" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="220" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">1. Router</text>
+
+  <rect x="140" y="100" width="160" height="36" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="220" y="123" text-anchor="middle" font-size="11" fill="#1e293b">Request</text>
+  <line x1="220" y1="136" x2="220" y2="152" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+
+  <rect x="140" y="152" width="160" height="40" rx="6" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="220" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="#713f12">Router: classify</text>
+
+  <path d="M 175 192 L 100 228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#m1)"/>
+  <path d="M 220 192 L 220 228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#m1)"/>
+  <path d="M 265 192 L 335 228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#m1)"/>
+
+  <rect x="45" y="228" width="110" height="36" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="100" y="250" text-anchor="middle" font-size="10" fill="#1e3a8a">Billing chain</text>
+  <rect x="165" y="228" width="110" height="36" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="220" y="250" text-anchor="middle" font-size="10" fill="#1e3a8a">Tech chain</text>
+  <rect x="285" y="228" width="110" height="36" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="340" y="250" text-anchor="middle" font-size="10" fill="#1e3a8a">General chain</text>
+
+  <text x="220" y="300" text-anchor="middle" font-size="11" fill="#334155">One decision, one of several</text>
+  <text x="220" y="315" text-anchor="middle" font-size="11" fill="#334155">fixed paths — fast, cheap,</text>
+  <text x="220" y="330" text-anchor="middle" font-size="11" fill="#334155">predictable.</text>
+
+  <!-- ============ Panel 2: Planner-Executor ============ -->
+  <rect x="440" y="55" width="380" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="630" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">2. Planner-Executor</text>
+
+  <rect x="550" y="100" width="160" height="34" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="630" y="121" text-anchor="middle" font-size="10.5" fill="#1e293b">Goal: "plan a trip"</text>
+  <line x1="630" y1="134" x2="630" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+
+  <rect x="550" y="150" width="160" height="34" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="630" y="171" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Planner</text>
+  <line x1="630" y1="184" x2="630" y2="200" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+
+  <rect x="455" y="200" width="80" height="30" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="495" y="219" text-anchor="middle" font-size="9.5" fill="#1e3a8a">Flights</text>
+  <rect x="545" y="200" width="80" height="30" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="585" y="219" text-anchor="middle" font-size="9.5" fill="#1e3a8a">Hotels</text>
+  <rect x="635" y="200" width="80" height="30" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="675" y="219" text-anchor="middle" font-size="9.5" fill="#1e3a8a">Activities</text>
+  <rect x="725" y="200" width="80" height="30" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="765" y="219" text-anchor="middle" font-size="9.5" fill="#1e3a8a">Itinerary</text>
+
+  <line x1="630" y1="230" x2="630" y2="246" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+  <rect x="550" y="246" width="160" height="32" rx="6" fill="#fef9c3" stroke="#a16207" stroke-width="1.5"/>
+  <text x="630" y="266" text-anchor="middle" font-size="10.5" font-weight="700" fill="#713f12">Executor runs each step</text>
+
+  <line x1="630" y1="278" x2="630" y2="294" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+  <rect x="550" y="294" width="160" height="34" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="630" y="315" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Answer</text>
+
+  <text x="630" y="352" text-anchor="middle" font-size="11" fill="#334155">Steps are planned first,</text>
+  <text x="630" y="367" text-anchor="middle" font-size="11" fill="#334155">then carried out in order.</text>
+
+  <!-- ============ Panel 3: Supervisor-Worker ============ -->
+  <rect x="850" y="55" width="380" height="320" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="1040" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">3. Supervisor-Worker</text>
+
+  <rect x="960" y="100" width="160" height="34" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="1040" y="121" text-anchor="middle" font-size="11" fill="#1e293b">Request</text>
+  <line x1="1040" y1="134" x2="1040" y2="150" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+
+  <rect x="960" y="150" width="160" height="38" rx="6" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="1040" y="173" text-anchor="middle" font-size="11" font-weight="700" fill="#713f12">Supervisor</text>
+
+  <path d="M 985 188 L 945 218" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#m1)"/>
+  <path d="M 1095 188 L 1135 218" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#m1)"/>
+
+  <rect x="865" y="218" width="150" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="940" y="239" text-anchor="middle" font-size="10" fill="#4c1d95">Research worker</text>
+  <rect x="1065" y="218" width="150" height="34" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="1140" y="239" text-anchor="middle" font-size="10" fill="#4c1d95">Writing worker</text>
+
+  <path d="M 950 218 Q 985 205 1005 190" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#m1)"/>
+  <path d="M 1130 218 Q 1095 205 1075 190" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#m1)"/>
+  <text x="1040" y="204" text-anchor="middle" font-size="9" fill="#64748b">(review, ask for redo)</text>
+
+  <line x1="1040" y1="252" x2="1040" y2="294" stroke="#94a3b8" stroke-width="2" marker-end="url(#m1)"/>
+  <rect x="960" y="294" width="160" height="34" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="1040" y="315" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Answer</text>
+
+  <text x="1040" y="352" text-anchor="middle" font-size="11" fill="#334155">Supervisor assigns, checks,</text>
+  <text x="1040" y="367" text-anchor="middle" font-size="11" fill="#334155">and combines workers' results.</text>
+
+  <defs><marker id="m1" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker></defs>
+</svg>
