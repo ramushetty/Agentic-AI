@@ -25,19 +25,34 @@ transformer architecture & attention · training vs. inference
 
 Here's the root problem it solves: a computer doesn't understand words or letters at all — it only
 understands numbers. So before any text can reach an LLM, it has to be chopped into small chunks
-(**tokens**), and each chunk gets converted into a number. The model never sees the word "cat" — it
-only ever sees a number that means "cat."
+(**tokens**), and each chunk gets converted into a number.
 
-**Concrete example:**
+**On what basis does a piece of text become a specific number? Two completely different bases, in two
+steps — this is the part that's easy to blur together:**
+
+**Step 1 — text piece → token ID. This number is 100% arbitrary, just a position in a list.** Think of
+a class roster: every student gets a roll number (1, 2, 3...) that has nothing to do with who they
+are — it's just "which row of the list are you." A tokenizer's vocabulary is built the same way: scan
+a huge amount of text, find the ~100,000 most common chunks, and write them down as a numbered list.
 ```
-"unhappiness"  →  "un" + "happi" + "ness"   →   [1917, 4102, 655]
-        (text)         (tokens: 3 pieces)         (the numbers the model actually reads)
+"un" is the 1918th entry in this particular list  →  so "un" = token ID 1917
 ```
-Three token-pieces, three numbers. That's genuinely the whole idea — chop the text into pieces, look
-up each piece's number in the model's vocabulary, feed the model the numbers.
+That's the whole basis: **position in a prebuilt list.** If the list had been built in a different
+order, "un" could just as easily have been ID 40 or ID 90,000 — the number itself means nothing.
+
+**Step 2 — token ID → embedding vector. This is where real meaning enters, and it's *learned*, not
+arbitrary** (full detail in Section 3): the model looks up row 1917 in a separate table, and that
+row — a list of many decimal numbers — is what actually got tuned during training so that
+similar-meaning tokens end up with similar rows.
+
+**Concrete example, both steps together:**
+```
+"unhappiness"  →  "un"+"happi"+"ness"  →  IDs [1917, 4102, 655]  →  each ID's row in the embedding table
+     (text)          (tokens: 3 pieces)    (arbitrary list positions)      (the meaningful vectors)
+```
 
 Sometimes a token is a whole word, sometimes it's just part of a word, and sometimes it's a single
-punctuation mark — depends on how common that chunk is.
+punctuation mark — depends on how common that chunk turned out to be when the list was built.
 
 **Why not just make each token a whole word?** Human language has effectively unlimited "words" —
 names, typos, slang, brand names, other languages. You can't build a fixed numbered list containing
