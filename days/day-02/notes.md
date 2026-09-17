@@ -195,6 +195,23 @@ fancier:
 This table isn't hand-built — it starts as random numbers and gets adjusted during training (Section
 5), the same way every other weight does, until similar tokens naturally end up with similar rows.
 
+**What does "4096 dimensions" actually mean, and why do we need a vector instead of just using the ID
+number directly?**
+
+"4096 dimensions" just means the vector is a list of exactly 4096 numbers — think of it like a
+spreadsheet: 100,000 rows (one per vocabulary word) × 4096 columns, every row fully filled with
+decimals. You can't visualize 4096 dimensions directly (humans max out at 3), so use this mental
+model instead: it's like describing a person with 4096 measurable traits instead of 3 (height, weight,
+age) — many more traits, so much finer ability to capture subtle differences in meaning.
+
+As for why the vector and not just the ID: because the ID is **arbitrary** (Section 1) — "un" = 1917
+tells you nothing about meaning, the same way two students sitting next to each other on a roster
+doesn't mean they're friends. A neural network works entirely by doing math on its inputs
+(multiplication, addition), so for that math to produce something meaningful, the input itself has to
+*encode* meaning. That's the vector's whole job — it's trained specifically so that doing math on it
+(distance, angle, addition) gives meaningful results, like `king - man + woman ≈ queen`. The ID can't
+do that; the vector is built to.
+
 **2. That starting vector then gets reshaped by context as it flows through the model** (this is what
 attention in Section 4 actually does) — so the word "bank" starts from the same lookup-table row in
 "river bank" and "bank account," but ends up with two *different* final vectors once attention has
