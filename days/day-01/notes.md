@@ -56,9 +56,11 @@ mostly academic/statistics topic for decades, until computers got fast enough an
 
 **Types of ML (how a computer can learn — this is the classification you asked about):**
 
-There are two common ways a computer can learn from data:
+![Types of Machine Learning: supervised, unsupervised, reinforcement, semi/self-supervised](assets/ml-types.svg)
 
-**Supervised Learning** — you give the computer examples *and* the correct answers, like a teacher
+There are **four** common ways a computer can learn from data:
+
+**1. Supervised Learning** — you give the computer examples *and* the correct answers, like a teacher
 checking homework.
 
 - **Classification** = sorting things into categories.
@@ -70,19 +72,22 @@ checking homework.
 You train the model on examples where you already know the right answer, so it learns the pattern.
 Then you show it something new, and it makes its own guess.
 
-**Unsupervised Learning** — you give the computer examples but **no** correct answers. It has to find
-patterns or groups on its own.
+**2. Unsupervised Learning** — you give the computer examples but **no** correct answers. It has to
+find patterns or groups on its own.
 
 Example: You give an online store all its customers' purchase histories, with no labels at all. The
 computer groups customers into clusters by itself — like "people who mostly buy baby products" and
 "people who mostly buy gym gear" — without anyone telling it those groups exist ahead of time.
 
-*(There's a third type, **Reinforcement Learning** — the computer learns by trial and error, getting a
-reward or a penalty, similar to training a dog with treats. This becomes important later when we
-build agents that improve from feedback. There's also **Semi-supervised** and **Self-supervised**
-learning — a mix, where the computer uses a small amount of labeled data plus a huge amount of
-unlabeled data. This last one is actually how today's large language models are pre-trained: they
-read huge amounts of plain text with no human labels at all, and just learn to predict the next word.)*
+**3. Reinforcement Learning** — the computer learns by trial and error, getting a reward or a penalty,
+similar to training a dog with treats. It tries an action, sees if the result was good or bad, and
+adjusts. This becomes important later when we build agents that improve from feedback.
+
+**4. Semi-supervised / Self-supervised Learning** — a mix: a small amount of labeled data plus a huge
+amount of unlabeled data. **This is the one that's easy to miss, but it's the most important one for
+this course** — it's exactly how today's large language models are pre-trained. They read huge amounts
+of plain text with no human labels at all, and just learn to predict the next word, over and over,
+across billions of sentences.
 
 ### What is DL (Deep Learning)?
 
@@ -172,6 +177,8 @@ of code, or a reply, not just sort things into categories.
 | **DL** | ML using brain-like layered networks — good with messy raw data | 2012 (AlexNet breakthrough) | A neural network reading X-ray images |
 | **NLP** | Applying AI/ML/DL to human language | 1950 (Turing Test) | Google Translate |
 | **Gen AI** | Creating brand-new content instead of just predicting/sorting | 2020–2022 (GPT-3, DALL-E, ChatGPT) | ChatGPT, Stable Diffusion |
+
+![Timeline: 1950 NLP idea, 1956 AI named, 1959 ML named, 2012 DL takes off, 2017 Transformer, 2020-22 Gen AI mainstream, 2023 Agentic AI](assets/timeline.svg)
 
 ## 2. How we got from rule-based systems to Agentic AI
 

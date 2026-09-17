@@ -1,0 +1,56 @@
+<svg width="1000" height="280" viewBox="0 0 1000 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="280" fill="#ffffff"/>
+
+  <text x="500" y="26" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    When each one showed up (not to scale)
+  </text>
+
+  <line x1="70" y1="140" x2="930" y2="140" stroke="#94a3b8" stroke-width="3"/>
+
+  <!-- 7 points -->
+  <!-- 1950 NLP idea (below) -->
+  <circle cx="100" cy="140" r="8" fill="#7c2d12"/>
+  <text x="100" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">1950</text>
+  <text x="100" y="202" text-anchor="middle" font-size="11" fill="#7c2d12">NLP idea</text>
+  <text x="100" y="217" text-anchor="middle" font-size="11" fill="#7c2d12">(Turing Test)</text>
+
+  <!-- 1956 AI (above) -->
+  <circle cx="250" cy="140" r="8" fill="#1e3a8a"/>
+  <text x="250" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">1956</text>
+  <text x="250" y="93" text-anchor="middle" font-size="11" fill="#1e3a8a">"AI" named</text>
+  <text x="250" y="78" text-anchor="middle" font-size="11" fill="#1e3a8a">(Dartmouth)</text>
+
+  <!-- 1959 ML (below) -->
+  <circle cx="400" cy="140" r="8" fill="#2563eb"/>
+  <text x="400" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb">1959</text>
+  <text x="400" y="202" text-anchor="middle" font-size="11" fill="#2563eb">"ML" named</text>
+  <text x="400" y="217" text-anchor="middle" font-size="11" fill="#2563eb">(Samuel's checkers)</text>
+
+  <!-- 2012 DL (above) -->
+  <circle cx="550" cy="140" r="8" fill="#0369a1"/>
+  <text x="550" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">2012</text>
+  <text x="550" y="93" text-anchor="middle" font-size="11" fill="#0369a1">DL takes off</text>
+  <text x="550" y="78" text-anchor="middle" font-size="11" fill="#0369a1">(AlexNet)</text>
+
+  <!-- 2017 Transformer (below) -->
+  <circle cx="670" cy="140" r="8" fill="#0e7490"/>
+  <text x="670" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490">2017</text>
+  <text x="670" y="202" text-anchor="middle" font-size="11" fill="#0e7490">Transformer</text>
+  <text x="670" y="217" text-anchor="middle" font-size="11" fill="#0e7490">(modern NLP/DL)</text>
+
+  <!-- 2020-22 Gen AI (above) -->
+  <circle cx="800" cy="140" r="8" fill="#c2410c"/>
+  <text x="800" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#c2410c">2020–22</text>
+  <text x="800" y="93" text-anchor="middle" font-size="11" fill="#c2410c">Gen AI mainstream</text>
+  <text x="800" y="78" text-anchor="middle" font-size="11" fill="#c2410c">(GPT-3, DALL-E, ChatGPT)</text>
+
+  <!-- 2023 Agentic (below) -->
+  <circle cx="920" cy="140" r="8" fill="#15803d"/>
+  <text x="920" y="185" text-anchor="middle" font-size="13" font-weight="700" fill="#15803d">2023–now</text>
+  <text x="920" y="202" text-anchor="middle" font-size="11" fill="#15803d">Agentic AI</text>
+  <text x="920" y="217" text-anchor="middle" font-size="11" fill="#15803d">(plans + tools + loops)</text>
+
+  <text x="500" y="255" text-anchor="middle" font-size="12" fill="#475569">
+    Each dot builds on the one before it — this is why the order matters more than the exact year.
+  </text>
+</svg>
