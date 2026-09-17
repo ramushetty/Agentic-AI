@@ -332,6 +332,32 @@ between.
 
 ![A simplified Transformer block, plus an attention-weight example showing "it" attending strongly to "animal"](assets/transformer-attention-explained.svg)
 
+**Full worked example — tracing one sentence through every stage:**
+
+*(Numbers below are illustrative, not real model output, but the mechanism is exactly right.)*
+
+`"The cat sat because it was tired."`
+
+1. **Tokenize** (Section 1): `The, cat, sat, because, it, was, tired, .` → IDs `[464, 3797, 7731, 780, 340, 373, 10032, 13]`
+2. **Embedding lookup** (Section 3): each ID → its row in the embedding table → a context-free starting
+   vector, e.g. `cat (3797) → [0.55, 0.12, -0.40, 0.08, 0.71, -0.09]`.
+3. **Add positional encoding**: a position-based pattern gets added to each vector, marking "you are
+   word #1 / #2 / #3..." — attention alone has no sense of order.
+4. **Self-attention**: every token scores how relevant every other token is to it:
+   `"it" → cat: 0.68, tired: 0.15, was: 0.09, sat: 0.03, the: 0.02, because: 0.02, .: 0.01`
+   "it"'s vector becomes a weighted mix dominated by "cat" — this is the actual mechanism that resolves
+   the reference. Multi-head = this scoring runs several times in parallel, each head free to specialize.
+5. **Add & Normalize**: the original vector is added back in, then rescaled to a stable range.
+6. **Feed-forward network**: each token's updated vector passes through a small neural net (same net,
+   applied to every token independently) — a further refinement step.
+7. **Add & Normalize** again.
+8. **Repeat steps 4–7, stacked N times** (96 for GPT-3) — early layers tend to pick up grammar/local
+   structure, later layers build deeper relationships. Every layer refines every token's vector further.
+9. **Predict the next token**: the final layer's last-position vector becomes a probability score over
+   every vocabulary word. Feed in `"The cat sat because it was"` (unfinished) and "tired" scores
+   highest — it gets generated, then fed back in as input for predicting the *next* token. This is why
+   generation happens one token at a time, even though understanding each token happens in parallel.
+
 ## 5. Training vs. Inference
 
 **Training** = teaching the model. You feed it a huge amount of data, it makes a prediction, you
@@ -443,6 +469,15 @@ Instead of computing attention once, the model computes it several times in para
 each head can specialize in a different kind of relationship — e.g. one head tracking grammatical
 structure, another tracking coreference (like "it" → "animal"). Combining multiple heads gives the
 model a richer understanding than a single attention computation could.
+
+**Q9a. Walk me through what happens to a sentence as it passes through a Transformer.**
+Tokenize the text into pieces and look up each piece's arbitrary ID → look up each ID's row in the
+embedding table for a context-free starting vector → add a positional encoding so the model knows word
+order → self-attention lets every token score and absorb relevant information from every other token
+(e.g. "it" pulling in "cat") → add-and-normalize → a feed-forward network refines each token's vector
+further → add-and-normalize again → repeat that whole block N times (96 for GPT-3) → the final layer's
+output becomes a probability distribution over the vocabulary, and the highest-scoring token is
+generated, then fed back in to predict the next one.
 
 **Q10. What's the practical difference between training and inference in terms of cost and frequency?**
 Training adjusts the model's weights using huge amounts of data and is extremely expensive but
