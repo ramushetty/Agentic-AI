@@ -4,15 +4,17 @@ A lean, 30-day, hands-on path through modern agentic AI engineering: LLM foundat
 LangChain/LangGraph, agentic RAG, GraphRAG with Neo4j, MCP, guardrails, evaluation/observability,
 Databricks governance, and production deployment.
 
-This repo is my daily build-in-public log. Each day has a folder with objectives, what I actually
-learned, and links to code. Six real-time projects are built along the way and tie multiple modules
-together.
+This repo is my daily build-in-public log — written to double as **interview prep for Agentic AI and
+Gen AI roles**, not just a personal journal. Each day has a folder with objectives, what I actually
+learned, links to code, and a set of interview Q&A for that day's topics. Six real-time projects are
+built along the way and tie multiple modules together.
 
 ## How this is organized
 
 - [`days/`](days) — one folder per day (`day-01` ... `day-30`). Each has a `README.md` log
   (objectives → resources → key learnings → links) and a `notes.md` with the actual write-up for
-  that day's objectives — the part meant to be read by other learners.
+  that day's objectives, diagrams for anything structural/hierarchical, and an **Interview Q&A**
+  section — the part meant to be read by other learners (and re-read before an interview).
 - [`projects/`](projects) — one folder per real-time project, built across the days that reference it.
 - Source code for a given day/project lives inside that day's or project's own folder.
 

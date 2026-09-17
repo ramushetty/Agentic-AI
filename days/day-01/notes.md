@@ -24,7 +24,7 @@ Think of AI, ML, DL as boxes inside boxes, like Russian nesting dolls:
 **NLP is different.** It is not a box inside the others. It's a *job* — "make computers understand
 human language." You can do that job the old way (hand-written rules), the ML way, or the DL way.
 
-![AI contains ML contains DL, with NLP as a cross-cutting domain](assets/ai-ml-dl-nlp.svg)
+![AI contains ML contains DL, with NLP as a cross-cutting domain and Gen AI as a newer generative job — full reference card with definitions, start dates, and examples for each](assets/ai-ml-dl-nlp.svg)
 
 ### What is AI?
 
@@ -251,6 +251,69 @@ to get there, it is.
   one that fits," and it has to call several tools (flight search, calendar, payment) in the right
   order. That's the same kind of agent loop we build starting in Module 5 (LangGraph) and standardize
   in Module 9 (MCP).
+
+## Interview Q&A (Day 01)
+
+Short, direct answers you could actually say out loud in an interview.
+
+**Q1. What is the difference between AI, ML, and DL?**
+AI is the umbrella goal — a machine acting intelligently, with or without learning. ML is a subset of
+AI where the system learns patterns from data instead of being hand-coded. DL is a subset of ML that
+uses multi-layer neural networks, and it's especially strong on raw, unstructured data like images,
+audio, and text.
+
+**Q2. Where does NLP fit into AI/ML/DL?**
+NLP is not a layer inside AI/ML/DL — it's an application domain. It's the task of making a computer
+understand or produce human language, and that task can be solved with rules, classic ML, or deep
+learning (today, almost always deep learning via transformers).
+
+**Q3. What's the difference between supervised and unsupervised learning?**
+Supervised learning trains on labeled data — the model is given the correct answer for every example
+(used for classification and regression). Unsupervised learning trains on unlabeled data — the model
+has to find structure or groupings on its own (e.g. clustering).
+
+**Q4. What's the difference between classification and regression?**
+Classification predicts a category or class (spam vs. not spam). Regression predicts a continuous
+number (a house price).
+
+**Q5. What is self-supervised learning, and why does it matter for LLMs?**
+Self-supervised learning generates its own labels from the raw data itself — for example, predicting
+the next word in a sentence using the sentence as its own label. It's how large language models like
+GPT and Claude are pre-trained on huge amounts of plain text without any human labeling.
+
+**Q6. What actually triggered the deep learning boom?**
+In 2012, a CNN called AlexNet won the ImageNet image-recognition competition by a huge margin,
+proving that deep, many-layer networks could beat traditional approaches once there was enough data
+and compute (GPUs) to train them.
+
+**Q7. What is Generative AI, and how is it different from traditional ML/DL?**
+Traditional ML/DL mostly classifies or predicts a number from existing data. Generative AI creates
+new content — text, images, audio, video, or code — that didn't exist before. It's built on deep
+learning (transformers for text, diffusion models for images).
+
+**Q8. What makes a system "agentic" rather than just a chatbot or a single model call?**
+An agentic system has a goal (not just one instruction), plans its own steps, can take real actions
+through tools, remembers what it already tried, checks and corrects its own output, and runs multiple
+steps with limited — not zero — human oversight. A single prompt-and-response is not agentic.
+
+**Q9. How did we get from rule-based expert systems to agentic AI?**
+Each era removed one limitation from the one before it: rule-based systems needed a human to write
+every decision; ML removed the need to hand-code logic by learning from data; DL removed the need to
+hand-engineer features; LLMs removed the need for a separate trained model per task; agentic AI
+removed the need for a human to prompt every single action — the system now plans and acts across
+multiple steps on its own.
+
+**Q10. Give an example of an agentic workflow vs. a non-agentic one.**
+Non-agentic: asking an LLM to translate one sentence — one input, one output, done. Agentic: asking an
+assistant to "find flights, check my calendar for conflicts, and book the cheapest one that fits" — it
+has to plan, call several tools (search, calendar, payment) in the right order, and adapt if something
+doesn't fit.
+
+**Q11. Why does the CNN vs. Transformer distinction come up so often in interviews?**
+CNNs are built for grid-like data (images) — they use convolution filters to detect local patterns
+like edges. Transformers process a whole sequence at once using "attention," which lets them capture
+long-range relationships between words far apart in a sentence. That's why transformers, not CNNs or
+RNNs, became the backbone of modern LLMs — full detail on Day 02.
 
 ## Sources
 

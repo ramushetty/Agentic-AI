@@ -1,40 +1,76 @@
-<svg width="900" height="620" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
-  <rect width="900" height="620" fill="#ffffff"/>
+<svg width="1150" height="760" viewBox="0 0 1150 760" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1150" height="760" fill="#ffffff"/>
 
-  <text x="450" y="40" text-anchor="middle" font-size="22" font-weight="700" fill="#1e293b">
-    AI ⊃ ML ⊃ DL — with NLP as a cross-cutting domain
+  <text x="575" y="32" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">
+    AI ⊃ ML ⊃ DL, with NLP cutting across them — and Gen AI as a newer, separate job
   </text>
 
-  <!-- AI outer circle -->
-  <circle cx="400" cy="370" r="250" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5"/>
-  <!-- ML circle -->
-  <circle cx="460" cy="320" r="170" fill="#93c5fd" stroke="#1d4ed8" stroke-width="2.5"/>
-  <!-- DL circle -->
-  <circle cx="520" cy="280" r="90" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2.5"/>
-  <!-- NLP ellipse: a domain cutting across ML/DL, not a subset -->
-  <ellipse cx="640" cy="230" rx="150" ry="85" fill="#fb923c" fill-opacity="0.55" stroke="#c2410c" stroke-width="2.5" transform="rotate(-18 640 230)"/>
+  <!-- ===== LEFT: nested-circle structure ===== -->
+  <circle cx="230" cy="400" r="230" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2.5"/>
+  <circle cx="270" cy="360" r="160" fill="#93c5fd" stroke="#1d4ed8" stroke-width="2.5"/>
+  <circle cx="310" cy="320" r="85" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2.5"/>
+  <ellipse cx="380" cy="210" rx="95" ry="62" fill="#fb923c" fill-opacity="0.6" stroke="#c2410c" stroke-width="2.5" transform="rotate(-15 380 210)"/>
 
-  <!-- AI-only label + example -->
-  <text x="160" y="540" font-size="26" font-weight="700" fill="#1e3a8a">AI</text>
-  <text x="130" y="565" font-size="14" fill="#1e3a8a">e.g. Deep Blue (1997)</text>
-  <text x="130" y="583" font-size="14" fill="#1e3a8a">hand-coded rules, no learning</text>
+  <text x="90" y="600" font-size="24" font-weight="700" fill="#1e3a8a">AI</text>
+  <text x="150" y="480" font-size="20" font-weight="700" fill="#1e3a8a">ML</text>
+  <text x="295" y="330" font-size="18" font-weight="700" fill="#ffffff">DL</text>
+  <text x="430" y="160" font-size="18" font-weight="700" fill="#7c2d12">NLP</text>
 
-  <!-- ML-only label + example -->
-  <text x="270" y="420" font-size="24" font-weight="700" fill="#1e3a8a">ML</text>
-  <text x="230" y="443" font-size="13" fill="#1e3a8a">e.g. spam filter</text>
-  <text x="230" y="460" font-size="13" fill="#1e3a8a">learns from labeled data</text>
+  <text x="230" y="660" text-anchor="middle" font-size="13" fill="#475569">
+    NLP is not a subset — it's a job (language) that AI/ML/DL all get applied to.
+  </text>
+  <text x="230" y="680" text-anchor="middle" font-size="13" fill="#475569">
+    Full definitions, start dates, and examples are in the cards →
+  </text>
 
-  <!-- DL label + example -->
-  <text x="480" y="270" font-size="22" font-weight="700" fill="#ffffff">DL</text>
-  <text x="450" y="330" font-size="13" fill="#ffffff">e.g. CNN reading</text>
-  <text x="450" y="346" font-size="13" fill="#ffffff">X-ray images</text>
+  <!-- ===== RIGHT: detail cards (all the info in words, in one place) ===== -->
 
-  <!-- NLP label + example -->
-  <text x="700" y="150" font-size="22" font-weight="700" fill="#7c2d12">NLP</text>
-  <text x="660" y="330" font-size="13" fill="#7c2d12">e.g. Google Translate:</text>
-  <text x="660" y="347" font-size="13" fill="#7c2d12">rules (2006) → transformers (today)</text>
+  <!-- AI card -->
+  <rect x="490" y="65" width="650" height="118" rx="10" fill="#eff6ff" stroke="#1d4ed8" stroke-width="2"/>
+  <text x="510" y="91" font-size="18" font-weight="700" fill="#1e3a8a">AI — Artificial Intelligence</text>
+  <text x="510" y="111" font-size="13" fill="#1e293b">Definition: making a computer act smart — with or without learning. Can be pure</text>
+  <text x="510" y="127" font-size="13" fill="#1e293b">hand-written rules; AI is the goal, not one specific method.</text>
+  <text x="510" y="145" font-size="13" fill="#1e293b">Started: 1956 — the term was coined at the Dartmouth Workshop.</text>
+  <text x="510" y="163" font-size="13" fill="#1e293b">Example: Deep Blue (1997) beat the world chess champion using hand-coded rules</text>
+  <text x="510" y="179" font-size="13" fill="#1e293b">and brute-force search — zero learning involved.</text>
 
-  <text x="450" y="600" text-anchor="middle" font-size="13" fill="#475569">
-    NLP is not a subset of AI/ML/DL — it's a domain they all get applied to.
+  <!-- ML card -->
+  <rect x="490" y="193" width="650" height="118" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="510" y="219" font-size="18" font-weight="700" fill="#1e3a8a">ML — Machine Learning</text>
+  <text x="510" y="239" font-size="13" fill="#1e293b">Definition: a subset of AI — the computer learns patterns from data instead of</text>
+  <text x="510" y="255" font-size="13" fill="#1e293b">being told rules by a human. Needs data + a way to check if it's learning correctly.</text>
+  <text x="510" y="273" font-size="13" fill="#1e293b">Started: 1959 — term coined by Arthur Samuel (self-playing checkers program).</text>
+  <text x="510" y="291" font-size="13" fill="#1e293b">Example: a spam filter trained on a million emails already labeled "spam" /</text>
+  <text x="510" y="307" font-size="13" fill="#1e293b">"not spam" — it works out the pattern itself.</text>
+
+  <!-- DL card -->
+  <rect x="490" y="321" width="650" height="118" rx="10" fill="#eff6ff" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="510" y="347" font-size="18" font-weight="700" fill="#1e3a8a">DL — Deep Learning</text>
+  <text x="510" y="367" font-size="13" fill="#1e293b">Definition: a subset of ML using multi-layer "neural networks." Great at messy,</text>
+  <text x="510" y="383" font-size="13" fill="#1e293b">raw data (images, audio, text) where you can't hand-write what "the pattern" is.</text>
+  <text x="510" y="401" font-size="13" fill="#1e293b">Started: idea from 1943; took off in 2012 when AlexNet won an image contest big.</text>
+  <text x="510" y="419" font-size="13" fill="#1e293b">Example: a CNN reads raw X-ray pixels directly and flags a tumor — nobody</text>
+  <text x="510" y="435" font-size="13" fill="#1e293b">hand-picks "look for a round white shape," the network learns that itself.</text>
+
+  <!-- NLP card -->
+  <rect x="490" y="449" width="650" height="118" rx="10" fill="#fff7ed" stroke="#c2410c" stroke-width="2"/>
+  <text x="510" y="475" font-size="18" font-weight="700" fill="#7c2d12">NLP — Natural Language Processing</text>
+  <text x="510" y="495" font-size="13" fill="#1e293b">Definition: NOT a subset of AI/ML/DL — it's a job/domain: making computers</text>
+  <text x="510" y="511" font-size="13" fill="#1e293b">understand and use human language. Done via rules, ML, or DL.</text>
+  <text x="510" y="529" font-size="13" fill="#1e293b">Started: 1950 — Alan Turing's "Can machines think?" and the Turing Test.</text>
+  <text x="510" y="547" font-size="13" fill="#1e293b">Example: Google Translate — rule-based (2006) → statistical → today's</text>
+  <text x="510" y="563" font-size="13" fill="#1e293b">transformer-based model, far more natural.</text>
+
+  <!-- Gen AI card -->
+  <rect x="490" y="577" width="650" height="118" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="510" y="603" font-size="18" font-weight="700" fill="#4c1d95">Gen AI — Generative AI</text>
+  <text x="510" y="623" font-size="13" fill="#1e293b">Definition: not "sort/predict" like classic ML/DL — it CREATES new content</text>
+  <text x="510" y="639" font-size="13" fill="#1e293b">(text, image, audio, video, code) that didn't exist before. Built on DL.</text>
+  <text x="510" y="657" font-size="13" fill="#1e293b">Started: 2014 GANs; went mainstream 2020–22 (GPT-3, DALL-E, ChatGPT).</text>
+  <text x="510" y="675" font-size="13" fill="#1e293b">Example: ChatGPT writes an email; Stable Diffusion turns a text prompt into</text>
+  <text x="510" y="691" font-size="13" fill="#1e293b">a photorealistic image.</text>
+
+  <text x="575" y="730" text-anchor="middle" font-size="12" fill="#475569">
+    Interview one-liner: AI is the goal; ML/DL are two nested strategies to reach it; NLP is the language domain; Gen AI is the newest job — creating, not just predicting.
   </text>
 </svg>
