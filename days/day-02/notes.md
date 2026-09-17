@@ -21,17 +21,31 @@ transformer architecture & attention · training vs. inference
 
 ## 1. Tokens and Tokenization
 
-LLMs don't read letter by letter, and they don't read whole words either — they read **tokens**, which
-are small chunks of text. Sometimes a token is a whole word, sometimes it's just part of a word, and
-sometimes it's a single punctuation mark.
+**Tokenization, in one line: breaking text into small pieces the model can actually read.**
 
-**Example:** "unbelievable" often gets split into something like `un` + `believ` + `able` — three
-tokens for one word.
+Here's the root problem it solves: a computer doesn't understand words or letters at all — it only
+understands numbers. So before any text can reach an LLM, it has to be chopped into small chunks
+(**tokens**), and each chunk gets converted into a number. The model never sees the word "cat" — it
+only ever sees a number that means "cat."
 
-**Why not just use whole words?** Human language has effectively unlimited "words" — names, typos,
-slang, brand names, other languages. You can't build a fixed list containing every possible word. By
-breaking words into common sub-pieces, the model can handle a word it has *never seen before* by
-assembling it from familiar pieces, the same way you could sound out an unfamiliar word from its parts.
+**Concrete example:**
+```
+"unhappiness"  →  "un" + "happi" + "ness"   →   [1917, 4102, 655]
+        (text)         (tokens: 3 pieces)         (the numbers the model actually reads)
+```
+Three token-pieces, three numbers. That's genuinely the whole idea — chop the text into pieces, look
+up each piece's number in the model's vocabulary, feed the model the numbers.
+
+Sometimes a token is a whole word, sometimes it's just part of a word, and sometimes it's a single
+punctuation mark — depends on how common that chunk is.
+
+**Why not just make each token a whole word?** Human language has effectively unlimited "words" —
+names, typos, slang, brand names, other languages. You can't build a fixed numbered list containing
+every possible word. By breaking words into common sub-pieces instead, the model can handle a word it
+has *never seen before* by assembling it from familiar pieces, the same way you could sound out an
+unfamiliar word from its parts. Try it yourself: a tokenizer that's never seen "flibbertigibbet" can
+still handle it, because it can break it into pieces it *has* seen — like "flib" + "ber" + "ti" +
+"gibbet" — instead of getting stuck.
 
 > **Why / How / Where / When**
 > - **Why:** a model can't have a vocabulary entry for every possible word — human language is
