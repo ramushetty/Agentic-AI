@@ -1,0 +1,66 @@
+<svg width="1000" height="480" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="480" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Embeddings turn meaning into geometry
+  </text>
+
+  <!-- Panel 1: clustering by meaning -->
+  <rect x="40" y="70" width="440" height="360" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="260" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Similar words land close together</text>
+
+  <ellipse cx="150" cy="180" rx="80" ry="55" fill="#dcfce7" opacity="0.6" stroke="#16a34a" stroke-dasharray="4,3"/>
+  <text x="120" y="165" font-size="13" fill="#14532d">apple</text>
+  <text x="150" y="195" font-size="13" fill="#14532d">banana</text>
+  <text x="105" y="215" font-size="13" fill="#14532d">orange</text>
+
+  <ellipse cx="340" cy="180" rx="75" ry="55" fill="#dbeafe" opacity="0.6" stroke="#2563eb" stroke-dasharray="4,3"/>
+  <text x="320" y="165" font-size="13" fill="#1e3a8a">dog</text>
+  <text x="355" y="190" font-size="13" fill="#1e3a8a">cat</text>
+  <text x="310" y="215" font-size="13" fill="#1e3a8a">lion</text>
+
+  <ellipse cx="245" cy="330" rx="85" ry="55" fill="#ede9fe" opacity="0.6" stroke="#7c3aed" stroke-dasharray="4,3"/>
+  <text x="210" y="320" font-size="13" fill="#4c1d95">king</text>
+  <text x="265" y="335" font-size="13" fill="#4c1d95">queen</text>
+  <text x="215" y="355" font-size="13" fill="#4c1d95">prince</text>
+
+  <text x="260" y="400" text-anchor="middle" font-size="11" fill="#334155">Fruits cluster together, animals cluster together, royalty</text>
+  <text x="260" y="415" text-anchor="middle" font-size="11" fill="#334155">clusters together — measured by cosine similarity.</text>
+
+  <!-- Panel 2: vector arithmetic -->
+  <rect x="520" y="70" width="440" height="360" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="740" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">king − man + woman ≈ queen</text>
+
+  <circle cx="600" cy="300" r="6" fill="#1e3a8a"/>
+  <text x="580" y="322" font-size="12" fill="#1e3a8a">man</text>
+  <circle cx="600" cy="180" r="6" fill="#1e3a8a"/>
+  <text x="580" y="165" font-size="12" font-weight="700" fill="#1e3a8a">king</text>
+  <circle cx="880" cy="300" r="6" fill="#7c2d12"/>
+  <text x="860" y="322" font-size="12" fill="#7c2d12">woman</text>
+  <circle cx="880" cy="180" r="6" fill="#7c2d12"/>
+  <text x="860" y="165" font-size="12" font-weight="700" fill="#7c2d12">queen</text>
+
+  <line x1="600" y1="294" x2="600" y2="186" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrE1)"/>
+  <line x1="880" y1="294" x2="880" y2="186" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrE1)"/>
+  <text x="605" y="240" font-size="10" fill="#1e3a8a">+royalty</text>
+  <text x="885" y="240" font-size="10" fill="#1e3a8a">+royalty</text>
+
+  <line x1="606" y1="300" x2="874" y2="300" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrE2)"/>
+  <text x="700" y="318" text-anchor="middle" font-size="10" fill="#15803d">+gender</text>
+
+  <line x1="606" y1="180" x2="874" y2="180" stroke="#a855f7" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrE3)"/>
+  <text x="700" y="172" text-anchor="middle" font-size="10" fill="#7c3aed">same gender shift</text>
+
+  <defs>
+    <marker id="arrE1" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#2563eb"/></marker>
+    <marker id="arrE2" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#16a34a"/></marker>
+    <marker id="arrE3" markerWidth="8" markerHeight="8" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#a855f7"/></marker>
+  </defs>
+
+  <text x="740" y="400" text-anchor="middle" font-size="11" fill="#334155">The "royalty" shift (man→king) is the SAME direction</text>
+  <text x="740" y="415" text-anchor="middle" font-size="11" fill="#334155">and size as the "royalty" shift (woman→queen).</text>
+
+  <text x="500" y="460" text-anchor="middle" font-size="12" fill="#475569">
+    word2vec (2013) discovered this — models learn concepts like "royalty" and "gender" as directions in vector space, purely from reading text.
+  </text>
+</svg>

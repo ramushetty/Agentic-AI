@@ -1,0 +1,72 @@
+<svg width="1100" height="500" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1100" height="500" fill="#ffffff"/>
+
+  <text x="550" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Training (rare, expensive) vs. Inference (constant, cheap)
+  </text>
+
+  <!-- Panel 1: Training loop -->
+  <rect x="30" y="60" width="500" height="380" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="280" y="85" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Training</text>
+
+  <rect x="215" y="105" width="130" height="55" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="280" y="127" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Training Data</text>
+  <text x="280" y="143" text-anchor="middle" font-size="9.5" fill="#1e3a8a">(huge amounts of text)</text>
+
+  <rect x="370" y="225" width="130" height="55" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="435" y="247" text-anchor="middle" font-size="11" font-weight="700" fill="#14532d">Forward Pass</text>
+  <text x="435" y="263" text-anchor="middle" font-size="9.5" fill="#14532d">(model predicts)</text>
+
+  <rect x="215" y="345" width="130" height="55" rx="8" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+  <text x="280" y="367" text-anchor="middle" font-size="11" font-weight="700" fill="#7c2d12">Loss</text>
+  <text x="280" y="383" text-anchor="middle" font-size="9.5" fill="#7c2d12">(compare to correct answer)</text>
+
+  <rect x="60" y="225" width="130" height="55" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="125" y="247" text-anchor="middle" font-size="11" font-weight="700" fill="#4c1d95">Backprop</text>
+  <text x="125" y="263" text-anchor="middle" font-size="9.5" fill="#4c1d95">→ update weights</text>
+
+  <path d="M 320 160 Q 395 190 415 225" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#tl1)"/>
+  <path d="M 415 280 Q 380 330 335 355" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#tl1)"/>
+  <path d="M 225 365 Q 165 330 140 280" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#tl1)"/>
+  <path d="M 140 225 Q 175 175 225 155" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#tl1)"/>
+  <defs>
+    <marker id="tl1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#64748b"/></marker>
+  </defs>
+
+  <text x="280" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">repeats</text>
+  <text x="280" y="253" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">billions</text>
+  <text x="280" y="266" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">of times</text>
+
+  <text x="280" y="425" text-anchor="middle" font-size="11" fill="#334155">Can cost $10M+ in compute. Happens once for</text>
+  <text x="280" y="440" text-anchor="middle" font-size="11" fill="#334155">pre-training, occasionally again for fine-tuning.</text>
+
+  <!-- Panel 2: Inference (linear) -->
+  <rect x="570" y="60" width="500" height="380" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="820" y="85" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">Inference</text>
+
+  <rect x="720" y="140" width="200" height="55" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="820" y="172" text-anchor="middle" font-size="12" fill="#1e293b">Your input (one message)</text>
+
+  <line x1="820" y1="195" x2="820" y2="225" stroke="#94a3b8" stroke-width="2" marker-end="url(#tl2)"/>
+
+  <rect x="720" y="225" width="200" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="820" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Frozen Model</text>
+  <text x="820" y="266" text-anchor="middle" font-size="10" fill="#1e3a8a">(same weights every time)</text>
+
+  <line x1="820" y1="285" x2="820" y2="315" stroke="#94a3b8" stroke-width="2" marker-end="url(#tl2)"/>
+
+  <rect x="720" y="315" width="200" height="55" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="820" y="347" text-anchor="middle" font-size="12" fill="#1e293b">Output (the response)</text>
+
+  <defs>
+    <marker id="tl2" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker>
+  </defs>
+
+  <text x="820" y="400" text-anchor="middle" font-size="11" fill="#334155">Cheap per call, but happens constantly — every</text>
+  <text x="820" y="415" text-anchor="middle" font-size="11" fill="#334155">message to ChatGPT/Claude is one inference pass.</text>
+  <text x="820" y="430" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">No weights change.</text>
+
+  <text x="550" y="475" text-anchor="middle" font-size="12" fill="#475569">
+    This inverse relationship (training: rare+expensive, inference: constant+cheap-per-call) is why companies obsess over inference cost at scale.
+  </text>
+</svg>

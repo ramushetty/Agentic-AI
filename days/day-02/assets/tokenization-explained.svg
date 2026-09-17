@@ -1,0 +1,81 @@
+<svg width="1000" height="440" viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="440" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Same sentence, 3 tokenization strategies: "ChatGPT is unbelievable!"
+  </text>
+
+  <!-- Row 1: word-level -->
+  <text x="60" y="100" font-size="13" font-weight="700" fill="#1e293b">1. Word-level</text>
+  <rect x="60" y="110" width="90" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="105" y="135" text-anchor="middle" font-size="12" fill="#1e3a8a">ChatGPT</text>
+  <rect x="158" y="110" width="50" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="183" y="135" text-anchor="middle" font-size="12" fill="#1e3a8a">is</text>
+  <rect x="216" y="110" width="160" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="296" y="135" text-anchor="middle" font-size="12" fill="#1e3a8a">unbelievable</text>
+  <rect x="384" y="110" width="30" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="399" y="135" text-anchor="middle" font-size="12" fill="#1e3a8a">!</text>
+  <text x="450" y="135" font-size="12" font-weight="700" fill="#1e3a8a">= 4 tokens</text>
+  <text x="60" y="170" font-size="11" fill="#475569">Stuck on any word it hasn't seen before ("unbelievabley"? no idea).</text>
+
+  <!-- Row 2: character-level -->
+  <text x="60" y="205" font-size="13" font-weight="700" fill="#1e293b">2. Character-level</text>
+  <g font-size="11" fill="#065f46">
+    <rect x="60" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="72" y="237" text-anchor="middle">C</text>
+    <rect x="86" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="98" y="237" text-anchor="middle">h</text>
+    <rect x="112" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="124" y="237" text-anchor="middle">a</text>
+    <rect x="138" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="150" y="237" text-anchor="middle">t</text>
+    <rect x="164" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="176" y="237" text-anchor="middle">G</text>
+    <rect x="190" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="202" y="237" text-anchor="middle">P</text>
+    <rect x="216" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="228" y="237" text-anchor="middle">T</text>
+
+    <rect x="260" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="272" y="237" text-anchor="middle">i</text>
+    <rect x="286" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="298" y="237" text-anchor="middle">s</text>
+
+    <rect x="330" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="342" y="237" text-anchor="middle">u</text>
+    <rect x="356" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="368" y="237" text-anchor="middle">n</text>
+    <rect x="382" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="394" y="237" text-anchor="middle">b</text>
+    <rect x="408" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="420" y="237" text-anchor="middle">e</text>
+    <rect x="434" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="446" y="237" text-anchor="middle">l</text>
+    <rect x="460" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="472" y="237" text-anchor="middle">i</text>
+    <rect x="486" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="498" y="237" text-anchor="middle">e</text>
+    <rect x="512" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="524" y="237" text-anchor="middle">v</text>
+    <rect x="538" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="550" y="237" text-anchor="middle">a</text>
+    <rect x="564" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="576" y="237" text-anchor="middle">b</text>
+    <rect x="590" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="602" y="237" text-anchor="middle">l</text>
+    <rect x="616" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="628" y="237" text-anchor="middle">e</text>
+
+    <rect x="644" y="215" width="24" height="34" rx="4" fill="#d1fae5" stroke="#059669"/><text x="656" y="237" text-anchor="middle">!</text>
+  </g>
+  <text x="720" y="237" font-size="12" font-weight="700" fill="#065f46">= 24 tokens</text>
+  <text x="60" y="270" font-size="11" fill="#475569">Tiny vocabulary, but sequences get very long and slow to process.</text>
+
+  <!-- Row 3: subword / BPE -->
+  <text x="60" y="305" font-size="13" font-weight="700" fill="#1e293b">3. Subword (BPE) — what GPT actually uses</text>
+  <rect x="60" y="315" width="70" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="95" y="340" text-anchor="middle" font-size="12" fill="#1e3a8a">Chat</text>
+  <rect x="136" y="315" width="35" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="153" y="340" text-anchor="middle" font-size="12" fill="#1e3a8a">G</text>
+  <rect x="177" y="315" width="45" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="199" y="340" text-anchor="middle" font-size="12" fill="#1e3a8a">PT</text>
+  <rect x="228" y="315" width="45" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="250" y="340" text-anchor="middle" font-size="12" fill="#1e3a8a">is</text>
+
+  <rect x="279" y="315" width="45" height="40" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="301" y="340" text-anchor="middle" font-size="12" fill="#78350f">un</text>
+  <rect x="330" y="315" width="90" height="40" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="375" y="340" text-anchor="middle" font-size="12" fill="#78350f">believ</text>
+  <rect x="426" y="315" width="60" height="40" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="456" y="340" text-anchor="middle" font-size="12" fill="#78350f">able</text>
+  <rect x="492" y="315" width="30" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="507" y="340" text-anchor="middle" font-size="12" fill="#1e3a8a">!</text>
+
+  <text x="560" y="340" font-size="12" font-weight="700" fill="#1e3a8a">= 8 tokens</text>
+
+  <text x="60" y="380" font-size="11" font-weight="700" fill="#92400e">un + believ + able = 3 tokens for ONE word (highlighted).</text>
+  <text x="60" y="398" font-size="11" fill="#475569">This is exactly how LLMs handle a word they've never seen — by assembling it from familiar pieces.</text>
+
+  <text x="500" y="425" text-anchor="middle" font-size="12" fill="#475569">
+    Rule of thumb: 1 token ≈ 4 English characters ≈ ¾ of a word.
+  </text>
+</svg>
