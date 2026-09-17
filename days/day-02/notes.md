@@ -364,6 +364,20 @@ Training:   Data → Predict → Compare to correct answer (Loss) → Adjust wei
 Inference:  Your input → Frozen model (same weights) → Output          → one pass, no weight changes
 ```
 
+**So what does a "trained model" actually consist of — is it a database that remembers everything it
+read?** No — this is worth being precise about. A trained model is just a giant file of tuned numbers
+(the weights: the embedding table, every attention layer, every feed-forward layer — Sections 3 &amp;
+4). GPT-3, for example, is about 175 billion of these numbers. It doesn't store any of the text it
+read. It compresses *patterns* from that text into the numbers — the way someone who's read thousands
+of books doesn't recite them word-for-word, but develops an intuition for language and facts.
+```
+Database:       stores exact text  →  looks it up on request   →  always accurate to the source
+Trained model:  stores tuned numbers  →  predicts a likely answer  →  can sometimes be wrong ("hallucination")
+```
+This is exactly why models sometimes hallucinate (they're guessing from patterns, not looking anything
+up) and exactly why RAG (Module 6) exists — RAG hands the model real text to read at query time,
+instead of relying only on what got compressed into its weights during training.
+
 > **Why / How / Where / When**
 > - **Why:** a model has to *learn* a language and a huge amount of world knowledge before it's useful
 >   (training), and then needs a fast, cheap way to actually be used by millions of people afterward
@@ -470,6 +484,14 @@ see every other token, past and future, which makes it good at understanding a c
 most embedding models are encoder-style) but unable to generate text token-by-token the way GPT does.
 The original 2017 Transformer used both halves together for translation (encoder reads the source
 sentence, decoder generates the translation).
+
+**Q9c. Does a trained model store the text it was trained on, like a database?**
+No. A trained model is a giant set of tuned numbers (weights) — the embedding table plus every
+attention and feed-forward layer's numbers. It doesn't retain retrievable copies of its training text;
+it compresses patterns from that text into those numbers, the way a well-read person develops
+intuition rather than memorizing every sentence. This is exactly why models hallucinate (they predict
+from learned patterns, they don't look anything up) and why RAG exists — to give the model real text to
+read at query time instead of relying solely on what's compressed into its weights.
 
 **Q10. What's the practical difference between training and inference in terms of cost and frequency?**
 Training adjusts the model's weights using huge amounts of data and is extremely expensive but
