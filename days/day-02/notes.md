@@ -328,6 +328,19 @@ In plain terms:
 The 9-step example above is the decoder type — that's exactly why it writes one word, looks at what it
 just wrote, then writes the next word, and keeps going.
 
+**Where do you actually use each one, in real products?**
+- **Encoder-only** — when you need to *understand* text, not write new text: search/RAG retrieval
+  (Section 3's embedding models are usually encoder-style), spam detection, sentiment analysis.
+- **Decoder-only** — when you need to *write* new text, one word at a time: chatbots (ChatGPT, Claude,
+  Gemini), writing code (GitHub Copilot, Claude Code) — almost every AI tool you personally use.
+- **Encoder-Decoder** — when there's a clear separate input and output: machine translation, dedicated
+  summarization models.
+
+One honest note: decoder-only models have gotten so good that today they're used for almost
+everything, including translation and summarization, just by putting the input in the prompt. Encoder-
+only models are still the standard choice for search/embeddings, since they're cheaper and faster for
+that one job than running a full chatbot model.
+
 ## 5. Training vs. Inference
 
 **Training** = teaching the model. You feed it a huge amount of data, it makes a prediction, you
