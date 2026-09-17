@@ -149,6 +149,8 @@ many layers actually works once you have enough data and computing power.
 
 **Types of DL (classified by the shape of the network):**
 
+![CNN vs RNN/LSTM vs Transformer — how each one actually processes data](assets/dl-architectures-explained.svg)
+
 - **CNN** (Convolutional Neural Network) — good at images (spotting shapes, edges, objects).
   *Example: Face ID unlocking your iPhone by recognizing your face.*
 - **RNN / LSTM** (Recurrent Neural Network) — an older method for sequences like text or time series;
@@ -199,6 +201,8 @@ today's LLMs.
 Older AI/ML/DL mostly did one of two jobs: **predict a number**, or **sort something into a category**
 (classification). Gen AI does something different — it **creates brand-new content** (text, images,
 audio, video, or code) that didn't exist before, instead of just labeling or predicting.
+
+![Traditional AI/ML/DL predicts or sorts an input into an existing label — Gen AI creates brand-new content](assets/genai-vs-traditional.svg)
 
 **Example:** You type "a cat wearing a spacesuit, photorealistic" into an image generator, and it
 creates a picture that has never existed before. Or you ask an LLM to write an email, and it
@@ -256,6 +260,8 @@ of code, or a reply, not just sort things into categories.
 
 If a system answers one question and stops, that is **not** agentic — it's just input in, output out,
 done. A system becomes "agentic" when it has some mix of these:
+
+![Non-agentic: one prompt, one response, done. Agentic: a loop of Plan, Act, Observe, Reflect that repeats until the goal is met](assets/agentic-loop-explained.svg)
 
 1. **Has a goal, not just one instruction.**
    "Book me the cheapest flight to Delhi next month" (a goal) is different from "Translate this
