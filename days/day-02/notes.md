@@ -40,6 +40,9 @@ a huge amount of text, find the ~100,000 most common chunks, and write them down
 That's the whole basis: **position in a prebuilt list.** If the list had been built in a different
 order, "un" could just as easily have been ID 40 or ID 90,000 — the number itself means nothing.
 
+> **One line to remember this by: a token ID is just a word-piece's position number in the model's
+> vocabulary list — nothing more.**
+
 **Step 2 — token ID → embedding vector. This is where real meaning enters, and it's *learned*, not
 arbitrary** (full detail in Section 3): the model looks up row 1917 in a separate table, and that
 row — a list of many decimal numbers — is what actually got tuned during training so that
