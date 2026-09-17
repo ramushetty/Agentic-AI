@@ -1,0 +1,84 @@
+<svg width="1150" height="480" viewBox="0 0 1150 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1150" height="480" fill="#ffffff"/>
+
+  <text x="575" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    The ReAct loop: Thought → Action → Observation → repeat → Final Answer
+  </text>
+
+  <!-- Left: the abstract loop -->
+  <rect x="30" y="55" width="330" height="400" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="195" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">The loop</text>
+
+  <rect x="70" y="100" width="250" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="195" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Thought</text>
+  <text x="195" y="138" text-anchor="middle" font-size="10" fill="#1e3a8a">reason about what to do next</text>
+
+  <line x1="195" y1="150" x2="195" y2="176" stroke="#94a3b8" stroke-width="2" marker-end="url(#rm)"/>
+
+  <rect x="70" y="176" width="250" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="195" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Action</text>
+  <text x="195" y="214" text-anchor="middle" font-size="10" fill="#14532d">call a tool</text>
+
+  <line x1="195" y1="226" x2="195" y2="252" stroke="#94a3b8" stroke-width="2" marker-end="url(#rm)"/>
+
+  <rect x="70" y="252" width="250" height="50" rx="8" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+  <text x="195" y="274" text-anchor="middle" font-size="12" font-weight="700" fill="#7c2d12">Observation</text>
+  <text x="195" y="290" text-anchor="middle" font-size="10" fill="#7c2d12">read the tool's result</text>
+
+  <path d="M 320 277 Q 355 240 320 145 Q 300 120 320 125" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#rm)"/>
+  <text x="345" y="215" font-size="9" fill="#475569" transform="rotate(90 345 215)">loop back to Thought</text>
+
+  <line x1="195" y1="302" x2="195" y2="330" stroke="#94a3b8" stroke-width="2" marker-end="url(#rm)"/>
+  <rect x="70" y="330" width="250" height="46" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="195" y="358" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">Final Answer</text>
+
+  <text x="195" y="405" text-anchor="middle" font-size="10.5" fill="#334155">Exits the loop once the model</text>
+  <text x="195" y="420" text-anchor="middle" font-size="10.5" fill="#334155">decides it has enough information.</text>
+
+  <defs><marker id="rm" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker></defs>
+
+  <!-- Right: worked example transcript -->
+  <rect x="400" y="55" width="720" height="400" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="760" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Worked example: "Book me the cheapest flight to Delhi next month"</text>
+
+  <g font-family="Consolas, monospace" font-size="11.5">
+    <text x="425" y="108" fill="#1e3a8a" font-weight="700">Thought</text>
+    <text x="500" y="108" fill="#334155">I need to search for flights first.</text>
+
+    <text x="425" y="130" fill="#14532d" font-weight="700">Action</text>
+    <text x="500" y="130" fill="#334155">search_flights(destination="Delhi", month="next month")</text>
+
+    <text x="425" y="152" fill="#7c2d12" font-weight="700">Observation</text>
+    <text x="565" y="152" fill="#334155">3 flights found — cheapest is $420 on Air India.</text>
+
+    <line x1="425" y1="168" x2="1090" y2="168" stroke="#e2e8f0" stroke-width="1"/>
+
+    <text x="425" y="192" fill="#1e3a8a" font-weight="700">Thought</text>
+    <text x="500" y="192" fill="#334155">Before booking, I should check the calendar for conflicts.</text>
+
+    <text x="425" y="214" fill="#14532d" font-weight="700">Action</text>
+    <text x="500" y="214" fill="#334155">check_calendar(date="...")</text>
+
+    <text x="425" y="236" fill="#7c2d12" font-weight="700">Observation</text>
+    <text x="565" y="236" fill="#334155">No conflicts found.</text>
+
+    <line x1="425" y1="252" x2="1090" y2="252" stroke="#e2e8f0" stroke-width="1"/>
+
+    <text x="425" y="276" fill="#1e3a8a" font-weight="700">Thought</text>
+    <text x="500" y="276" fill="#334155">I have enough information to book.</text>
+
+    <text x="425" y="298" fill="#14532d" font-weight="700">Action</text>
+    <text x="500" y="298" fill="#334155">book_flight(flight_id="AI202")</text>
+
+    <text x="425" y="320" fill="#7c2d12" font-weight="700">Observation</text>
+    <text x="565" y="320" fill="#334155">Booking confirmed.</text>
+  </g>
+
+  <rect x="425" y="345" width="670" height="60" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="450" y="368" font-size="12" font-weight="700" fill="#4c1d95">Final Answer</text>
+  <text x="450" y="388" font-size="11" fill="#4c1d95">Booked the $420 Air India flight — no calendar conflicts.</text>
+
+  <text x="760" y="435" text-anchor="middle" font-size="11" fill="#475569">
+    Every Thought/Action/Observation is real text the model generates and reads back — nothing is hidden from you.
+  </text>
+</svg>
