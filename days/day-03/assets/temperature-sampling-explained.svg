@@ -1,0 +1,62 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="420" fill="#ffffff"/>
+
+  <text x="500" y="26" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">
+    How temperature reshapes the model's next-word choices
+  </text>
+  <text x="500" y="44" text-anchor="middle" font-size="11" fill="#475569">
+    Same starting question: "The weather today is ___" — same 6 candidate words, different temperature
+  </text>
+
+  <!-- Panel 1: low temperature -->
+  <rect x="40" y="60" width="440" height="330" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="260" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Low temperature (0.2)</text>
+
+  <line x1="80" y1="320" x2="460" y2="320" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <rect x="80" y="130" width="50" height="190" fill="#16a34a"/>
+  <text x="105" y="122" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">95%</text>
+  <rect x="143" y="305" width="50" height="15" fill="#93c5fd"/>
+  <rect x="206" y="312" width="50" height="8" fill="#93c5fd"/>
+  <rect x="269" y="316" width="50" height="4" fill="#93c5fd"/>
+  <rect x="332" y="318" width="50" height="2" fill="#93c5fd"/>
+  <rect x="395" y="319" width="50" height="1" fill="#93c5fd"/>
+
+  <text x="105" y="335" text-anchor="middle" font-size="10" fill="#334155">sunny</text>
+  <text x="168" y="335" text-anchor="middle" font-size="10" fill="#334155">cloudy</text>
+  <text x="231" y="335" text-anchor="middle" font-size="10" fill="#334155">rainy</text>
+  <text x="294" y="335" text-anchor="middle" font-size="10" fill="#334155">cold</text>
+  <text x="357" y="335" text-anchor="middle" font-size="10" fill="#334155">nice</text>
+  <text x="420" y="335" text-anchor="middle" font-size="10" fill="#334155">weird</text>
+
+  <text x="260" y="365" text-anchor="middle" font-size="11" fill="#334155">Almost always picks "sunny" —</text>
+  <text x="260" y="380" text-anchor="middle" font-size="11" fill="#334155">safe, repeatable, same answer every time.</text>
+
+  <!-- Panel 2: high temperature -->
+  <rect x="520" y="60" width="440" height="330" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="740" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">High temperature (1.0)</text>
+
+  <line x1="560" y1="320" x2="940" y2="320" stroke="#94a3b8" stroke-width="1.5"/>
+
+  <rect x="560" y="230" width="50" height="90" fill="#f97316"/>
+  <text x="585" y="222" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">45%</text>
+  <rect x="623" y="260" width="50" height="60" fill="#f97316"/>
+  <rect x="686" y="285" width="50" height="35" fill="#f97316"/>
+  <rect x="749" y="302" width="50" height="18" fill="#f97316"/>
+  <rect x="812" y="310" width="50" height="10" fill="#f97316"/>
+  <rect x="875" y="313" width="50" height="7" fill="#f97316"/>
+
+  <text x="585" y="335" text-anchor="middle" font-size="10" fill="#334155">sunny</text>
+  <text x="648" y="335" text-anchor="middle" font-size="10" fill="#334155">cloudy</text>
+  <text x="711" y="335" text-anchor="middle" font-size="10" fill="#334155">rainy</text>
+  <text x="774" y="335" text-anchor="middle" font-size="10" fill="#334155">cold</text>
+  <text x="837" y="335" text-anchor="middle" font-size="10" fill="#334155">nice</text>
+  <text x="900" y="335" text-anchor="middle" font-size="10" fill="#334155">weird</text>
+
+  <text x="740" y="365" text-anchor="middle" font-size="11" fill="#334155">Often picks "cloudy," sometimes even "weird" —</text>
+  <text x="740" y="380" text-anchor="middle" font-size="11" fill="#334155">more variety, more creative, less predictable.</text>
+
+  <text x="500" y="410" text-anchor="middle" font-size="11" fill="#475569">
+    top_p works differently: it only keeps the smallest group of top words adding up to probability p, and samples from just that group.
+  </text>
+</svg>
