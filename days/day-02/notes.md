@@ -285,6 +285,17 @@ policy," even though they share no words.
 open-source options like `sentence-transformers` (e.g. `all-MiniLM`) — plus the older, word-level
 models that started it all: Word2Vec and GloVe.
 
+**Is an "embedding model" the same thing as a Transformer?** Related, not identical: "Transformer" is
+an *architecture* (Section 4), "embedding model" is a *job* (turn a whole sentence into one
+meaning-vector). Most modern embedding models above (`text-embedding-3`, `sentence-transformers`,
+Cohere Embed) **are** Transformers internally — just trained for a different job than a generative LLM:
+```
+Generative LLM (GPT, Claude):        predicts the NEXT token  → generates text, one token at a time
+Embedding model (text-embedding-3):  maps a WHOLE sentence to ONE vector → generates nothing, just compares
+```
+Not every embedding model is a Transformer, though — Word2Vec and GloVe predate Transformers entirely
+(2013 vs. 2017) and use much simpler methods.
+
 ## 4. Transformer Architecture and Attention
 
 Every modern LLM (GPT, Claude, Gemini, LLaMA) is built on the **Transformer** architecture, introduced
