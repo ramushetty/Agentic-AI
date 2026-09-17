@@ -81,7 +81,13 @@ computer groups customers into clusters by itself — like "people who mostly bu
 
 **3. Reinforcement Learning** — the computer learns by trial and error, getting a reward or a penalty,
 similar to training a dog with treats. It tries an action, sees if the result was good or bad, and
-adjusts. This becomes important later when we build agents that improve from feedback.
+adjusts.
+
+*Example: AlphaGo, the AI that beat the world champion at the game Go in 2016, learned by playing
+millions of games against itself — winning was the reward, losing was the penalty. Self-driving cars
+also use this to learn things like smooth braking.*
+
+This becomes important later when we build agents that improve from feedback.
 
 **4. Semi-supervised / Self-supervised Learning** — a mix: a small amount of labeled data plus a huge
 amount of unlabeled data. **This is the one that's easy to miss, but it's the most important one for
@@ -108,14 +114,21 @@ many layers actually works once you have enough data and computing power.
 
 **Types of DL (classified by the shape of the network):**
 
-- **CNN** (Convolutional Neural Network) — good at images (spotting shapes, edges, objects)
+- **CNN** (Convolutional Neural Network) — good at images (spotting shapes, edges, objects).
+  *Example: Face ID unlocking your iPhone by recognizing your face.*
 - **RNN / LSTM** (Recurrent Neural Network) — an older method for sequences like text or time series;
-  reads one step at a time, so it's slow and forgets long sequences
+  reads one step at a time, so it's slow and forgets long sequences.
+  *Example: the old-style predictive keyboard on phones, before modern autocomplete got smarter.*
 - **Transformer** — today's standard for sequences (text, and now images/audio too); reads the whole
-  sequence at once using "attention" — you'll go deeper into this on Day 02
+  sequence at once using "attention" — you'll go deeper into this on Day 02.
+  *Example: ChatGPT, Claude, Google Translate's current version.*
 - **GAN** (Generative Adversarial Network) — two networks compete against each other to generate
-  realistic new content (used in early Gen AI image tools)
-- **Autoencoder** — learns to compress data down and rebuild it, often used to spot unusual/abnormal data
+  realistic new content.
+  *Example: "This Person Does Not Exist" — a website that generates a realistic human face that has
+  never actually existed, using a GAN.*
+- **Autoencoder** — learns to compress data down and rebuild it, often used to spot unusual/abnormal data.
+  *Example: a bank's fraud-detection system flagging a transaction because it looks nothing like the
+  customer's normal spending pattern.*
 
 ### What is NLP (Natural Language Processing)?
 
@@ -133,12 +146,18 @@ today's LLMs.
 
 **Types of NLP tasks (classification):**
 
-- **Text Classification** — spam detection, sentiment analysis (is this review positive, negative, or neutral?)
-- **Named Entity Recognition (NER)** — finding names of people, places, or companies inside text
-- **Machine Translation** — translating between languages
-- **Question Answering** — answering a question using a document as the source
-- **Summarization** — shortening a long piece of text without losing the key points
-- **Text Generation** — writing brand-new text (this is where NLP and Gen AI meet)
+- **Text Classification** — sorting text into categories.
+  *Example: Gmail deciding an email is spam, or Twitter/X flagging a tweet as likely harmful.*
+- **Named Entity Recognition (NER)** — finding names of people, places, or companies inside text.
+  *Example: LinkedIn automatically pulling your job title and company name out of your profile text.*
+- **Machine Translation** — translating between languages.
+  *Example: Google Translate, DeepL.*
+- **Question Answering** — answering a question using a document as the source.
+  *Example: asking Alexa or Siri "what time does the store close?" and it reads the answer off a webpage.*
+- **Summarization** — shortening a long piece of text without losing the key points.
+  *Example: an app like Otter.ai turning a 1-hour meeting recording into a 5-bullet summary.*
+- **Text Generation** — writing brand-new text (this is where NLP and Gen AI meet).
+  *Example: ChatGPT or Claude writing an email for you from a short instruction.*
 
 ### What is Gen AI (Generative AI)?
 
