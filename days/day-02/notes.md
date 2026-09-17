@@ -369,6 +369,32 @@ between.
    highest — it gets generated, then fed back in as input for predicting the *next* token. This is why
    generation happens one token at a time, even though understanding each token happens in parallel.
 
+**Wait — is that an encoder or a decoder? Modern LLMs are decoder-only.** The original 2017 Transformer
+paper actually had two halves:
+
+- **Encoder** — reads the *entire* input at once. Every token can see every other token, including
+  ones *after* it (**bidirectional** attention). Good for *understanding* a complete input.
+- **Decoder** — *generates* output one token at a time. Each token can only attend to itself and
+  tokens *before* it, never ones that don't exist yet (**causal**/masked attention). Good for
+  *generating* text.
+
+```
+Encoder attention on "it":  can see  The, cat, sat, because, it, was, tired   (ALL tokens, past + future)
+Decoder attention on "it":  can see  The, cat, sat, because, it               (only itself + past)
+```
+
+Three architectures get built from these two pieces:
+
+| Architecture | Best at | Example models |
+|---|---|---|
+| Encoder-only | Understanding/classifying a complete input | BERT, and most embedding models (Section 3) |
+| Decoder-only | Generating text, one token at a time | GPT, Claude, LLaMA — basically every modern chat LLM |
+| Encoder-Decoder | Input → output tasks (translation, summarization) | The original 2017 Transformer, T5 |
+
+**The worked example above is specifically decoder-only** — that's exactly why generation happens one
+token at a time and each generated token gets fed back in: causal attention literally cannot see
+tokens that don't exist yet. That's the actual architectural reason, not a simplification.
+
 ## 5. Training vs. Inference
 
 **Training** = teaching the model. You feed it a huge amount of data, it makes a prediction, you
@@ -489,6 +515,15 @@ order → self-attention lets every token score and absorb relevant information 
 further → add-and-normalize again → repeat that whole block N times (96 for GPT-3) → the final layer's
 output becomes a probability distribution over the vocabulary, and the highest-scoring token is
 generated, then fed back in to predict the next one.
+
+**Q9b. Is GPT an encoder or a decoder? What's architecturally different about BERT vs. GPT?**
+GPT (and Claude, LLaMA) are decoder-only: causal/masked attention means each token can only see itself
+and earlier tokens, never future ones — which is exactly why they generate text one token at a time,
+feeding each output back in as input. BERT is encoder-only: bidirectional attention lets every token
+see every other token, past and future, which makes it good at understanding a complete input (and why
+most embedding models are encoder-style) but unable to generate text token-by-token the way GPT does.
+The original 2017 Transformer used both halves together for translation (encoder reads the source
+sentence, decoder generates the translation).
 
 **Q10. What's the practical difference between training and inference in terms of cost and frequency?**
 Training adjusts the model's weights using huge amounts of data and is extremely expensive but
