@@ -119,6 +119,9 @@ has no memory of anything that isn't explicitly included in the current context.
 erased to fit new writing — older parts of a long conversation get dropped or summarized once you go
 past the limit.
 
+*(A quick term: a "turn" just means one back-and-forth exchange — you send a message, the model
+replies, that's one turn. "Turn 20" = the 20th such exchange in an ongoing chat.)*
+
 ```
 Turn 1:   [System 80] + [History 120] + [Msg 40] + [free space] + [Reserved reply 80]  → mostly free
 Turn 20:  [System 80] + [History 520] + [Msg 40] + [little free] + [Reserved reply 80] → nearly full
