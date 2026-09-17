@@ -68,6 +68,8 @@ checking homework.
   risky or safe?
   **Common algorithms:** Logistic Regression, Decision Tree, Random Forest, SVM (Support Vector
   Machine), Naive Bayes, K-Nearest Neighbors (KNN), Gradient Boosting (XGBoost/LightGBM).
+
+  ![How Logistic Regression, Decision Tree, SVM, and KNN each draw a different decision boundary on the same data](assets/classification-explained.svg)
 - **Regression** = predicting a number.
   Example: What will this house sell for? How many customers will show up tomorrow?
   **Common algorithms:** Linear Regression, Ridge/Lasso Regression, Decision Tree/Random Forest
@@ -312,6 +314,14 @@ PCA (Principal Component Analysis) compresses a large number of features into a 
 reduce noise, fight overfitting, and to visualize high-dimensional data in 2D/3D. t-SNE and UMAP are
 used more specifically for visualization rather than as a general preprocessing step, since they're
 better at preserving local clusters visually but distort global distances more.
+
+**Q4d. What is a "decision boundary," and how does it differ across classification algorithms?**
+A decision boundary is the line (or curved surface) a classifier draws to separate one class from
+another. Logistic Regression draws a single straight line (linear boundary). Decision Trees/Random
+Forest draw axis-aligned "staircase" boundaries because they split on one feature at a time. SVM finds
+the line with the widest possible margin between the two classes, and the closest points to that line
+are called "support vectors." KNN doesn't fit a boundary in advance at all — it classifies a new point
+by majority vote among its k nearest neighbors, so the resulting boundary can be irregular/jagged.
 
 **Q5. What is self-supervised learning, and why does it matter for LLMs?**
 Self-supervised learning generates its own labels from the raw data itself — for example, predicting
