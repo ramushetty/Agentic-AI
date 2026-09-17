@@ -3,13 +3,14 @@
 **Module:** Module 2
 
 ## Objectives
-- [ ] Understand the differences between AI, ML, DL, and NLP with real examples
+- [ ] Understand the differences between AI, ML, DL, NLP, and Gen AI with real examples
+- [ ] Know roughly when each one started (history) and what types/categories exist within each (classification)
 - [ ] Learn the evolution from rule-based systems to Agentic AI
 - [ ] Identify what makes an AI system “agentic”
 - [ ] Explore real-world use cases: automation, copilots, and assistants
 
 ## Notes
-Full write-up covering all four objectives: [notes.md](notes.md)
+Full write-up: [notes.md](notes.md)
 
 ## Resources
 <!-- Docs, articles, videos you used today -->
