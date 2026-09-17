@@ -1,0 +1,55 @@
+<svg width="1000" height="480" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="480" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    How Linear Regression vs. Decision Tree Regression fit the same data
+  </text>
+  <text x="500" y="48" text-anchor="middle" font-size="12" fill="#475569">
+    x-axis = feature (e.g. house size) · y-axis = target being predicted (e.g. price)
+  </text>
+
+  <!-- Panel 1: Linear Regression -->
+  <rect x="40" y="90" width="440" height="340" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="260" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">1. Linear Regression</text>
+
+  <circle cx="90" cy="365" r="6" fill="#0891b2"/>
+  <circle cx="130" cy="340" r="6" fill="#0891b2"/>
+  <circle cx="170" cy="335" r="6" fill="#0891b2"/>
+  <circle cx="210" cy="300" r="6" fill="#0891b2"/>
+  <circle cx="250" cy="310" r="6" fill="#0891b2"/>
+  <circle cx="290" cy="260" r="6" fill="#0891b2"/>
+  <circle cx="330" cy="255" r="6" fill="#0891b2"/>
+  <circle cx="370" cy="220" r="6" fill="#0891b2"/>
+  <circle cx="410" cy="215" r="6" fill="#0891b2"/>
+  <circle cx="440" cy="185" r="6" fill="#0891b2"/>
+
+  <line x1="80" y1="370" x2="450" y2="180" stroke="#dc2626" stroke-width="3"/>
+
+  <text x="260" y="400" text-anchor="middle" font-size="11" fill="#334155">Fits ONE straight line that minimizes total</text>
+  <text x="260" y="415" text-anchor="middle" font-size="11" fill="#334155">error — good when the trend is roughly linear.</text>
+
+  <!-- Panel 2: Decision Tree Regression -->
+  <rect x="520" y="90" width="440" height="340" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="740" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">2. Decision Tree Regression</text>
+
+  <circle cx="570" cy="365" r="6" fill="#0891b2"/>
+  <circle cx="610" cy="340" r="6" fill="#0891b2"/>
+  <circle cx="650" cy="335" r="6" fill="#0891b2"/>
+  <circle cx="690" cy="300" r="6" fill="#0891b2"/>
+  <circle cx="730" cy="310" r="6" fill="#0891b2"/>
+  <circle cx="770" cy="260" r="6" fill="#0891b2"/>
+  <circle cx="810" cy="255" r="6" fill="#0891b2"/>
+  <circle cx="850" cy="220" r="6" fill="#0891b2"/>
+  <circle cx="890" cy="215" r="6" fill="#0891b2"/>
+  <circle cx="920" cy="185" r="6" fill="#0891b2"/>
+
+  <polyline points="550,347 670,347 670,305 750,305 750,245 870,245 870,200 930,200"
+    fill="none" stroke="#dc2626" stroke-width="3"/>
+
+  <text x="740" y="400" text-anchor="middle" font-size="11" fill="#334155">Predicts a constant value within each split —</text>
+  <text x="740" y="415" text-anchor="middle" font-size="11" fill="#334155">a "staircase" fit that captures non-linear jumps.</text>
+
+  <text x="500" y="460" text-anchor="middle" font-size="12" fill="#475569">
+    Same 10 data points in both panels — Ridge/Lasso = Linear Regression + a penalty to avoid overfitting; SVR = the SVM idea applied to regression.
+  </text>
+</svg>

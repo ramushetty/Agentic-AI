@@ -1,0 +1,100 @@
+<svg width="900" height="650" viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="900" height="650" fill="#ffffff"/>
+
+  <text x="450" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Reinforcement Learning: the agent-environment loop
+  </text>
+
+  <!-- Agent box -->
+  <rect x="90" y="70" width="220" height="90" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
+  <text x="200" y="108" text-anchor="middle" font-size="16" font-weight="700" fill="#4c1d95">AGENT</text>
+  <text x="200" y="128" text-anchor="middle" font-size="12" fill="#4c1d95">(the policy being learned)</text>
+
+  <!-- Environment box -->
+  <rect x="590" y="70" width="220" height="90" rx="10" fill="#fff7ed" stroke="#c2410c" stroke-width="2.5"/>
+  <text x="700" y="108" text-anchor="middle" font-size="16" font-weight="700" fill="#7c2d12">ENVIRONMENT</text>
+  <text x="700" y="128" text-anchor="middle" font-size="12" fill="#7c2d12">(the world the agent acts in)</text>
+
+  <!-- action arrow (top, agent -> environment) -->
+  <path d="M 310 90 L 590 90" stroke="#16a34a" stroke-width="2.5" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="450" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">action (e.g. "move left")</text>
+
+  <!-- reward arrow (bottom, environment -> agent) -->
+  <path d="M 590 145 L 310 145" stroke="#dc2626" stroke-width="2.5" fill="none" marker-end="url(#arrowRed)"/>
+  <text x="450" y="165" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">next state + reward (+1 / -1)</text>
+
+  <defs>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="200" text-anchor="middle" font-size="12" fill="#475569">
+    This repeats thousands/millions of times — the agent adjusts its policy to get more reward.
+  </text>
+
+  <!-- Grid world example -->
+  <text x="450" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">
+    Concrete example: a grid-world learning a path to the goal
+  </text>
+
+  <!-- grid cells 5x5, cell = 60px, origin (150,260) -->
+  <g stroke="#cbd5e1" stroke-width="1.5">
+    <rect x="150" y="260" width="60" height="60" fill="#dcfce7"/>
+    <rect x="210" y="260" width="60" height="60" fill="#ffffff"/>
+    <rect x="270" y="260" width="60" height="60" fill="#ffffff"/>
+    <rect x="330" y="260" width="60" height="60" fill="#ffffff"/>
+    <rect x="390" y="260" width="60" height="60" fill="#ffffff"/>
+
+    <rect x="150" y="320" width="60" height="60" fill="#ffffff"/>
+    <rect x="210" y="320" width="60" height="60" fill="#ffffff"/>
+    <rect x="270" y="320" width="60" height="60" fill="#ffffff"/>
+    <rect x="330" y="320" width="60" height="60" fill="#ffffff"/>
+    <rect x="390" y="320" width="60" height="60" fill="#ffffff"/>
+
+    <rect x="150" y="380" width="60" height="60" fill="#ffffff"/>
+    <rect x="210" y="380" width="60" height="60" fill="#ffffff"/>
+    <rect x="270" y="380" width="60" height="60" fill="#fecaca"/>
+    <rect x="330" y="380" width="60" height="60" fill="#ffffff"/>
+    <rect x="390" y="380" width="60" height="60" fill="#ffffff"/>
+
+    <rect x="150" y="440" width="60" height="60" fill="#ffffff"/>
+    <rect x="210" y="440" width="60" height="60" fill="#ffffff"/>
+    <rect x="270" y="440" width="60" height="60" fill="#ffffff"/>
+    <rect x="330" y="440" width="60" height="60" fill="#ffffff"/>
+    <rect x="390" y="440" width="60" height="60" fill="#ffffff"/>
+
+    <rect x="150" y="500" width="60" height="60" fill="#ffffff"/>
+    <rect x="210" y="500" width="60" height="60" fill="#ffffff"/>
+    <rect x="270" y="500" width="60" height="60" fill="#ffffff"/>
+    <rect x="330" y="500" width="60" height="60" fill="#ffffff"/>
+    <rect x="390" y="500" width="60" height="60" fill="#fef08a"/>
+  </g>
+
+  <text x="180" y="295" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">S</text>
+  <text x="270" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#b91c1c">✕</text>
+  <text x="420" y="535" text-anchor="middle" font-size="16" font-weight="700" fill="#a16207">★</text>
+
+  <text x="180" y="245" text-anchor="middle" font-size="10" fill="#475569">Start</text>
+  <text x="270" y="255" text-anchor="middle" font-size="10" fill="#475569">Trap (-10 reward)</text>
+  <text x="420" y="590" text-anchor="middle" font-size="10" fill="#475569">Goal (+100 reward)</text>
+
+  <!-- learned path avoiding the trap, dashed arrow -->
+  <polyline points="180,290 180,350 180,410 180,470 180,530 240,530 300,530 360,530 400,530"
+    fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="8,5" marker-end="url(#arrowBlue)"/>
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="620" text-anchor="middle" font-size="12" fill="#475569">
+    No one labels "go down" as correct — the agent tries paths, gets +100 at the goal and -10 at the trap, and learns to avoid the trap.
+  </text>
+  <text x="450" y="638" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">
+    Common algorithms: Q-Learning (table of state→action values) · DQN (neural-net version for huge state spaces) · Policy Gradient / PPO (learns the policy directly)
+  </text>
+</svg>

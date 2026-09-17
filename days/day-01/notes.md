@@ -64,16 +64,25 @@ There are **four** common ways a computer can learn from data:
 checking homework.
 
 - **Classification** = sorting things into categories.
-  Example: Is this email spam or not spam? Is this photo a cat or a dog? Is this loan application
-  risky or safe?
+  Examples:
+  - Is this email spam or not spam?
+  - Is this photo a cat or a dog?
+  - Is this loan application risky or safe?
+
   **Common algorithms:** Logistic Regression, Decision Tree, Random Forest, SVM (Support Vector
   Machine), Naive Bayes, K-Nearest Neighbors (KNN), Gradient Boosting (XGBoost/LightGBM).
 
   ![How Logistic Regression, Decision Tree, SVM, and KNN each draw a different decision boundary on the same data](assets/classification-explained.svg)
+
 - **Regression** = predicting a number.
-  Example: What will this house sell for? How many customers will show up tomorrow?
+  Examples:
+  - What will this house sell for?
+  - How many customers will show up tomorrow?
+
   **Common algorithms:** Linear Regression, Ridge/Lasso Regression, Decision Tree/Random Forest
   Regression, SVR (Support Vector Regression).
+
+  ![How Linear Regression vs Decision Tree Regression fit the same data](assets/regression-explained.svg)
 
 You train the model on examples where you already know the right answer, so it learns the pattern.
 Then you show it something new, and it makes its own guess.
@@ -82,26 +91,36 @@ Then you show it something new, and it makes its own guess.
 find patterns or groups on its own. There are two common jobs here too:
 
 - **Clustering** = grouping similar things together.
-  Example: an online store groups customers into clusters by purchase history — like "people who
-  mostly buy baby products" and "people who mostly buy gym gear" — without anyone telling it those
-  groups exist ahead of time.
+  Example: an online store groups its customers into clusters by purchase history, with no labels
+  given ahead of time:
+  - "people who mostly buy baby products"
+  - "people who mostly buy gym gear"
+
   **Common algorithms:** K-Means, Hierarchical Clustering, DBSCAN, Gaussian Mixture Model (GMM).
+
+  ![K-Means vs DBSCAN grouping the same kind of data differently](assets/clustering-explained.svg)
+
 - **Dimensionality Reduction** = squeezing a large number of features down to a smaller number, while
   keeping most of the useful information.
   Example: a dataset with 100 columns about a customer gets compressed to 10 columns that still
   capture almost everything important — makes the data faster to work with and easier to visualize.
   **Common algorithms:** PCA (Principal Component Analysis), t-SNE, UMAP.
 
+  ![PCA compressing 2 features into 1](assets/pca-explained.svg)
+
 **3. Reinforcement Learning** — the computer learns by trial and error, getting a reward or a penalty,
 similar to training a dog with treats. It tries an action, sees if the result was good or bad, and
 adjusts.
 
-*Example: AlphaGo, the AI that beat the world champion at the game Go in 2016, learned by playing
-millions of games against itself — winning was the reward, losing was the penalty. Self-driving cars
-also use this to learn things like smooth braking.*
+Examples:
+- AlphaGo (2016) beat the world Go champion by playing millions of games against itself — winning was
+  the reward, losing was the penalty.
+- Self-driving cars use this to learn things like smooth braking.
 
 **Common algorithms:** Q-Learning, Deep Q-Network (DQN), Policy Gradient methods, PPO (Proximal Policy
 Optimization).
+
+![The agent-environment loop, plus a grid-world example learning a path to a goal while avoiding a trap](assets/reinforcement-learning-explained.svg)
 
 This becomes important later when we build agents that improve from feedback.
 

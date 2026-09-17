@@ -1,0 +1,79 @@
+<svg width="1000" height="480" viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="480" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    K-Means vs. DBSCAN — two clustering algorithms group data differently
+  </text>
+
+  <!-- Panel 1: K-Means -->
+  <rect x="40" y="90" width="440" height="340" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="260" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">1. K-Means (k = 3)</text>
+
+  <!-- cluster 1 -->
+  <circle cx="120" cy="200" r="6" fill="#2563eb"/>
+  <circle cx="140" cy="220" r="6" fill="#2563eb"/>
+  <circle cx="110" cy="230" r="6" fill="#2563eb"/>
+  <circle cx="150" cy="205" r="6" fill="#2563eb"/>
+  <circle cx="125" cy="240" r="6" fill="#2563eb"/>
+  <line x1="119" y1="209" x2="139" y2="229" stroke="#0f172a" stroke-width="3"/>
+  <line x1="139" y1="209" x2="119" y2="229" stroke="#0f172a" stroke-width="3"/>
+
+  <!-- cluster 2 -->
+  <circle cx="260" cy="290" r="6" fill="#f97316"/>
+  <circle cx="280" cy="310" r="6" fill="#f97316"/>
+  <circle cx="250" cy="320" r="6" fill="#f97316"/>
+  <circle cx="290" cy="295" r="6" fill="#f97316"/>
+  <circle cx="265" cy="330" r="6" fill="#f97316"/>
+  <line x1="259" y1="299" x2="279" y2="319" stroke="#0f172a" stroke-width="3"/>
+  <line x1="279" y1="299" x2="259" y2="319" stroke="#0f172a" stroke-width="3"/>
+
+  <!-- cluster 3 -->
+  <circle cx="390" cy="200" r="6" fill="#7c3aed"/>
+  <circle cx="410" cy="220" r="6" fill="#7c3aed"/>
+  <circle cx="380" cy="230" r="6" fill="#7c3aed"/>
+  <circle cx="420" cy="205" r="6" fill="#7c3aed"/>
+  <circle cx="395" cy="240" r="6" fill="#7c3aed"/>
+  <line x1="389" y1="209" x2="409" y2="229" stroke="#0f172a" stroke-width="3"/>
+  <line x1="409" y1="209" x2="389" y2="229" stroke="#0f172a" stroke-width="3"/>
+
+  <text x="260" y="378" text-anchor="middle" font-size="11" fill="#334155">✕ = centroid. Picks k centers, assigns each point to</text>
+  <text x="260" y="393" text-anchor="middle" font-size="11" fill="#334155">its nearest one, repeats. Assumes round clusters.</text>
+  <text x="260" y="410" text-anchor="middle" font-size="11" fill="#334155">You must choose k in advance.</text>
+
+  <!-- Panel 2: DBSCAN -->
+  <rect x="520" y="90" width="440" height="340" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="2"/>
+  <text x="740" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b">2. DBSCAN (no k needed)</text>
+
+  <!-- round blob cluster -->
+  <circle cx="590" cy="190" r="6" fill="#2563eb"/>
+  <circle cx="610" cy="200" r="6" fill="#2563eb"/>
+  <circle cx="595" cy="220" r="6" fill="#2563eb"/>
+  <circle cx="620" cy="215" r="6" fill="#2563eb"/>
+  <circle cx="630" cy="195" r="6" fill="#2563eb"/>
+  <circle cx="605" cy="180" r="6" fill="#2563eb"/>
+
+  <!-- crescent / arbitrary shaped cluster -->
+  <circle cx="720" cy="190" r="6" fill="#f97316"/>
+  <circle cx="750" cy="185" r="6" fill="#f97316"/>
+  <circle cx="780" cy="195" r="6" fill="#f97316"/>
+  <circle cx="800" cy="220" r="6" fill="#f97316"/>
+  <circle cx="790" cy="250" r="6" fill="#f97316"/>
+  <circle cx="760" cy="260" r="6" fill="#f97316"/>
+  <circle cx="730" cy="245" r="6" fill="#f97316"/>
+  <circle cx="710" cy="220" r="6" fill="#f97316"/>
+
+  <!-- noise points -->
+  <circle cx="880" cy="300" r="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="570" cy="310" r="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="910" cy="170" r="6" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+  <text x="900" y="295" font-size="10" fill="#475569">noise</text>
+  <text x="590" y="325" font-size="10" fill="#475569">noise</text>
+
+  <text x="740" y="378" text-anchor="middle" font-size="11" fill="#334155">Groups densely packed points — handles odd</text>
+  <text x="740" y="393" text-anchor="middle" font-size="11" fill="#334155">shapes (like this crescent) and marks sparse</text>
+  <text x="740" y="410" text-anchor="middle" font-size="11" fill="#334155">points as noise/outliers (gray). No k needed.</text>
+
+  <text x="500" y="450" text-anchor="middle" font-size="12" fill="#475569">
+    Hierarchical Clustering is a third option: builds a merge-tree of clusters, so you don't pick k upfront either. GMM is like K-Means but with soft, probability-based membership.
+  </text>
+</svg>
