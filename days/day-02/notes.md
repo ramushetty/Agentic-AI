@@ -115,6 +115,15 @@ The **context window** is the maximum number of tokens — input plus output, co
 can work with in a single request. Anything outside that window simply doesn't exist to the model: it
 has no memory of anything that isn't explicitly included in the current context.
 
+**This is one shared pool, not separate budgets for asking and replying:**
+```
+GPT-3.5 window = 16,000 tokens total
+Your conversation + question used  =  15,000 tokens
+Tokens left for the model's reply  =   1,000 tokens   ← even if it "wants" to say more, it can't
+```
+So it's never "16K to ask, 16K to reply" — it's 16K total, split between the two. The more you've
+already used on input/history, the shorter the model's possible reply gets.
+
 **Analogy:** think of it as the size of a whiteboard. Once the whiteboard is full, something has to be
 erased to fit new writing — older parts of a long conversation get dropped or summarized once you go
 past the limit.
