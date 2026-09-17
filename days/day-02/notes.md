@@ -155,6 +155,15 @@ Turn 20:  [System 80] + [History 520] + [Msg 40] + [little free] + [Reserved rep
 
 ## 3. Embeddings and Vector Representations
 
+**Embedding vector, in one line: a list of many numbers that describes a word's *meaning* — the same
+way you'd describe a person using a list of measurable traits (height, weight, age) instead of just
+their name.** Two people with similar traits (twins) get similar number-lists; two words with similar
+meaning ("cat" and "kitten") get similar number-lists too, even sharing zero letters.
+
+This is the key contrast with Section 1: a **token ID** (like 1917) is a locker *number* — arbitrary,
+tells you nothing by itself. An **embedding vector** (`[0.12, -0.87, ..., 0.05]`) is what's *inside*
+that locker — the actual meaning, built up during training, not assigned in advance.
+
 An **embedding** is a way of turning a piece of text (a word, a sentence, a whole document) into a
 list of numbers — a **vector** — that captures its *meaning*, not just its spelling. Texts with
 similar meaning end up with vectors that are close together in this number-space, even if they don't
