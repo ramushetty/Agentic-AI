@@ -8,8 +8,8 @@
   rest of your pipeline doesn't have to care what format the file started in.
 - **Text splitting** breaks that clean text into small chunks, because both context windows (Day 02)
   and RAG retrieval work better on small, focused pieces than one giant blob.
-- **Chunk size + overlap** are the two settings that matter most — and this is exactly what your own
-  `MM-Rag-Stack-project`'s `ingestion.py` already does (`chunk_size=2000`, `chunk_overlap=120`).
+- **Chunk size + overlap** are the two settings that matter most — a typical real pipeline uses
+  something like `chunk_size=2000`, `chunk_overlap=120`.
 
 ---
 
@@ -34,7 +34,7 @@ Raw PDF file  →  document loader (parses layout, pulls out text/tables/images)
 - **Webpages** — WebBaseLoader
 - **Spreadsheets/CSVs** — CSVLoader
 - **Scanned/handwritten PDFs** — OCR tools like `pytesseract`, since there's no real text layer to
-  extract — this is exactly what your `MM-Rag-Stack-project` does for scanned documents.
+  extract — the loader has to read the pixels, not a text stream.
 
 ![Different file types (PDF, DOCX, webpage, CSV) each go through their own loader, converging into the same clean text-plus-metadata format](assets/document-loaders-explained.svg)
 
@@ -68,8 +68,9 @@ match a specific question well. A small, focused chunk about one topic matches m
 - **Semantic splitting** — uses embeddings to find natural topic-boundary points in the text, so each
   chunk stays about one coherent idea. More accurate, more expensive to compute.
 - **Structure-aware splitting** — splits along headers/sections, and keeps tables or images as their
-  own separate chunks instead of mixing them into surrounding text — this is exactly why your
-  `MM-Rag-Stack-project` handles `text`, `table`, and `image` as different content types.
+  own separate chunks instead of mixing them into surrounding text. A multi-modal RAG pipeline often
+  tags each chunk with a `content_type` (`text`, `table`, `image`) so retrieval can treat them
+  differently later.
 
 **The two settings that matter most: chunk size and overlap.**
 ```
@@ -87,8 +88,8 @@ chunk.
 > - **How:** pick a splitting strategy (recursive is the safe default), set a chunk size that fits
 >   comfortably within your embedding model's limit, and add a small overlap so boundary content isn't
 >   lost.
-> - **Where:** right after loading (Section 1), right before embedding (Day 02) — this is the
->   `ingestion.py` step in a RAG pipeline like your `MM-Rag-Stack-project`.
+> - **Where:** right after loading (Section 1), right before embedding (Day 02) — the "ingestion" step
+>   of any RAG pipeline.
 > - **When:** every document, every time it's ingested — this isn't a one-off setting, it's a step
 >   that runs for every new file.
 
