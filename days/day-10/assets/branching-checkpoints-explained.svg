@@ -1,0 +1,46 @@
+<svg width="1000" height="440" viewBox="0 0 1000 440" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="440" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Branching into more than two paths — with a checkpoint saved after every node
+  </text>
+
+  <rect x="400" y="60" width="200" height="50" rx="8" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="500" y="90" text-anchor="middle" font-size="12" font-weight="700" fill="#713f12">Classify node</text>
+  <circle cx="612" cy="85" r="9" fill="#0891b2"/>
+  <text x="612" y="89" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">✓</text>
+
+  <path d="M 470 110 L 220 175" stroke="#94a3b8" stroke-width="2" marker-end="url(#bc)"/>
+  <path d="M 500 110 L 500 175" stroke="#94a3b8" stroke-width="2" marker-end="url(#bc)"/>
+  <path d="M 530 110 L 780 175" stroke="#94a3b8" stroke-width="2" marker-end="url(#bc)"/>
+
+  <text x="280" y="150" font-size="10.5" fill="#475569">"billing"</text>
+  <text x="500" y="150" text-anchor="middle" font-size="10.5" fill="#475569">"technical"</text>
+  <text x="700" y="150" font-size="10.5" fill="#475569">"general"</text>
+
+  <rect x="120" y="175" width="170" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="205" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Billing node</text>
+  <circle cx="282" cy="180" r="9" fill="#0891b2"/>
+  <text x="282" y="184" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">✓</text>
+
+  <rect x="415" y="175" width="170" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="500" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#14532d">Tech node</text>
+  <circle cx="577" cy="180" r="9" fill="#0891b2"/>
+  <text x="577" y="184" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">✓</text>
+
+  <rect x="710" y="175" width="170" height="50" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="795" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#4c1d95">General node</text>
+  <circle cx="872" cy="180" r="9" fill="#0891b2"/>
+  <text x="872" y="184" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff">✓</text>
+
+  <text x="500" y="270" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490">
+    ✓ = a checkpoint saved right after that node finishes
+  </text>
+
+  <rect x="150" y="300" width="700" height="90" rx="8" fill="#f0f9ff" stroke="#0891b2" stroke-width="1.5"/>
+  <text x="500" y="325" text-anchor="middle" font-size="12" fill="#0c4a6e">If the process crashes after the "Tech node" checkpoint, it doesn't</text>
+  <text x="500" y="345" text-anchor="middle" font-size="12" fill="#0c4a6e">restart from "Classify node" — it resumes from that last saved</text>
+  <text x="500" y="365" text-anchor="middle" font-size="12" fill="#0c4a6e">checkpoint, with the classification decision already intact.</text>
+
+  <defs><marker id="bc" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker></defs>
+</svg>

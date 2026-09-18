@@ -15,7 +15,7 @@ Full write-up: [notes.md](notes.md)
 ## Resources
 <!-- Docs, articles, videos you used today -->
 - [LangChain documentation](https://python.langchain.com/)
-- [LangGraph documentation](https://langchain-ai.github.io/langgraph/)
+- [LangGraph overview](https://docs.langchain.com/oss/python/langgraph/overview)
 
 ## Key Learnings
 <!-- Write this in your own words after studying/building. This is the part that goes public. -->

@@ -122,4 +122,4 @@ keep growing across every step, not get replaced down to just the newest message
 
 ## Sources
 
-- [LangGraph documentation](https://langchain-ai.github.io/langgraph/)
+- [LangGraph overview](https://docs.langchain.com/oss/python/langgraph/overview)

@@ -203,4 +203,4 @@ the input.
 ## Sources
 
 - [LangChain documentation](https://python.langchain.com/)
-- [LangGraph documentation](https://langchain-ai.github.io/langgraph/)
+- [LangGraph overview](https://docs.langchain.com/oss/python/langgraph/overview)
