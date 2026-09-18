@@ -1,0 +1,52 @@
+<svg width="1050" height="360" viewBox="0 0 1050 360" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1050" height="360" fill="#ffffff"/>
+
+  <text x="525" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    An LCEL pipeline: every piece is a Runnable, connected with |
+  </text>
+  <text x="525" y="48" text-anchor="middle" font-size="12" font-family="Consolas, monospace" fill="#475569">
+    rag_chain = {"context": retriever, "question": RunnablePassthrough()} | prompt | model | parser
+  </text>
+
+  <!-- Retriever -->
+  <rect x="40" y="130" width="200" height="90" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="140" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a8a">Retriever</text>
+  <text x="140" y="184" text-anchor="middle" font-size="10.5" fill="#1e3a8a">fetches relevant chunks</text>
+  <text x="140" y="200" text-anchor="middle" font-size="10.5" fill="#1e3a8a">from the vector DB</text>
+
+  <text x="255" y="182" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">|</text>
+  <line x1="240" y1="175" x2="270" y2="175" stroke="#94a3b8" stroke-width="2" marker-end="url(#lc)"/>
+
+  <!-- Prompt -->
+  <rect x="270" y="130" width="200" height="90" rx="10" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="370" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Prompt</text>
+  <text x="370" y="184" text-anchor="middle" font-size="10.5" fill="#713f12">fills the template with</text>
+  <text x="370" y="200" text-anchor="middle" font-size="10.5" fill="#713f12">context + the question</text>
+
+  <text x="485" y="182" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">|</text>
+  <line x1="470" y1="175" x2="500" y2="175" stroke="#94a3b8" stroke-width="2" marker-end="url(#lc)"/>
+
+  <!-- Model -->
+  <rect x="500" y="130" width="200" height="90" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="600" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Model</text>
+  <text x="600" y="184" text-anchor="middle" font-size="10.5" fill="#4c1d95">generates a raw</text>
+  <text x="600" y="200" text-anchor="middle" font-size="10.5" fill="#4c1d95">response (Day 02)</text>
+
+  <text x="715" y="182" text-anchor="middle" font-size="20" font-weight="700" fill="#64748b">|</text>
+  <line x1="700" y1="175" x2="730" y2="175" stroke="#94a3b8" stroke-width="2" marker-end="url(#lc)"/>
+
+  <!-- Parser -->
+  <rect x="730" y="130" width="200" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="830" y="165" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Output Parser</text>
+  <text x="830" y="184" text-anchor="middle" font-size="10.5" fill="#14532d">turns raw output into</text>
+  <text x="830" y="200" text-anchor="middle" font-size="10.5" fill="#14532d">a usable answer</text>
+
+  <defs><marker id="lc" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker></defs>
+
+  <text x="525" y="255" text-anchor="middle" font-size="12" fill="#334155">
+    Each box's output is the next box's input — the same idea as piping Unix commands together.
+  </text>
+  <text x="525" y="280" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">
+    Because every box is a "Runnable," streaming, batching, async, and retries work the same way for all of them, automatically.
+  </text>
+</svg>
