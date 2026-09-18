@@ -1,0 +1,38 @@
+# Core dependencies for the hands-on notebooks in days/day-06 through day-10 (and onward).
+# Install with: pip install -r requirements.txt
+
+# LangChain core + integrations used across the notebooks
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-huggingface
+langchain-openai
+langchain-anthropic
+langchain-google-genai
+
+# Vector stores
+faiss-cpu
+langchain-chroma
+
+# LangGraph (Days 09-10)
+langgraph
+
+# Local embeddings model backend (no API key needed)
+sentence-transformers
+
+# Structured output / API deployment (Day 08)
+pydantic
+fastapi
+uvicorn
+python-dotenv
+
+# Document loaders (Day 06)
+pypdf
+pymupdf
+pdfplumber
+
+# Notebook support
+ipykernel
+grandalf
+numpy

@@ -26,7 +26,10 @@ Reflection prompts (answer in your own words, after reading notes.md):
 
 ## Notes / Code
 <!-- Link to code in this folder, or to the relevant project/ folder -->
-See [notes.md](notes.md) for the full lesson.
+See [notes.md](notes.md) for the full lesson, and
+[code/day10_branching_checkpoints_hitl.ipynb](code/day10_branching_checkpoints_hitl.ipynb) for a
+hands-on notebook (a real 3-way branching graph with checkpoint history, plus a working
+interrupt-and-resume approval gate — no API key needed).
 
 ## Tomorrow
 <!-- One line: what's next -->

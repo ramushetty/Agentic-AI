@@ -23,7 +23,10 @@ Reflection prompts (answer in your own words, after reading notes.md):
 
 ## Notes / Code
 <!-- Link to code in this folder, or to the relevant project/ folder -->
-See [notes.md](notes.md) for the full lesson.
+See [notes.md](notes.md) for the full lesson, and
+[code/day09_langgraph_fundamentals.ipynb](code/day09_langgraph_fundamentals.ipynb) for a hands-on
+notebook (a real 2-node graph, run end to end, with both reducer types shown in actual output — no API
+key needed).
 
 ## Tomorrow
 <!-- One line: what's next -->

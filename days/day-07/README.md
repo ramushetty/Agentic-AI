@@ -27,7 +27,10 @@ Reflection prompts (answer in your own words, after reading notes.md):
 
 ## Notes / Code
 <!-- Link to code in this folder, or to the relevant project/ folder -->
-See [notes.md](notes.md) for the full lesson.
+See [notes.md](notes.md) for the full lesson, and
+[code/day07_embeddings_vectordb_lcel.ipynb](code/day07_embeddings_vectordb_lcel.ipynb) for a hands-on
+notebook (real embedding vectors, cosine similarity numbers, a local FAISS search, and an LCEL
+pipeline — no API key needed except the optional final cell).
 
 ## Tomorrow
 <!-- One line: what's next -->

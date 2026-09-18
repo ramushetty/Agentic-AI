@@ -26,7 +26,10 @@ Reflection prompts (answer in your own words, after reading notes.md):
 
 ## Notes / Code
 <!-- Link to code in this folder, or to the relevant project/ folder -->
-See [notes.md](notes.md) for the full lesson.
+See [notes.md](notes.md) for the full lesson, and
+[code/day06_document_loaders_and_splitting.ipynb](code/day06_document_loaders_and_splitting.ipynb) for
+a hands-on notebook (loads a real file, compares fixed-size vs. recursive splitting, shows chunk
+overlap in actual output — no API key needed).
 
 ## Tomorrow
 <!-- One line: what's next -->

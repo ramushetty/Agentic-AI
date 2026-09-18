@@ -27,7 +27,11 @@ Reflection prompts (answer in your own words, after reading notes.md):
 
 ## Notes / Code
 <!-- Link to code in this folder, or to the relevant project/ folder -->
-See [notes.md](notes.md) for the full lesson.
+See [notes.md](notes.md) for the full lesson, plus two runnable pieces of code:
+[code/day08_structured_output_and_reliability.ipynb](code/day08_structured_output_and_reliability.ipynb)
+(Pydantic schemas, validation errors, and a retry-with-backoff demo — no API key needed) and
+[code/api_example.py](code/api_example.py) (a small FastAPI app with a schema-validated `/ask`
+endpoint — run with `uvicorn api_example:app --reload`).
 
 ## Tomorrow
 <!-- One line: what's next -->

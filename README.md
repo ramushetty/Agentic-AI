@@ -91,5 +91,18 @@ LangChain · LangGraph · LangSmith · Langfuse · Neo4j · MCP · n8n · Databr
 
 ## Running things locally
 
-Each project/day that ships code includes its own setup notes in its `README.md`. Secrets go in a
-local `.env` (never committed — see `.gitignore`).
+```bash
+python -m venv venv
+venv\Scripts\activate        # Windows (use `source venv/bin/activate` on macOS/Linux)
+pip install -r requirements.txt
+python -m ipykernel install --user --name=agentic-ai-venv --display-name "Agentic-AI (venv)"
+```
+
+Most day folders from Day 06 onward have a `code/` subfolder with a runnable `.ipynb` notebook — open
+it and select the `Agentic-AI (venv)` kernel. The notebooks are designed to run fully without any API
+key wherever possible (local embeddings, deterministic mock LLM nodes for graph mechanics); any cell
+that does need a real model call is clearly marked and checks for a key before running. Secrets go in a
+local `.env` in the repo root (e.g. `OPENAI_API_KEY=sk-...`) — never committed, see `.gitignore`.
+
+The 6 real-time projects (in `projects/`) are heavier, standalone builds and may have their own setup
+notes in their own `README.md`.
