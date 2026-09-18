@@ -1,0 +1,56 @@
+<svg width="1000" height="420" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1000" height="420" fill="#ffffff"/>
+
+  <text x="500" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">
+    Different file types, one clean output shape
+  </text>
+
+  <!-- Row 1: PDF -->
+  <rect x="60" y="60" width="150" height="42" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="135" y="86" text-anchor="middle" font-size="11.5" fill="#1e293b">PDF file</text>
+  <line x1="210" y1="81" x2="255" y2="81" stroke="#94a3b8" stroke-width="2" marker-end="url(#dl)"/>
+  <rect x="255" y="60" width="210" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="360" y="86" text-anchor="middle" font-size="11" fill="#1e3a8a">PyMuPDF / pdfplumber</text>
+
+  <!-- Row 2: DOCX -->
+  <rect x="60" y="130" width="150" height="42" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="135" y="156" text-anchor="middle" font-size="11.5" fill="#1e293b">Word doc (.docx)</text>
+  <line x1="210" y1="151" x2="255" y2="151" stroke="#94a3b8" stroke-width="2" marker-end="url(#dl)"/>
+  <rect x="255" y="130" width="210" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="360" y="156" text-anchor="middle" font-size="11" fill="#1e3a8a">Docx2txtLoader</text>
+
+  <!-- Row 3: Webpage -->
+  <rect x="60" y="200" width="150" height="42" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="135" y="226" text-anchor="middle" font-size="11.5" fill="#1e293b">Webpage</text>
+  <line x1="210" y1="221" x2="255" y2="221" stroke="#94a3b8" stroke-width="2" marker-end="url(#dl)"/>
+  <rect x="255" y="200" width="210" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="360" y="226" text-anchor="middle" font-size="11" fill="#1e3a8a">WebBaseLoader</text>
+
+  <!-- Row 4: CSV -->
+  <rect x="60" y="270" width="150" height="42" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="135" y="296" text-anchor="middle" font-size="11.5" fill="#1e293b">CSV / spreadsheet</text>
+  <line x1="210" y1="291" x2="255" y2="291" stroke="#94a3b8" stroke-width="2" marker-end="url(#dl)"/>
+  <rect x="255" y="270" width="210" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="360" y="296" text-anchor="middle" font-size="11" fill="#1e3a8a">CSVLoader</text>
+
+  <!-- converging arrows -->
+  <path d="M 465 81 Q 560 81 600 170" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dl)"/>
+  <path d="M 465 151 Q 550 155 600 185" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dl)"/>
+  <path d="M 465 221 Q 550 217 600 205" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dl)"/>
+  <path d="M 465 291 Q 560 291 600 220" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#dl)"/>
+
+  <defs><marker id="dl" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0,0 L4,6 L8,0 Z" fill="#94a3b8"/></marker></defs>
+
+  <!-- shared output -->
+  <rect x="620" y="150" width="320" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="780" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="#14532d">Clean text + metadata</text>
+  <text x="780" y="202" text-anchor="middle" font-size="11" fill="#14532d">(filename, page number, source)</text>
+  <text x="780" y="220" text-anchor="middle" font-size="10" fill="#166534">same shape, every time</text>
+
+  <text x="500" y="330" text-anchor="middle" font-size="12" fill="#475569">
+    The rest of the pipeline (splitting, embedding, retrieval) never needs to know what format the file started as.
+  </text>
+  <text x="500" y="350" text-anchor="middle" font-size="11" fill="#475569">
+    Scanned/handwritten PDFs need one more step first: OCR (e.g. pytesseract) to turn pixels into readable text.
+  </text>
+</svg>
