@@ -50,14 +50,14 @@
   <!-- extractors -->
   <rect x="610" y="60" width="260" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
   <text x="740" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Tables</text>
-  <text x="740" y="100" text-anchor="middle" font-size="10" fill="#14532d">ruled + quality gate → high confidence</text>
-  <text x="740" y="115" text-anchor="middle" font-size="10" fill="#14532d">caption-anchored rows → medium confidence</text>
-  <text x="740" y="130" text-anchor="middle" font-size="10" fill="#14532d">rejected → stays in page text</text>
+  <text x="740" y="100" text-anchor="middle" font-size="10" fill="#14532d">detect tables, then CHECK the result</text>
+  <text x="740" y="115" text-anchor="middle" font-size="10" fill="#14532d">(rows, columns, short cells, numbers)</text>
+  <text x="740" y="130" text-anchor="middle" font-size="10" fill="#14532d">can't trust it? keep the page text</text>
 
   <rect x="610" y="160" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
   <text x="740" y="184" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Text</text>
-  <text x="740" y="202" text-anchor="middle" font-size="10" fill="#14532d">reading order, table regions removed</text>
-  <text x="740" y="217" text-anchor="middle" font-size="10" fill="#14532d">(no duplicate numbers)</text>
+  <text x="740" y="202" text-anchor="middle" font-size="10" fill="#14532d">one Document per page,</text>
+  <text x="740" y="217" text-anchor="middle" font-size="10" fill="#14532d">page number kept in metadata</text>
 
   <rect x="610" y="250" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
   <text x="740" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Raster images</text>
@@ -66,8 +66,8 @@
 
   <rect x="610" y="340" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
   <text x="740" y="364" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Vector figures</text>
-  <text x="740" y="382" text-anchor="middle" font-size="10" fill="#14532d">find drawing clusters → render to PNG</text>
-  <text x="740" y="397" text-anchor="middle" font-size="10" fill="#14532d">+ grab the "Figure N |" caption</text>
+  <text x="740" y="382" text-anchor="middle" font-size="10" fill="#14532d">charts drawn as shapes → render the</text>
+  <text x="740" y="397" text-anchor="middle" font-size="10" fill="#14532d">page/region to an image + keep its caption</text>
 
   <!-- scanned path -->
   <text x="482" y="408" text-anchor="end" font-size="11" font-weight="700" fill="#b45309">no text + big picture → scan</text>
@@ -105,6 +105,6 @@
   <text x="1045" y="492" text-anchor="middle" font-size="10" fill="#475569">counts · rejected · failed pages · seconds</text>
 
   <text x="600" y="565" text-anchor="middle" font-size="12" fill="#475569">
-    Cheap and fast on everything (58 pages ≈ 6 seconds) — then route only the HARD pages to a heavier layout-aware parser.
+    Run the cheap methods on everything — then send only the HARD pages to a heavier, layout-aware parser.
   </text>
 </svg>

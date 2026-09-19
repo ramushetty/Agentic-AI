@@ -34,12 +34,11 @@ a hands-on notebook in two parts (no API key needed):
 
 - **Part 1 — simple:** loads a small text file, compares fixed-size vs. recursive splitting, shows chunk
   overlap in actual output. Fully offline.
-- **Part 2 — production:** a robust ingestion pipeline run on a real 58-page research paper (the
-  DeepSeek-V4 technical report, downloaded once into a git-ignored folder): text with page numbers,
-  scanned-page OCR fallback, table extraction with quality gates, raster + vector figure extraction with
-  captions, per-file error handling, and chunking. OCR needs the free
-  [Tesseract](https://github.com/tesseract-ocr/tesseract) program installed; without it, the notebook
-  still runs and simply skips OCR.
+- **Part 2 — a real PDF, step by step:** seven small steps on a real 58-page research paper (the
+  DeepSeek-V4 technical report, downloaded once into a git-ignored folder): keep page numbers, chunk
+  without losing them, pictures and charts, why tables are hard, OCR for scanned pages, and handling
+  broken files. OCR needs the free [Tesseract](https://github.com/tesseract-ocr/tesseract) program
+  installed; without it, that one cell just says so and the rest still runs.
 
 ## Tomorrow
 <!-- One line: what's next -->

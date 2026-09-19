@@ -10,9 +10,9 @@
   and RAG retrieval work better on small, focused pieces than one giant blob.
 - **Chunk size + overlap** are the two settings that matter most — a typical real pipeline uses
   something like `chunk_size=2000`, `chunk_overlap=120`.
-- **Production-grade loading** = one pipeline that handles everything a real PDF throws at it: scanned
-  pages (OCR), tables, figures, corrupted files — and never lets one bad file crash the whole run
-  (Section 3, with a real 58-page paper in the notebook).
+- **Real PDFs are messy** — scanned pages, tables, charts, broken files. Section 3 lists each case and
+  what to do about it, and the notebook's Part 2 handles them one small step at a time on a real
+  58-page paper.
 
 ---
 
@@ -63,7 +63,7 @@ match a specific question well. A small, focused chunk about one topic matches m
 **Splitting strategies, from worst to best default:**
 - **Fixed-size splitting** — cut every N characters, no matter what. Simple, but it can slice a
   sentence or even a word right in half, breaking meaning.
-- **Recursive character splitting** (the common default — what your own project uses) — tries to
+- **Recursive character splitting** (the common default in real pipelines) — tries to
   split on natural boundaries first: paragraph breaks, then sentence breaks, then word breaks, only
   falling back to a hard cut if nothing else works. Keeps chunks readable.
 - **Token-based splitting** — splits by token count (Day 02) instead of character count, since tokens
@@ -96,46 +96,42 @@ chunk.
 > - **When:** every document, every time it's ingested — this isn't a one-off setting, it's a step
 >   that runs for every new file.
 
-## 3. Production-grade ingestion: what real documents throw at you
+## 3. Real documents are messy — what a production pipeline must handle
 
-The simple loader from Section 1 works on clean files. Real PDFs are much messier. Part 2 of the
-notebook runs **one pipeline on a real 58-page research paper** (the DeepSeek-V4 technical report) to
-show every case in action.
+The loader from Section 1 works on clean files. Real PDFs are messier. Part 2 of the notebook goes
+through each case **one small step at a time**, on a real 58-page research paper.
 
-**What real documents contain — and the path each one needs:**
+**What real documents contain — and what you do about it:**
 
-| What you meet | The problem | The fix |
+| What you meet | The problem | What you do |
 |---|---|---|
-| Normal text pages | You need page numbers for citations | Extract text per page, keep `page` in metadata |
-| Scanned pages (a photo of a page) | No text layer at all — extraction returns nothing | Detect "no text + a big picture", then run OCR (Tesseract) |
-| Tables with grid lines | Flattening loses rows and columns | PyMuPDF table finder, then a **quality check** |
-| Tables without grid lines (most papers) | The finder finds nothing — or invents fake tables from charts | Rebuild rows from word positions, under the "Table N" caption |
-| Embedded images | Text extraction ignores them | Save the original image, skip tiny decorative logos |
-| Charts drawn as shapes ("vector figures") | They aren't images at all, so image extraction misses them | Find drawing clusters, render that region to a PNG |
-| Corrupted / wrong-type / locked files | One bad file crashes the whole batch | Catch errors per file, log them, keep going |
+| Normal pages | Answers need page numbers for citations | One `Document` per page, page number in `metadata` |
+| Huge PDF metadata | Copying it onto every chunk bloats your database | Keep only the fields you need |
+| Charts and diagrams | Often drawn as shapes, not stored as pictures — so "extract images" misses them | Render the page (or just the figure) to an image |
+| Tables | Plain extraction puts one cell per line, so the rows are lost | Check table detection carefully; if it fails, keep the page text |
+| Scanned pages | It's a picture of paper — there's no text to extract | Detect "no text", then run OCR |
+| Broken files | One bad file can crash the whole run | `try/except` per file: report and continue |
 
-**How the borderless-table rebuild works (in one line):**
+**Real numbers from the notebook:**
 ```
-words with x/y positions → group into lines by y → split each line at big x-gaps → markdown row
-"AGIEval (EM)"  "0-shot"  "80.1"  "82.6"  "83.1"   →   | AGIEval (EM) | 0-shot | 80.1 | 82.6 | 83.1 |
-```
-
-**Real numbers from the notebook run** (58 pages, about 6 seconds):
-```
-8 tables recovered from word positions  |  45 fake "tables" (chart labels, diagrams) rejected
-20 vector figures rendered + 5 raster images (decorative logos skipped), each with its caption
-simulated scanned page → OCR → 99.9% match with the real text
-corrupted.pdf and logo.png → reported and skipped, and the run still finished
+58 pages  →  223 chunks, and every chunk still knows its page number
+only 7 embedded pictures, but the paper has 20+ figures (most charts are drawn as shapes)
+PyMuPDF's table finder reported 45 "tables" — mostly fake, because the real tables have no grid lines
+a fake scan of page 5  →  OCR  →  the page's text read back correctly
 ```
 
 **Two surprises worth remembering:**
-- The paper has only **5 real embedded images but 20 figures.** Charts in papers are usually drawn as
-  vector shapes, not stored as pictures — so a loader that only extracts "images" misses most figures.
-- PyMuPDF's built-in table finder found **0 real tables and 45 fake ones.** It works from drawn lines
-  (its own docs say borderless tables may fail), and most paper tables have no lines. This is why every
-  table candidate needs a **quality gate** instead of blind trust.
+- **Pictures ≠ figures.** The paper has 7 embedded pictures but 20+ figures. Charts are usually drawn as
+  vector shapes, so a loader that only extracts "images" misses most of them.
+- **Tables lose their rows.** In plain text, a table becomes one cell per line (`AGIEval (EM)`, `0-shot`,
+  `80.1`, `82.6`, ...) — every number is there, but you can't tell which column it belongs to. And the
+  built-in table finder works from drawn grid lines, so on a paper full of borderless tables it found
+  mostly fake ones.
 
 ![A production PDF ingestion pipeline: safety checks, per-page routing between normal extraction (tables, text, images, vector figures) and OCR, then documents with metadata, splitting of text only, and an ingestion report](assets/production-pdf-pipeline-explained.svg)
+
+That diagram is the **big picture** of a production pipeline. You don't need to build all of it on day one
+— the notebook covers the core ideas, and bigger systems add the rest.
 
 **Which loader is best?** There's no single winner — each has a job:
 
@@ -149,25 +145,22 @@ corrupted.pdf and logo.png → reported and skipped, and the run still finished
 | Cloud services (Azure Document Intelligence, AWS Textract, Google Document AI) | Highest accuracy on tables, forms, scans | Costs money; your data leaves your machine |
 | Tesseract | Free OCR for scanned pages | Not perfect on equations or handwriting |
 
-**The practical recommendation:** use **PyMuPDF as the fast backbone** (text, images, figures, page
-rendering), add an **OCR fallback** for scans and **quality gates** on tables — then **route only the hard
-pages** to a heavier parser. Run cheap methods on everything; pay for expensive ones only where they help.
+**The practical recommendation:** use **PyMuPDF as the fast backbone** (text, images, page rendering),
+add an **OCR fallback** for scans, and **don't trust table detection blindly**. Then send only the *hard*
+pages to a heavier tool. Run cheap methods on everything; pay for expensive ones only where they help.
 
-**Production checklist** (every item is in the notebook's Part 2):
-- Validate the input first (exists? really a PDF? locked?).
-- Isolate errors **per page** and **per file** — report, don't crash.
-- Keep a **whitelist** of metadata (this paper's author field is 3,800+ characters — don't copy it to
-  every chunk).
-- Store a **file hash** so unchanged files can be skipped on re-ingestion.
-- Label extraction confidence (`ruled_table` vs `caption_layout` vs `ocr_text`).
-- If a table can't be parsed, **leave its text in the page** instead of dropping it.
-- Emit an **ingestion report** (counts, rejected, failed, seconds) for every file.
+**Production checklist:**
+- Validate the input first (does it exist? is it really a PDF?).
+- **Report, don't crash** — handle errors per file.
+- Keep only the metadata you need.
+- Label uncertain results (like OCR text) so you can trust them a little less.
+- If something can't be parsed cleanly, **keep the plain text** instead of dropping it.
 
 > **Why / How / Where / When**
 > - **Why:** real documents mix text, scans, tables, and figures, and one weak spot (a scanned page, a
 >   corrupted file) can silently ruin retrieval quality or crash a whole batch.
-> - **How:** a router per page — text layer present → normal extractors; no text + big picture → OCR —
->   with each extractor returning `Document`s that carry a `content_type` and rich metadata.
+> - **How:** handle each case with a small, separate step — page-by-page text, picture/figure capture, a
+>   table check, an OCR fallback, and error handling — each returning `Document`s with useful metadata.
 > - **Where:** the ingestion stage of any serious RAG system, before splitting and embedding.
 > - **When:** as soon as your documents stop being clean text files — which, for real business data
 >   (contracts, reports, papers, invoices), is almost immediately.
