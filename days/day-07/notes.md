@@ -89,6 +89,18 @@ def format_docs(docs):
 Without it, the prompt would contain the raw list — ids, `metadata={}`, `Document(...)` wrappers — which
 is noise the model shouldn't have to read.
 
+**What is `RunnablePassthrough`, and how does it "get" the question?** It doesn't go looking for it — it is
+simply **handed** the input, like every other branch of the dict. `RunnablePassthrough()` is the simplest
+runnable there is: it **returns whatever it receives**, exactly like the function `lambda x: x`.
+```
+RunnablePassthrough().invoke("hello")   →   "hello"
+
+{"shout": upper-case it, "length": count it, "same": RunnablePassthrough()}.invoke("hello")
+   →   {"shout": "HELLO", "length": 5, "same": "hello"}      ← all three branches received "hello"
+```
+So in the RAG dict, one branch (the retriever) *uses* the question to search, while the other
+(`RunnablePassthrough`) just *keeps* it, so the original question is still available for the prompt.
+
 **Wait — you only pass ONE string to `.invoke()`. How does it become both `context` and `question`?**
 The curly-brace part is a **dict**, and LangChain treats a dict as "run every value with the **same
 input**, and collect the results under the same keys." So your one string goes down both branches:
