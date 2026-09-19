@@ -25,3 +25,7 @@ Thumbs.db
 *.log
 *.sqlite3
 /tmp/
+
+# Day 06 notebook: the downloaded PDF and everything extracted from it are regenerated on each run
+days/day-06/code/data/downloads/
+days/day-06/code/data/extracted/

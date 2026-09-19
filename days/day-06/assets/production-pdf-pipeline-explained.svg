@@ -1,0 +1,110 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1200" height="600" fill="#ffffff"/>
+
+  <text x="600" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#1e293b">
+    A production PDF ingestion pipeline — every case has a path
+  </text>
+
+  <defs>
+    <marker id="pp" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+    <marker id="ppr" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+  </defs>
+
+  <!-- 1. input -->
+  <rect x="20" y="245" width="130" height="70" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="85" y="275" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Input file</text>
+  <text x="85" y="294" text-anchor="middle" font-size="10.5" fill="#475569">(PDF, TXT, ...)</text>
+  <line x1="150" y1="280" x2="185" y2="280" stroke="#64748b" stroke-width="2" marker-end="url(#pp)"/>
+
+  <!-- 2. safety checks -->
+  <rect x="185" y="190" width="190" height="180" rx="10" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="280" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">Safety checks</text>
+  <text x="280" y="240" text-anchor="middle" font-size="11" fill="#713f12">file exists?</text>
+  <text x="280" y="260" text-anchor="middle" font-size="11" fill="#713f12">really a PDF? (not HTML)</text>
+  <text x="280" y="280" text-anchor="middle" font-size="11" fill="#713f12">password-protected?</text>
+  <text x="280" y="300" text-anchor="middle" font-size="11" fill="#713f12">corrupted?</text>
+  <text x="280" y="325" text-anchor="middle" font-size="10.5" font-weight="700" fill="#713f12">unsupported type → skip</text>
+  <text x="280" y="345" text-anchor="middle" font-size="10.5" fill="#713f12">whitelist metadata only</text>
+
+  <path d="M 280 370 L 280 430" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ppr)"/>
+  <rect x="185" y="430" width="190" height="80" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="280" y="458" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">On failure: log + skip</text>
+  <text x="280" y="477" text-anchor="middle" font-size="10.5" fill="#991b1b">one bad file never</text>
+  <text x="280" y="493" text-anchor="middle" font-size="10.5" fill="#991b1b">crashes the batch</text>
+
+  <line x1="375" y1="280" x2="410" y2="280" stroke="#64748b" stroke-width="2" marker-end="url(#pp)"/>
+
+  <!-- 3. per-page decision -->
+  <polygon points="410,280 490,215 570,280 490,345" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
+  <text x="490" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0c4a6e">Each page</text>
+  <text x="490" y="288" text-anchor="middle" font-size="10" fill="#0c4a6e">has text layer?</text>
+  <text x="490" y="302" text-anchor="middle" font-size="9.5" fill="#0c4a6e">(own try/except)</text>
+
+  <!-- normal path arrows -->
+  <text x="425" y="203" font-size="11" font-weight="700" fill="#15803d">yes → normal page</text>
+  <path d="M 545 250 L 610 105" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 565 268 L 610 195" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 565 285 L 610 285" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 545 312 L 610 375" stroke="#16a34a" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+
+  <!-- extractors -->
+  <rect x="610" y="60" width="260" height="90" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="740" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Tables</text>
+  <text x="740" y="100" text-anchor="middle" font-size="10" fill="#14532d">ruled + quality gate → high confidence</text>
+  <text x="740" y="115" text-anchor="middle" font-size="10" fill="#14532d">caption-anchored rows → medium confidence</text>
+  <text x="740" y="130" text-anchor="middle" font-size="10" fill="#14532d">rejected → stays in page text</text>
+
+  <rect x="610" y="160" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="740" y="184" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Text</text>
+  <text x="740" y="202" text-anchor="middle" font-size="10" fill="#14532d">reading order, table regions removed</text>
+  <text x="740" y="217" text-anchor="middle" font-size="10" fill="#14532d">(no duplicate numbers)</text>
+
+  <rect x="610" y="250" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="740" y="274" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Raster images</text>
+  <text x="740" y="292" text-anchor="middle" font-size="10" fill="#14532d">extract original bytes; skip decorative</text>
+  <text x="740" y="307" text-anchor="middle" font-size="10" fill="#14532d">logos (judged by displayed size)</text>
+
+  <rect x="610" y="340" width="260" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="740" y="364" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14532d">Vector figures</text>
+  <text x="740" y="382" text-anchor="middle" font-size="10" fill="#14532d">find drawing clusters → render to PNG</text>
+  <text x="740" y="397" text-anchor="middle" font-size="10" fill="#14532d">+ grab the "Figure N |" caption</text>
+
+  <!-- scanned path -->
+  <text x="482" y="408" text-anchor="end" font-size="11" font-weight="700" fill="#b45309">no text + big picture → scan</text>
+  <path d="M 490 345 L 490 450 L 610 450" stroke="#d97706" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <rect x="610" y="425" width="260" height="70" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="2"/>
+  <text x="740" y="449" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">OCR fallback (Tesseract)</text>
+  <text x="740" y="467" text-anchor="middle" font-size="10" fill="#7c2d12">render page → image → read the text</text>
+  <text x="740" y="482" text-anchor="middle" font-size="10" fill="#7c2d12">tagged ocr_text (a bit less trusted)</text>
+
+  <!-- to documents -->
+  <path d="M 870 105 L 910 200" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 870 195 L 910 215" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 870 285 L 910 250" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 870 375 L 910 270" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+  <path d="M 870 460 L 910 285" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#pp)"/>
+
+  <rect x="910" y="150" width="270" height="180" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1045" y="175" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">Documents + metadata</text>
+  <text x="1045" y="198" text-anchor="middle" font-size="10.5" fill="#4c1d95">content_type: text · table · image</text>
+  <text x="1045" y="214" text-anchor="middle" font-size="10.5" fill="#4c1d95">figure · ocr_text</text>
+  <text x="1045" y="238" text-anchor="middle" font-size="10.5" fill="#4c1d95">source · page · title · file_id</text>
+  <text x="1045" y="254" text-anchor="middle" font-size="10.5" fill="#4c1d95">extraction_method · image_path</text>
+  <text x="1045" y="282" text-anchor="middle" font-size="10" font-style="italic" fill="#5b21b6">figure text = its caption,</text>
+  <text x="1045" y="297" text-anchor="middle" font-size="10" font-style="italic" fill="#5b21b6">so text search can find it</text>
+  <text x="1045" y="316" text-anchor="middle" font-size="10" font-style="italic" fill="#5b21b6">metadata holds the image path</text>
+
+  <line x1="1045" y1="330" x2="1045" y2="360" stroke="#64748b" stroke-width="2" marker-end="url(#pp)"/>
+  <rect x="910" y="360" width="270" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="1045" y="385" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">Split TEXT only</text>
+  <text x="1045" y="403" text-anchor="middle" font-size="10" fill="#1e3a8a">tables + figures stay whole</text>
+  <text x="1045" y="418" text-anchor="middle" font-size="10" fill="#1e3a8a">→ embed → vector DB</text>
+
+  <rect x="910" y="450" width="270" height="60" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="1045" y="474" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">Ingestion report</text>
+  <text x="1045" y="492" text-anchor="middle" font-size="10" fill="#475569">counts · rejected · failed pages · seconds</text>
+
+  <text x="600" y="565" text-anchor="middle" font-size="12" fill="#475569">
+    Cheap and fast on everything (58 pages ≈ 6 seconds) — then route only the HARD pages to a heavier layout-aware parser.
+  </text>
+</svg>
