@@ -75,6 +75,21 @@ rag_chain = {"context": retriever, "question": RunnablePassthrough()} | prompt |
 The retriever fetches relevant chunks (Section 1), the question passes through unchanged, both feed
 into the prompt, which goes to the model, whose output gets parsed into the final answer.
 
+**Wait — you only pass ONE string to `.invoke()`. How does it become both `context` and `question`?**
+The curly-brace part is a **dict**, and LangChain treats a dict as "run every value with the **same
+input**, and collect the results under the same keys." So your one string goes down both branches:
+```
+rag_chain.invoke("how do I get my money back?")
+      │
+      ├─► "context":  retriever | format_docs   →  "Our refund policy allows returns within 30 days..."
+      └─► "question": RunnablePassthrough()      →  "how do I get my money back?"   (unchanged)
+                          │
+                          ▼
+   prompt template  "...{context}...  Question: {question}"   ←  filled by matching dict KEYS to {placeholder} NAMES
+```
+That's why the keys must be spelled exactly like the `{placeholders}` in the prompt. (Behind the scenes
+LangChain wraps the dict in a `RunnableParallel`; the notebook shows this middle step with real output.)
+
 ![A pipeline built from Runnables connected with | : retriever, prompt, model, and parser, each step's output feeding the next](assets/lcel-pipeline-explained.svg)
 
 **What you get for free just by using this pattern:**
@@ -121,6 +136,14 @@ hand?**
 Streaming, batching, async support, automatic retries/fallbacks, and built-in tracing — all of this
 comes from every piece sharing the same Runnable interface, instead of having to be wired up separately
 for each custom chain.
+
+**Q6. In `{"context": retriever, "question": RunnablePassthrough()} | prompt`, you only call
+`.invoke("some question")` once. How do both `context` and `question` get filled?**
+A dict of runnables is treated as a `RunnableParallel`: it runs every value with the same input and
+returns a dict with the same keys. The one question string goes to the retriever (which returns the
+matching documents as `context`) and to `RunnablePassthrough()` (which returns the string unchanged as
+`question`). The prompt template then fills its `{context}` and `{question}` placeholders by matching
+those dict keys to the placeholder names.
 
 ## Sources
 
