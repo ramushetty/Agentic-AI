@@ -24,6 +24,7 @@ Thumbs.db
 # Local data / runtime artifacts
 *.log
 *.sqlite3
+*.sqlite
 /tmp/
 
 # Day 06 notebook: the downloaded PDF and everything extracted from it are regenerated on each run

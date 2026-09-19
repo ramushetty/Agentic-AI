@@ -1,0 +1,79 @@
+<svg width="1050" height="520" viewBox="0 0 1050 520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1050" height="520" fill="#ffffff"/>
+
+  <text x="525" y="30" text-anchor="middle" font-size="19" font-weight="700" fill="#1e293b">
+    A reliable multi-step graph: five safety nets
+  </text>
+
+  <defs>
+    <marker id="ro" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+    <marker id="ror" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+  </defs>
+
+  <!-- pipeline -->
+  <rect x="40" y="100" width="180" height="70" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">fetch</text>
+  <text x="130" y="148" text-anchor="middle" font-size="10.5" fill="#1e3a8a">e.g. an API or model call</text>
+  <line x1="220" y1="135" x2="330" y2="135" stroke="#64748b" stroke-width="2" marker-end="url(#ro)"/>
+
+  <rect x="330" y="100" width="180" height="70" rx="10" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+  <text x="420" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#7c2d12">process</text>
+  <text x="420" y="148" text-anchor="middle" font-size="10.5" fill="#7c2d12">the step that can fail</text>
+  <line x1="510" y1="135" x2="620" y2="135" stroke="#64748b" stroke-width="2" marker-end="url(#ro)"/>
+
+  <rect x="620" y="100" width="180" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="710" y="128" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">save</text>
+  <text x="710" y="148" text-anchor="middle" font-size="10.5" fill="#14532d">write the result</text>
+  <line x1="800" y1="135" x2="880" y2="135" stroke="#64748b" stroke-width="2" marker-end="url(#ro)"/>
+  <rect x="880" y="112" width="110" height="46" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="935" y="140" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">done</text>
+
+  <!-- 1 retry loop on process -->
+  <path d="M 395 100 C 380 55 460 55 445 100" stroke="#dc2626" stroke-width="2.5" fill="none" marker-end="url(#ror)"/>
+  <text x="420" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">① retry (wait longer each time)</text>
+
+  <!-- checkpoint markers -->
+  <circle cx="275" cy="190" r="11" fill="#0891b2"/>
+  <text x="275" y="194" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">✓</text>
+  <circle cx="565" cy="190" r="11" fill="#0891b2"/>
+  <text x="565" y="194" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">✓</text>
+  <text x="420" y="212" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0e7490">✓ = checkpoint saved after each step</text>
+
+  <!-- explanation cards -->
+  <rect x="30" y="240" width="240" height="150" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="150" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">① RetryPolicy</text>
+  <text x="150" y="286" text-anchor="middle" font-size="10.5" fill="#7f1d1d">A flaky step (timeout, rate limit)</text>
+  <text x="150" y="301" text-anchor="middle" font-size="10.5" fill="#7f1d1d">gets tried again automatically,</text>
+  <text x="150" y="316" text-anchor="middle" font-size="10.5" fill="#7f1d1d">up to a maximum number of times.</text>
+  <text x="150" y="342" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7f1d1d">Set on the node:</text>
+  <text x="150" y="358" text-anchor="middle" font-size="10" font-family="Consolas, monospace" fill="#7f1d1d">add_node(..., retry_policy=...)</text>
+
+  <rect x="285" y="240" width="240" height="150" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
+  <text x="405" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a6e">② Resume from a checkpoint</text>
+  <text x="405" y="286" text-anchor="middle" font-size="10.5" fill="#0c4a6e">Retries ran out, or the server died?</text>
+  <text x="405" y="301" text-anchor="middle" font-size="10.5" fill="#0c4a6e">Fix the cause, then continue:</text>
+  <text x="405" y="323" text-anchor="middle" font-size="10" font-family="Consolas, monospace" fill="#0c4a6e">graph.invoke(None, config)</text>
+  <text x="405" y="345" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0c4a6e">fetch is NOT redone —</text>
+  <text x="405" y="360" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0c4a6e">only the failed step runs again</text>
+
+  <rect x="540" y="240" width="240" height="150" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="660" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4c1d95">③ Fallback path</text>
+  <text x="660" y="286" text-anchor="middle" font-size="10.5" fill="#4c1d95">Still failing after every retry?</text>
+  <text x="660" y="301" text-anchor="middle" font-size="10.5" fill="#4c1d95">Route (conditional edge) to a safe</text>
+  <text x="660" y="316" text-anchor="middle" font-size="10.5" fill="#4c1d95">node instead of crashing:</text>
+  <text x="660" y="342" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4c1d95">a simpler model, a cached answer,</text>
+  <text x="660" y="357" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4c1d95">or a clear message to the user</text>
+
+  <rect x="795" y="240" width="225" height="150" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="2"/>
+  <text x="907" y="264" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">④ recursion_limit</text>
+  <text x="907" y="286" text-anchor="middle" font-size="10.5" fill="#7c2d12">A graph that loops can get stuck.</text>
+  <text x="907" y="301" text-anchor="middle" font-size="10.5" fill="#7c2d12">A step cap stops it with an error</text>
+  <text x="907" y="316" text-anchor="middle" font-size="10.5" fill="#7c2d12">instead of burning time and money.</text>
+  <text x="907" y="342" text-anchor="middle" font-size="10" font-family="Consolas, monospace" fill="#7c2d12">config={"recursion_limit": 25}</text>
+
+  <!-- 5 idempotency -->
+  <rect x="30" y="410" width="990" height="90" rx="10" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="525" y="436" text-anchor="middle" font-size="13" font-weight="700" fill="#713f12">⑤ Make steps safe to repeat ("idempotent")</text>
+  <text x="525" y="458" text-anchor="middle" font-size="11.5" fill="#713f12">Retries and resumes mean a step may run more than once. A step that charges a card, sends an email, or writes a row</text>
+  <text x="525" y="476" text-anchor="middle" font-size="11.5" fill="#713f12">should be safe to run twice — e.g. check "already done?" first, or use a unique request id — or you'll double-charge or double-send.</text>
+</svg>

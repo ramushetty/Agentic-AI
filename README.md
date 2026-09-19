@@ -69,7 +69,7 @@ built along the way and tie multiple modules together.
 - [x] Days 1-3 — Foundations (AI/ML/DL/NLP, LLM internals, frameworks & prompting)
 - [x] Days 4-5 — Agentic architectures & design patterns
 - [x] Days 6-8 — Production pipelines with LangChain/LCEL
-- [ ] Days 9-11 — Stateful agents with LangGraph
+- [x] Days 9-11 — Stateful agents with LangGraph
 - [ ] Days 12-13 — Project 2: Multi-Agent Collaboration System
 - [ ] Days 14-15 — Agentic RAG
 - [ ] Days 16-17 — Knowledge graphs with Neo4j

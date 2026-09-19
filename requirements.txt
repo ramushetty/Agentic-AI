@@ -15,8 +15,9 @@ langchain-google-genai
 faiss-cpu
 langchain-chroma
 
-# LangGraph (Days 09-10)
+# LangGraph (Days 09-11)
 langgraph
+langgraph-checkpoint-sqlite   # SqliteSaver: saves conversations to a file (Day 11)
 
 # Local embeddings model backend (no API key needed)
 sentence-transformers
