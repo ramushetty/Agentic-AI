@@ -70,10 +70,24 @@ stdout.
 
 **A retrieval pipeline in LCEL:**
 ```python
-rag_chain = {"context": retriever, "question": RunnablePassthrough()} | prompt | model | parser
+rag_chain = {"context": retriever | format_docs, "question": RunnablePassthrough()} | prompt | model | parser
 ```
-The retriever fetches relevant chunks (Section 1), the question passes through unchanged, both feed
-into the prompt, which goes to the model, whose output gets parsed into the final answer.
+The retriever fetches relevant chunks (Section 1), `format_docs` turns them into text, the question
+passes through unchanged, both feed into the prompt, which goes to the model, whose output gets parsed
+into the final answer.
+
+**What is `format_docs`?** A tiny helper you write yourself. A retriever returns a **list of `Document`
+objects**, but the prompt needs plain **text** for `{context}`. `format_docs` joins each document's text
+into one string, with a blank line between them:
+```python
+def format_docs(docs):
+    return "\n\n".join(d.page_content for d in docs)
+```
+```
+[Document(refund policy...), Document(password reset...)]  →  format_docs  →  "refund policy...\n\npassword reset..."
+```
+Without it, the prompt would contain the raw list — ids, `metadata={}`, `Document(...)` wrappers — which
+is noise the model shouldn't have to read.
 
 **Wait — you only pass ONE string to `.invoke()`. How does it become both `context` and `question`?**
 The curly-brace part is a **dict**, and LangChain treats a dict as "run every value with the **same
