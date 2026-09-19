@@ -195,7 +195,7 @@ id) before acting.
 
 ## Sources
 
-- [LangGraph: Memory overview](https://docs.langchain.com/oss/python/langgraph/memory)
+- [LangGraph: Memory overview](https://docs.langchain.com/oss/python/concepts/memory)
 - [LangGraph: Persistence (checkpointers)](https://docs.langchain.com/oss/python/langgraph/persistence)
 - [LangGraph: Stores](https://docs.langchain.com/oss/python/langgraph/stores)
 - [LangGraph: Run a local server (`langgraph dev`)](https://docs.langchain.com/oss/python/langgraph/local-server)

@@ -12,7 +12,7 @@ Full write-up: [notes.md](notes.md)
 
 ## Resources
 <!-- Docs, articles, videos you used today -->
-- [LangGraph: Memory overview](https://docs.langchain.com/oss/python/langgraph/memory)
+- [LangGraph: Memory overview](https://docs.langchain.com/oss/python/concepts/memory)
 - [LangGraph: Persistence (checkpointers)](https://docs.langchain.com/oss/python/langgraph/persistence)
 - [LangGraph: Stores](https://docs.langchain.com/oss/python/langgraph/stores)
 - [LangGraph: Run a local server (`langgraph dev`)](https://docs.langchain.com/oss/python/langgraph/local-server)
@@ -43,4 +43,4 @@ uvicorn graph_api_example:create_app --factory --reload
 
 ## Tomorrow
 <!-- One line: what's next -->
-Day 12 — Project 2: build a multi-agent collaboration system.
+Day 13 — Project 2: build a multi-agent collaboration system (Days 12 and 13 combined).
