@@ -33,8 +33,8 @@ built along the way and tie multiple modules together.
 | 09 | Module 5 | LangGraph Fundamentals & State | [days/day-09](days/day-09/README.md) |
 | 10 | Module 5 | Branching Graphs, Checkpoints & Human-in-the-Loop | [days/day-10](days/day-10/README.md) |
 | 11 | Module 5 | Agent Memory & Deployment | [days/day-11](days/day-11/README.md) |
-| 12 | Project 2 (build) | Multi-Agent Collaboration System — Build Day 1 | [days/day-12](days/day-12/README.md) |
-| 13 | Project 2 (build) | Multi-Agent Collaboration System — Build Day 2 & Writeup | [days/day-13](days/day-13/README.md) |
+| 12 | Project 2 (build) | Multi-Agent Collaboration System — Build Day 1 (combined into Day 13) | [days/day-12](days/day-12/README.md) |
+| 13 | Project 2 (build) | Multi-Agent Refund Desk — Days 12 + 13 combined: build & writeup | [days/day-13](days/day-13/README.md) |
 | 14 | Module 6 | Agentic RAG: Adaptive Retrieval | [days/day-14](days/day-14/README.md) |
 | 15 | Module 6 | Evidence-First Answers & RAG Evaluation | [days/day-15](days/day-15/README.md) |
 | 16 | Module 7 | Knowledge Graph Modeling with Neo4j | [days/day-16](days/day-16/README.md) |
@@ -70,7 +70,7 @@ built along the way and tie multiple modules together.
 - [x] Days 4-5 — Agentic architectures & design patterns
 - [x] Days 6-8 — Production pipelines with LangChain/LCEL
 - [x] Days 9-11 — Stateful agents with LangGraph
-- [ ] Days 12-13 — Project 2: Multi-Agent Collaboration System
+- [x] Days 12-13 — Project 2: Multi-Agent Collaboration System
 - [ ] Days 14-15 — Agentic RAG
 - [ ] Days 16-17 — Knowledge graphs with Neo4j
 - [ ] Days 18-19 — GraphRAG hybrid retrieval

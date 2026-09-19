@@ -1,0 +1,32 @@
+Language model: none (fallback rules)
+
+=== T-1: small refund ($40): no human needed
+  reply : Your refund of $40.00 for order A100 has been issued.
+  trail : intent_classified > route:lookup_worker > tool_call:get_order > tool_result:get_order > route:policy_worker > tool_call:check_refund_policy > tool_result:check_refund_policy > route:refund_worker > tool_call:issue_refund > tool_result:issue_refund > route:reply_worker > reply_drafted
+
+--- T-2 is paused, waiting for a manager: True
+
+=== T-2: big refund ($900): paused, manager approves
+  reply : Your refund of $900.00 for order A200 has been issued.
+  trail : intent_classified > route:lookup_worker > tool_call:get_order > tool_result:get_order > route:policy_worker > tool_call:check_refund_policy > tool_result:check_refund_policy > route:human_approval > approval_requested > human_decision > route:refund_worker > tool_call:issue_refund > tool_result:issue_refund > route:reply_worker > reply_drafted
+
+=== T-3: outside the 30-day window: denied
+  reply : We cannot refund order A300: delivered 90 days ago, window is 30 days.
+  trail : intent_classified > route:lookup_worker > tool_call:get_order > tool_result:get_order > route:policy_worker > tool_call:check_refund_policy > tool_result:check_refund_policy > route:reply_worker > reply_drafted
+
+=== T-4: flaky order service: retried, then worked
+  reply : Your refund of $55.00 for order A500 has been issued.
+  trail : intent_classified > route:lookup_worker > tool_call:get_order > tool_error:get_order > tool_call:get_order > tool_error:get_order > tool_call:get_order > tool_result:get_order > route:policy_worker > tool_call:check_refund_policy > tool_result:check_refund_policy > route:refund_worker > tool_call:issue_refund > tool_result:issue_refund > route:reply_worker > reply_drafted
+
+--- T-5 (prompt injection) is still paused for a human: True
+
+=== T-5: injection attempt: manager rejects
+  reply : A manager reviewed order A200 and could not approve the refund.
+  trail : intent_classified > route:lookup_worker > tool_call:get_order > tool_result:get_order > route:policy_worker > tool_call:check_refund_policy > tool_result:check_refund_policy > route:human_approval > approval_requested > human_decision > route:reply_worker > reply_drafted
+
+=== T-6: a worker tries a tool it is not allowed to use
+  blocked: lookup_worker is not allowed to use issue_refund
+  trail  : tool_blocked:issue_refund
+
+Refunds actually paid: {'A100': 40.0, 'A200': 900.0, 'A500': 55.0}
+Audit log: 65 events written to audit_log.jsonl

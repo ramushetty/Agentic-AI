@@ -1,0 +1,152 @@
+<svg width="1100" height="830" viewBox="0 0 1100 830" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1100" height="830" fill="#ffffff"/>
+
+  <text x="550" y="30" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">
+    Refund Desk: one supervisor, five workers, and governance around every tool call
+  </text>
+
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#64748b"/></marker>
+    <marker id="ag" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#16a34a"/></marker>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker>
+  </defs>
+
+  <!-- customer -->
+  <rect x="30" y="58" width="220" height="100" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="140" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Customer ticket</text>
+  <text x="140" y="104" text-anchor="middle" font-size="10.5" font-style="italic" fill="#334155">"Laptop arrived damaged,</text>
+  <text x="140" y="119" text-anchor="middle" font-size="10.5" font-style="italic" fill="#334155">refund please"</text>
+  <text x="140" y="142" text-anchor="middle" font-size="10.5" font-family="Consolas, monospace" fill="#334155">order_id = A200</text>
+  <line x1="250" y1="108" x2="318" y2="108" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- supervisor -->
+  <rect x="320" y="50" width="470" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="555" y="74" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a">SUPERVISOR  (looks at what is known, picks the next step)</text>
+  <text x="335" y="98" font-size="11" fill="#1e293b">① Classify intent: "refund" or "order_status"   (Gemini, fallback = keyword rules)</text>
+  <text x="335" y="117" font-size="11" fill="#1e293b">② next_step_for(state): a rulebook allows exactly ONE next step</text>
+  <text x="335" y="136" font-size="11" fill="#1e293b">③ Step cap = 8, then it jumps to the reply step (no endless loops)</text>
+  <text x="335" y="155" font-size="11" font-weight="700" fill="#1e3a8a">④ Writes every decision to the audit log</text>
+
+  <!-- who decides what -->
+  <rect x="815" y="50" width="255" height="120" rx="10" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="942" y="72" text-anchor="middle" font-size="12.5" font-weight="700" fill="#713f12">Who decides what</text>
+  <text x="828" y="94" font-size="10.5" fill="#713f12"><tspan font-weight="700">LLM (Gemini):</tspan> kind of request,</text>
+  <text x="828" y="108" font-size="10.5" fill="#713f12">   and the wording of the reply</text>
+  <text x="828" y="127" font-size="10.5" fill="#713f12"><tspan font-weight="700">Code:</tspan> steps, tools, limits, money</text>
+  <text x="828" y="146" font-size="10.5" fill="#713f12"><tspan font-weight="700">Human:</tspan> refunds over $100</text>
+  <text x="828" y="162" font-size="10.5" fill="#713f12"><tspan font-weight="700">Log:</tspan> proves what happened</text>
+
+  <!-- fan-out arrows -->
+  <path d="M 555 170 L 125 232" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+  <path d="M 555 170 L 335 232" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+  <path d="M 555 170 L 555 232" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+  <path d="M 555 170 L 765 232" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+  <path d="M 555 170 L 965 232" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a)"/>
+
+  <!-- workers -->
+  <rect x="30" y="234" width="190" height="112" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
+  <text x="125" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a6e">1 lookup_worker</text>
+  <text x="125" y="276" text-anchor="middle" font-size="10.5" fill="#0c4a6e">finds the order</text>
+  <text x="125" y="295" text-anchor="middle" font-size="10.5" font-family="Consolas, monospace" fill="#0c4a6e">tool: get_order</text>
+  <text x="125" y="313" text-anchor="middle" font-size="10.5" fill="#0c4a6e">read-only</text>
+  <text x="125" y="331" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">retried if it times out</text>
+
+  <rect x="240" y="234" width="190" height="112" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
+  <text x="335" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a6e">2 policy_worker</text>
+  <text x="335" y="276" text-anchor="middle" font-size="10.5" fill="#0c4a6e">delivered? within 30 days?</text>
+  <text x="335" y="295" text-anchor="middle" font-size="10" font-family="Consolas, monospace" fill="#0c4a6e">tool: check_refund_policy</text>
+  <text x="335" y="313" text-anchor="middle" font-size="10.5" fill="#0c4a6e">read-only; flags "over $100"</text>
+  <text x="335" y="331" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">retried if it times out</text>
+
+  <rect x="450" y="234" width="190" height="112" rx="10" fill="#ffedd5" stroke="#d97706" stroke-width="3"/>
+  <text x="545" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#7c2d12">3 human_approval</text>
+  <text x="545" y="276" text-anchor="middle" font-size="10.5" fill="#7c2d12">graph PAUSES before this</text>
+  <text x="545" y="292" text-anchor="middle" font-size="10.5" fill="#7c2d12">(interrupt_before)</text>
+  <text x="545" y="313" text-anchor="middle" font-size="10.5" fill="#7c2d12">manager: approve / reject</text>
+  <text x="545" y="331" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7c2d12">only when amount &gt; $100</text>
+
+  <rect x="660" y="234" width="190" height="112" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="755" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">4 refund_worker</text>
+  <text x="755" y="276" text-anchor="middle" font-size="10.5" fill="#7f1d1d">pays the customer</text>
+  <text x="755" y="295" text-anchor="middle" font-size="10.5" font-family="Consolas, monospace" fill="#7f1d1d">tool: issue_refund</text>
+  <text x="755" y="313" text-anchor="middle" font-size="10.5" fill="#7f1d1d">the ONLY tool that moves money</text>
+  <text x="755" y="331" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">idempotent: never pays twice</text>
+
+  <rect x="870" y="234" width="190" height="112" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="965" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4c1d95">5 reply_worker</text>
+  <text x="965" y="276" text-anchor="middle" font-size="10.5" fill="#4c1d95">writes the customer message</text>
+  <text x="965" y="295" text-anchor="middle" font-size="10.5" fill="#4c1d95">Gemini, using ONLY the facts</text>
+  <text x="965" y="313" text-anchor="middle" font-size="10.5" fill="#4c1d95">fallback: a plain template</text>
+  <text x="965" y="331" text-anchor="middle" font-size="10.5" font-weight="700" fill="#4c1d95">no tools; ends the ticket</text>
+
+  <text x="962" y="366" text-anchor="middle" font-size="10.5" font-style="italic" fill="#475569">Workers 1-4 go BACK to the supervisor,</text>
+  <text x="962" y="381" text-anchor="middle" font-size="10.5" font-style="italic" fill="#475569">which then chooses again. Worker 5 ends it.</text>
+
+  <!-- gateway -->
+  <line x1="125" y1="346" x2="125" y2="392" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="335" y1="346" x2="335" y2="392" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="755" y1="346" x2="755" y2="392" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+
+  <rect x="30" y="394" width="1030" height="70" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+  <text x="545" y="417" text-anchor="middle" font-size="13.5" font-weight="700" fill="#14532d">GOVERNANCE GATEWAY: call_tool(worker, tool)   (workers can NEVER call a tool directly)</text>
+  <text x="545" y="439" text-anchor="middle" font-size="11" fill="#14532d">① Is this tool on the worker's allowlist?  No: BLOCK it and log "tool_blocked"   ② log the call   ③ run the tool   ④ log the result or error</text>
+  <text x="545" y="455" text-anchor="middle" font-size="10.5" font-style="italic" fill="#166534">The rules are in code, not in a prompt, so a confused or tricked LLM cannot talk its way past them.</text>
+
+  <!-- tools -->
+  <line x1="125" y1="464" x2="125" y2="490" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="405" y1="464" x2="405" y2="490" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="690" y1="464" x2="690" y2="490" stroke="#16a34a" stroke-width="2" marker-end="url(#ag)"/>
+  <line x1="950" y1="464" x2="950" y2="490" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#ar)"/>
+
+  <rect x="30" y="492" width="250" height="70" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="155" y="514" text-anchor="middle" font-size="12" font-weight="700" font-family="Consolas, monospace" fill="#1e293b">get_order</text>
+  <text x="155" y="532" text-anchor="middle" font-size="10.5" fill="#334155">allowed for: lookup_worker only</text>
+  <text x="155" y="548" text-anchor="middle" font-size="10.5" fill="#334155">(flaky on purpose for order A500)</text>
+
+  <rect x="290" y="492" width="230" height="70" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="405" y="514" text-anchor="middle" font-size="12" font-weight="700" font-family="Consolas, monospace" fill="#1e293b">check_refund_policy</text>
+  <text x="405" y="532" text-anchor="middle" font-size="10.5" fill="#334155">allowed for: policy_worker only</text>
+  <text x="405" y="548" text-anchor="middle" font-size="10.5" fill="#334155">30-day window, $100 limit</text>
+
+  <rect x="530" y="492" width="320" height="70" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="690" y="514" text-anchor="middle" font-size="12" font-weight="700" font-family="Consolas, monospace" fill="#1e293b">issue_refund</text>
+  <text x="690" y="532" text-anchor="middle" font-size="10.5" fill="#334155">allowed for: refund_worker only</text>
+  <text x="690" y="548" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b91c1c">refuses &gt; $100 with no approver, even if the graph has a bug</text>
+
+  <rect x="860" y="492" width="200" height="70" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="960" y="514" text-anchor="middle" font-size="12" font-weight="700" font-family="Consolas, monospace" fill="#991b1b">delete_customer</text>
+  <text x="960" y="532" text-anchor="middle" font-size="10.5" fill="#7f1d1d">on NO allowlist</text>
+  <text x="960" y="548" text-anchor="middle" font-size="10.5" font-weight="700" fill="#7f1d1d">always blocked + logged</text>
+
+  <!-- bottom cards -->
+  <rect x="30" y="590" width="335" height="150" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="2"/>
+  <text x="197" y="613" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e293b">Audit log (audit_log.jsonl, append-only)</text>
+  <text x="42" y="636" font-size="9.5" font-family="Consolas, monospace" fill="#334155">T-2 supervisor  route: human_approval</text>
+  <text x="42" y="651" font-size="9.5" font-family="Consolas, monospace" fill="#334155">T-2 supervisor  approval_requested</text>
+  <text x="42" y="666" font-size="9.5" font-family="Consolas, monospace" fill="#334155">T-2 manager_maya human_decision: approved</text>
+  <text x="42" y="681" font-size="9.5" font-family="Consolas, monospace" fill="#334155">T-2 refund_worker tool_call: issue_refund</text>
+  <text x="42" y="696" font-size="9.5" font-family="Consolas, monospace" fill="#b91c1c">T-6 lookup_worker tool_blocked: issue_refund</text>
+  <text x="197" y="720" text-anchor="middle" font-size="10.5" fill="#334155">Who did what, when, on which ticket.</text>
+  <text x="197" y="733" text-anchor="middle" font-size="10.5" fill="#334155">Every retry, block and decision is a line.</text>
+
+  <rect x="380" y="590" width="335" height="150" rx="10" fill="#e0f2fe" stroke="#0891b2" stroke-width="2"/>
+  <text x="547" y="613" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0c4a6e">Checkpointer (state saved after every step)</text>
+  <text x="547" y="640" text-anchor="middle" font-size="10.5" fill="#0c4a6e">A ticket waiting for a manager is SAVED,</text>
+  <text x="547" y="656" text-anchor="middle" font-size="10.5" fill="#0c4a6e">so it can wait days and survive a restart.</text>
+  <text x="547" y="682" text-anchor="middle" font-size="10.5" fill="#0c4a6e">Resume = save the decision with update_state,</text>
+  <text x="547" y="698" text-anchor="middle" font-size="10.5" fill="#0c4a6e">then invoke(None, config).</text>
+  <text x="547" y="722" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0c4a6e">Here MemorySaver; production: SqliteSaver / Postgres</text>
+
+  <rect x="730" y="590" width="330" height="150" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="895" y="613" text-anchor="middle" font-size="12.5" font-weight="700" fill="#991b1b">Reliability</text>
+  <text x="745" y="638" font-size="10.5" fill="#7f1d1d">• RetryPolicy: 4 tries, timeouts only</text>
+  <text x="745" y="656" font-size="10.5" fill="#7f1d1d">• A blocked tool is NOT retried (fails loudly)</text>
+  <text x="745" y="674" font-size="10.5" fill="#7f1d1d">• issue_refund is idempotent (safe to retry)</text>
+  <text x="745" y="692" font-size="10.5" fill="#7f1d1d">• Supervisor step cap = 8, recursion_limit = 25</text>
+  <text x="745" y="710" font-size="10.5" fill="#7f1d1d">• Gemini fails or is invalid: safe fallback</text>
+  <text x="745" y="728" font-size="10.5" fill="#7f1d1d">• No decision from a human = no refund</text>
+
+  <rect x="30" y="765" width="1030" height="46" rx="10" fill="#fef9c3" stroke="#a16207" stroke-width="2"/>
+  <text x="545" y="785" text-anchor="middle" font-size="13.5" font-weight="700" fill="#713f12">The LLM suggests, the code enforces, the human approves, the log proves.</text>
+  <text x="545" y="802" text-anchor="middle" font-size="11" fill="#713f12">Tested on 6 tickets: small refund, big refund + approval, denied, flaky service, prompt injection, blocked tool.</text>
+</svg>

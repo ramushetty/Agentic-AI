@@ -30,3 +30,6 @@ Thumbs.db
 # Day 06 notebook: the downloaded PDF and everything extracted from it are regenerated on each run
 days/day-06/code/data/downloads/
 days/day-06/code/data/extracted/
+
+# Project 02: the demo writes an audit log each run
+projects/02-multi-agent-collaboration/audit_log.jsonl
