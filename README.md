@@ -16,6 +16,8 @@ built along the way and tie multiple modules together.
   that day's objectives, diagrams for anything structural/hierarchical, and an **Interview Q&A**
   section — the part meant to be read by other learners (and re-read before an interview).
 - [`projects/`](projects) — one folder per real-time project, built across the days that reference it.
+- [`extras/`](extras) — supplementary, self-study material that isn't part of the 30-day path or the 6
+  projects (e.g. course-along practice notebooks), kept for personal reference.
 - Source code for a given day/project lives inside that day's or project's own folder.
 
 ## 30-Day Roadmap
@@ -63,6 +65,15 @@ built along the way and tie multiple modules together.
 | 04 | Databricks Ask-to-Query Agent | Module 13 | Day 28-29 | [projects/04-databricks-ask-to-query-agent](projects/04-databricks-ask-to-query-agent/README.md) |
 | 05 | LLM Evaluation and Observability | Module 12 | Day 26-27 | [projects/05-llm-evaluation-observability](projects/05-llm-evaluation-observability/README.md) |
 | 06 | Deploying an AI Agent to Production | Module 14 | Day 30 | [projects/06-production-deployment](projects/06-production-deployment/README.md) |
+
+## Extras
+
+Supplementary, self-study material — not part of the 30-day path or the 6 projects above, kept for
+personal reference.
+
+| Folder | What it is |
+|---|---|
+| [extras/langgraph-practice](extras/langgraph-practice/README.md) | Course-along LangGraph practice notebooks: graph basics, a tool-calling agent, and a small RAG pipeline. |
 
 ## Progress
 

@@ -19,6 +19,10 @@ langchain-chroma
 langgraph
 langgraph-checkpoint-sqlite   # SqliteSaver: saves conversations to a file (Day 11)
 
+# Only used by extras/langgraph-practice (self-study notebooks, not part of the daily curriculum)
+langchain-groq
+langchain-tavily
+
 # Local embeddings model backend (no API key needed)
 sentence-transformers
 
