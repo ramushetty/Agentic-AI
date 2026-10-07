@@ -3,9 +3,9 @@
 **Module:** Module 5
 
 ## Objectives
-- [ ] Manage memory using short-term and long-term storage
-- [ ] Deploy graph-based workflows
-- [ ] Orchestrate reliable multi-step systems
+- [x] Manage memory using short-term and long-term storage
+- [x] Deploy graph-based workflows
+- [x] Orchestrate reliable multi-step systems
 
 ## Notes
 Full write-up: [notes.md](notes.md)
@@ -32,10 +32,11 @@ Reflection prompts (answer in your own words, after reading notes.md):
 <!-- Link to code in this folder, or to the relevant project/ folder -->
 See [notes.md](notes.md) for the full lesson, and
 [code/day11_memory_deploy_reliability.ipynb](code/day11_memory_deploy_reliability.ipynb) for a hands-on
-notebook in 7 small steps (short-term memory, long-term memory, saving to a SQLite file, calling a
-FastAPI graph, retry, step cap, and resume after a crash — no API key needed).
+notebook in 8 small steps (short-term memory, long-term memory, trimming/summarizing a conversation that
+grows too long, saving to a SQLite file, calling a FastAPI graph, retry, step cap, and resume after a
+crash — no API key needed).
 
-The API used in step 4 is in [code/graph_api_example.py](code/graph_api_example.py). A server can't run
+The API used in step 5 is in [code/graph_api_example.py](code/graph_api_example.py). A server can't run
 inside a notebook cell, so to try it yourself from the `code/` folder:
 ```
 uvicorn graph_api_example:create_app --factory --reload

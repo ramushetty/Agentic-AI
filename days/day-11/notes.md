@@ -51,10 +51,14 @@ new  thread_id   →  reads the store for "users/raj"      →  knows his prefer
 - **Procedural memory** — rules for how to behave ("always answer in short sentences").
 
 **What if the conversation gets too long?** Short-term memory keeps growing, but the context window is
-limited (Day 02) and you pay for every token. Three common fixes:
-- **Trim** — keep only the last N messages (LangChain has a `trim_messages` helper).
-- **Summarize** — replace old messages with a short summary.
-- **Move important facts to long-term memory** — so they survive even after trimming.
+limited (Day 02) and you pay for every token. Three common fixes, all shown in the notebook's step 3:
+- **Trim** — keep only the last N messages. LangChain's `trim_messages` helper does this in one line.
+- **Summarize** — replace old messages with a short summary (a real app asks an LLM to write it).
+- **Move important facts to long-term memory** — so they survive even after trimming (step 2's store).
+
+```
+6 messages, trim_messages(max_tokens=3, token_counter=len)  →  keeps only the last 3: "message 4", "message 5", "message 6"
+```
 
 **Memory that disappears on restart isn't real memory.** `MemorySaver` and `InMemoryStore` live in RAM.
 For real apps, use a database-backed one: a SQLite file for small apps, PostgreSQL for production. The
