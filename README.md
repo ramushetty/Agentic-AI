@@ -74,6 +74,7 @@ personal reference.
 | Folder | What it is |
 |---|---|
 | [extras/langgraph-practice](extras/langgraph-practice/README.md) | Course-along LangGraph practice notebooks: graph basics, a tool-calling agent, and a small RAG pipeline. |
+| [extras/memory](extras/memory/README.md) | Course-along memory notebooks: sliding-window and summary memory, LangGraph persistence, and `langmem`'s automatic memory manager. |
 
 ## Progress
 

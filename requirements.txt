@@ -23,6 +23,9 @@ langgraph-checkpoint-sqlite   # SqliteSaver: saves conversations to a file (Day 
 langchain-groq
 langchain-tavily
 
+# Only used by extras/memory (self-study notebooks, not part of the daily curriculum)
+langmem
+
 # Local embeddings model backend (no API key needed)
 sentence-transformers
 
