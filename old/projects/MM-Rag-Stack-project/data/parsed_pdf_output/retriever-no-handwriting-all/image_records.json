@@ -1,0 +1,9 @@
+[
+  {
+    "page_number": 2,
+    "image_index": 1,
+    "image_path": "D:\\MAHA\\AIPro\\AgenticAI\\AgenticAI7AM\\MM-Rag-Stack-project\\data\\parsed_pdf_output\\retriever-no-handwriting-all\\extracted_images\\page_002_image_1.jpeg",
+    "image_ext": "jpeg",
+    "image_ocr_text": "Retriever Analogy\n\nUnderstanding a Retriever using a Library Example\nMAPPING: KEY ROLES\n\na€ee.g\n\nDocuments =\n\nEe | Retriever = LUM = Teacher\n— Pieary Becks Librarian Reads the information\nThe one whe ts The knowledge nietee\nqueston aeredintetirey. | | -gitdsimemen\nPROCESS FLOW\nZittewionficette ) (3: Tomcherende 4. Teacher gives\npotter thatifornaton the inl saree\n\nA retriever does not generate the final answer itself.\nIt finds the most relevant information and passes it to the LLM."
+  }
+]
