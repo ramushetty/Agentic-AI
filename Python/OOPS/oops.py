@@ -213,3 +213,44 @@ class Car:
 # Polymorphism
 # same method name but different implementation in different classes. (method overloading and method overriding)
 
+
+#polymorphic function - doesn't care about the type of object, it can work with any object that has the required method.
+# it only cares about the method name and its implementation. (duck typing) exists
+
+
+class Paypal:
+    def process_payment(self,amount):
+        print(f"Processing payment of {amount} using Paypal")
+class Gpay:
+    def process_payment(self,amount):
+        print(f"Processing payment of {amount} using Gpay")
+class CreditCard:
+    def process_payment(self,amount):
+        print(f"Processing payment of {amount} using Credit Card")
+
+def execute_payment(payment_gateway,amount):
+    payment_gateway.process_payment(amount)
+
+
+# Abstarction part-2
+# when you are inheriting the blueprint of a class you need to write the logic for the methods in the child class. (abstract class and abstract methods)
+
+from abc import ABC, abstractmethod
+class NotificationService(ABC):
+    @abstractmethod
+    def send_notification(self,message):
+        pass
+    @abstractmethod
+    def read_notification(self):
+        pass
+    def add_notification(self):
+        pass
+
+class EmailNotificationService(NotificationService):
+    def send_notification(self,message):
+        return f"Sending email notification: {message}"
+    def read_notification(self):
+        return "Reading email notification" 
+
+
+
