@@ -14,3 +14,5 @@
 
 # token is currency of AI
 
+# output tokens would be expensive then input tokens 
+
